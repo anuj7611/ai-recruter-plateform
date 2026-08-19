@@ -1,0 +1,224 @@
+generator client {
+  provider     = "prisma-client"
+  output       = "../src/generated/prisma"
+  moduleFormat = "esm"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ================================
+// ENUMS
+// ================================
+
+enum UserRole {
+  CANDIDATE
+  RECRUITER
+  SUPER_ADMIN
+}
+
+enum UserStatus {
+  ACTIVE
+  SUSPENDED
+  DEACTIVATED
+}
+
+enum ExperienceLevel {
+  FRESHER
+  JUNIOR
+  MID_LEVEL
+  SENIOR
+  LEAD
+}
+
+enum AuthProvider {
+  GOOGLE
+  GITHUB
+}
+
+enum SessionStatus {
+  ACTIVE
+  REVOKED
+  EXPIRED
+}
+
+// ================================
+// USER
+// ================================
+
+model User {
+  id String @id @default(uuid()) @db.Uuid
+
+  name         String
+  email        String  @unique
+  passwordHash String?
+
+  avatarUrl String?
+
+  role   UserRole   @default(CANDIDATE)
+  status UserStatus @default(ACTIVE)
+
+  emailVerifiedAt DateTime?
+  lastLoginAt     DateTime?
+
+  candidateProfile CandidateProfile?
+  recruiterProfile RecruiterProfile?
+
+  accounts                Account[]
+  sessions                Session[]
+  emailVerificationTokens EmailVerificationToken[]
+  passwordResetTokens     PasswordResetToken[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([role])
+  @@index([status])
+  @@map("users")
+}
+
+// ================================
+// CANDIDATE PROFILE
+// ================================
+
+model CandidateProfile {
+  id String @id @default(uuid()) @db.Uuid
+
+  userId String @unique @db.Uuid
+
+  headline String?
+  bio      String?
+
+  currentRole String?
+  targetRole  String?
+
+  experienceYears Int              @default(0)
+  experienceLevel ExperienceLevel?
+
+  location String?
+
+  linkedinUrl  String?
+  githubUrl    String?
+  portfolioUrl String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([experienceLevel])
+  @@map("candidate_profiles")
+}
+
+// ================================
+// RECRUITER PROFILE
+// ================================
+
+model RecruiterProfile {
+  id String @id @default(uuid()) @db.Uuid
+
+  userId String @unique @db.Uuid
+
+  jobTitle   String?
+  department String?
+  bio        String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("recruiter_profiles")
+}
+
+model Account {
+  id String @id @default(uuid()) @db.Uuid
+
+  userId String @db.Uuid
+
+  provider          AuthProvider
+  providerAccountId String
+
+  accessToken  String?
+  refreshToken String?
+
+  tokenExpiresAt DateTime?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+  @@map("accounts")
+}
+
+model Session {
+  id String @id @default(uuid()) @db.Uuid
+
+  userId String @db.Uuid
+
+  refreshTokenHash String @unique
+
+  status SessionStatus @default(ACTIVE)
+
+  ipAddress String?
+  userAgent String?
+
+  deviceName String?
+
+  expiresAt DateTime
+  revokedAt DateTime?
+
+  lastUsedAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([status])
+  @@index([expiresAt])
+  @@map("sessions")
+}
+
+model EmailVerificationToken {
+  id String @id @default(uuid()) @db.Uuid
+
+  userId String @db.Uuid
+
+  tokenHash String @unique
+
+  expiresAt DateTime
+  usedAt    DateTime?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([expiresAt])
+  @@map("email_verification_tokens")
+}
+
+model PasswordResetToken {
+  id String @id @default(uuid()) @db.Uuid
+
+  userId String @db.Uuid
+
+  tokenHash String @unique
+
+  expiresAt DateTime
+  usedAt    DateTime?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([expiresAt])
+  @@map("password_reset_tokens")
+}
