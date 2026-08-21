@@ -586,14 +586,6 @@ export type CandidateProfileUncheckedUpdateOneWithoutUserNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.CandidateProfileUpdateToOneWithWhereWithoutUserInput, Prisma.CandidateProfileUpdateWithoutUserInput>, Prisma.CandidateProfileUncheckedUpdateWithoutUserInput>
 }
 
-export type IntFieldUpdateOperationsInput = {
-  set?: number
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
 export type NullableEnumExperienceLevelFieldUpdateOperationsInput = {
   set?: $Enums.ExperienceLevel | null
 }

@@ -1,7 +1,12 @@
 import type { NextFunction, Request, Response } from "express";
 import { ApiError } from "../utils/api-error.js";
 
-export const APP_ROLES = ["CANDIDATE", "RECRUITER", "SUPER_ADMIN"] as const;
+export const APP_ROLES = [
+  "CANDIDATE",
+  "RECRUITER",
+  "ORGANIZATION_ADMIN",
+  "SUPER_ADMIN",
+] as const;
 export type AppRole = (typeof APP_ROLES)[number];
 
 export const authorizeRoles =

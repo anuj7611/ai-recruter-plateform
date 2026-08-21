@@ -3,8 +3,11 @@ import { prisma } from "../../lib/prisma.js";
 import { ApiError } from "../../utils/api-error.js";
 import { hashPassword, verifyPassword } from "../../utils/security/password.js";
 import {
+  ACCOUNT_LOCK_TTL_MS,
   REFRESH_TOKEN_TTL_SECONDS,
   EMAIL_VERIFICATION_TTL_MS,
+  MAX_FAILED_LOGIN_ATTEMPTS,
+  PASSWORD_RESET_TTL_MS,
 } from "./auth.constants.js";
 import {
   createAccessToken,
@@ -15,10 +18,73 @@ import type { LoginMetadata } from "./auth.types.js";
 import type {
   LoginInput,
   RegisterInput,
+  ForgotPasswordInput,
+  ResetPasswordInput,
   VerifyEmailInput,
 } from "./auth.validation.js";
-import { sendVerificationEmail } from "../../services/email/email.service.js";
+import {
+  sendPasswordResetEmail,
+  sendVerificationEmail,
+} from "../../services/email/email.service.js";
 import { generateSecureToken, hashToken } from "../../utils/security/crypto.js";
+
+const getDeviceName = (userAgent: string | null): string | null => {
+  if (!userAgent) return null;
+
+  const browser =
+    userAgent.match(/Edg\/([\d.]+)/)?.[0] ??
+    userAgent.match(/Chrome\/([\d.]+)/)?.[0] ??
+    userAgent.match(/Firefox\/([\d.]+)/)?.[0] ??
+    userAgent.match(/Version\/([\d.]+).*Safari/)?.[0]?.split(" ")[0] ??
+    "Unknown browser";
+  const os =
+    userAgent.match(/Windows NT [\d.]+/)?.[0] ??
+    userAgent.match(/Android [\d.]+/)?.[0] ??
+    userAgent.match(/(?:iPhone|CPU) OS [\d_]+/)?.[0] ??
+    userAgent.match(/Mac OS X [\d_]+/)?.[0] ??
+    (userAgent.includes("Linux") ? "Linux" : "Unknown device");
+
+  return `${browser} on ${os}`.slice(0, 160);
+};
+
+export const createAuthSession = async (
+  userId: string,
+  role: string,
+  metadata: LoginMetadata,
+) => {
+  const sessionId = randomUUID();
+  const accessToken = createAccessToken({ userId, role, sessionId });
+  const refreshToken = createRefreshToken({ userId, sessionId });
+  const refreshTokenExpiresAt = new Date(
+    Date.now() + REFRESH_TOKEN_TTL_SECONDS * 1000,
+  );
+
+  await prisma.$transaction([
+    prisma.session.create({
+      data: {
+        id: sessionId,
+        userId,
+        refreshTokenHash: hashToken(refreshToken),
+        status: "ACTIVE",
+        ipAddress: metadata.ipAddress,
+        userAgent: metadata.userAgent,
+        deviceName: getDeviceName(metadata.userAgent),
+        expiresAt: refreshTokenExpiresAt,
+        lastUsedAt: new Date(),
+      },
+    }),
+    prisma.user.update({
+      where: { id: userId },
+      data: {
+        lastLoginAt: new Date(),
+        failedLoginAttempts: 0,
+        lockedUntil: null,
+      },
+    }),
+  ]);
+
+  return { accessToken, refreshToken, refreshTokenExpiresAt };
+};
 
 // ====================================
 // REGISTER
@@ -136,6 +202,8 @@ export const loginUser = async (input: LoginInput, metadata: LoginMetadata) => {
 
       role: true,
       status: true,
+      failedLoginAttempts: true,
+      lockedUntil: true,
 
       emailVerifiedAt: true,
 
@@ -166,6 +234,19 @@ export const loginUser = async (input: LoginInput, metadata: LoginMetadata) => {
     throw new ApiError(401, "Invalid email or password", "INVALID_CREDENTIALS");
   }
 
+  const now = new Date();
+
+  if (user.lockedUntil && user.lockedUntil > now) {
+    throw new ApiError(
+      429,
+      "Too many failed login attempts. Try again later.",
+      "ACCOUNT_TEMPORARILY_LOCKED",
+      { retryAfterSeconds: Math.ceil((user.lockedUntil.getTime() - now.getTime()) / 1000) },
+    );
+  }
+
+  const previousFailedAttempts = user.lockedUntil ? 0 : user.failedLoginAttempts;
+
   // ------------------------------
   // Verify password
   // ------------------------------
@@ -173,6 +254,28 @@ export const loginUser = async (input: LoginInput, metadata: LoginMetadata) => {
   const passwordMatches = await verifyPassword(user.passwordHash, password);
 
   if (!passwordMatches) {
+    const failedLoginAttempts = previousFailedAttempts + 1;
+    const shouldLock = failedLoginAttempts >= MAX_FAILED_LOGIN_ATTEMPTS;
+
+    await prisma.user.update({
+      where: { id: user.id },
+      data: {
+        failedLoginAttempts: shouldLock ? 0 : failedLoginAttempts,
+        lockedUntil: shouldLock
+          ? new Date(Date.now() + ACCOUNT_LOCK_TTL_MS)
+          : null,
+      },
+    });
+
+    if (shouldLock) {
+      throw new ApiError(
+        429,
+        "Too many failed login attempts. Try again later.",
+        "ACCOUNT_TEMPORARILY_LOCKED",
+        { retryAfterSeconds: Math.ceil(ACCOUNT_LOCK_TTL_MS / 1000) },
+      );
+    }
+
     throw new ApiError(401, "Invalid email or password", "INVALID_CREDENTIALS");
   }
 
@@ -188,76 +291,7 @@ export const loginUser = async (input: LoginInput, metadata: LoginMetadata) => {
     );
   }
 
-  // ------------------------------
-  // Create session ID
-  // ------------------------------
-
-  const sessionId = randomUUID();
-
-  // ------------------------------
-  // Generate JWTs
-  // ------------------------------
-
-  const accessToken = createAccessToken({
-    userId: user.id,
-    role: user.role,
-    sessionId,
-  });
-
-  const refreshToken = createRefreshToken({
-    userId: user.id,
-    sessionId,
-  });
-
-  // ------------------------------
-  // Hash refresh JWT
-  // ------------------------------
-
-  const refreshTokenHash = hashToken(refreshToken);
-
-  // ------------------------------
-  // Refresh expiry
-  // ------------------------------
-
-  const refreshTokenExpiresAt = new Date(
-    Date.now() + REFRESH_TOKEN_TTL_SECONDS * 1000,
-  );
-
-  // ------------------------------
-  // Store session + update login
-  // ------------------------------
-
-  await prisma.$transaction([
-    prisma.session.create({
-      data: {
-        id: sessionId,
-
-        userId: user.id,
-
-        refreshTokenHash,
-
-        status: "ACTIVE",
-
-        ipAddress: metadata.ipAddress,
-
-        userAgent: metadata.userAgent,
-
-        expiresAt: refreshTokenExpiresAt,
-
-        lastUsedAt: new Date(),
-      },
-    }),
-
-    prisma.user.update({
-      where: {
-        id: user.id,
-      },
-
-      data: {
-        lastLoginAt: new Date(),
-      },
-    }),
-  ]);
+  const authSession = await createAuthSession(user.id, user.role, metadata);
 
   // ------------------------------
   // Return safe data only
@@ -281,11 +315,7 @@ export const loginUser = async (input: LoginInput, metadata: LoginMetadata) => {
       recruiterProfile: user.recruiterProfile,
     },
 
-    accessToken,
-
-    refreshToken,
-
-    refreshTokenExpiresAt,
+    ...authSession,
   };
 };
 
@@ -437,6 +467,8 @@ export const refreshAuthSession = async (
       ipAddress: metadata.ipAddress,
 
       userAgent: metadata.userAgent,
+
+      deviceName: getDeviceName(metadata.userAgent),
     },
   });
 
@@ -649,4 +681,154 @@ export const verifyUserEmail = async (input: VerifyEmailInput) => {
   return {
     verified: true,
   };
+};
+
+// ====================================
+// PASSWORD RESET
+// ====================================
+
+export const requestPasswordReset = async (input: ForgotPasswordInput) => {
+  const user = await prisma.user.findUnique({
+    where: { email: input.email },
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      passwordHash: true,
+      status: true,
+    },
+  });
+
+  // Always return the same result so this endpoint cannot enumerate accounts.
+  if (!user || !user.passwordHash || user.status !== "ACTIVE") return;
+
+  const token = generateSecureToken();
+  const expiresAt = new Date(Date.now() + PASSWORD_RESET_TTL_MS);
+
+  await prisma.$transaction([
+    prisma.passwordResetToken.deleteMany({
+      where: { userId: user.id, usedAt: null },
+    }),
+    prisma.passwordResetToken.create({
+      data: {
+        userId: user.id,
+        tokenHash: hashToken(token),
+        expiresAt,
+      },
+    }),
+  ]);
+
+  try {
+    await sendPasswordResetEmail({
+      email: user.email,
+      name: user.name,
+      resetToken: token,
+    });
+  } catch (error) {
+    console.error("Could not send password reset email:", error);
+  }
+};
+
+export const resetPassword = async (input: ResetPasswordInput) => {
+  const tokenHash = hashToken(input.token);
+  const resetToken = await prisma.passwordResetToken.findUnique({
+    where: { tokenHash },
+    select: {
+      id: true,
+      userId: true,
+      expiresAt: true,
+      usedAt: true,
+      user: { select: { status: true } },
+    },
+  });
+
+  if (!resetToken || resetToken.usedAt) {
+    throw new ApiError(400, "Reset token is invalid", "INVALID_RESET_TOKEN");
+  }
+
+  if (resetToken.expiresAt <= new Date()) {
+    throw new ApiError(400, "Reset token has expired", "RESET_TOKEN_EXPIRED");
+  }
+
+  if (resetToken.user.status !== "ACTIVE") {
+    throw new ApiError(
+      403,
+      "This account is currently unavailable",
+      "ACCOUNT_UNAVAILABLE",
+    );
+  }
+
+  const passwordHash = await hashPassword(input.password);
+  const now = new Date();
+
+  await prisma.$transaction([
+    prisma.user.update({
+      where: { id: resetToken.userId },
+      data: {
+        passwordHash,
+        failedLoginAttempts: 0,
+        lockedUntil: null,
+      },
+    }),
+    prisma.passwordResetToken.updateMany({
+      where: { userId: resetToken.userId, usedAt: null },
+      data: { usedAt: now },
+    }),
+    prisma.session.updateMany({
+      where: { userId: resetToken.userId, status: "ACTIVE" },
+      data: { status: "REVOKED", revokedAt: now },
+    }),
+  ]);
+
+  return { passwordReset: true };
+};
+
+// ====================================
+// DEVICE SESSIONS
+// ====================================
+
+export const getUserSessions = async (
+  userId: string,
+  currentSessionId: string,
+) => {
+  const now = new Date();
+
+  await prisma.session.updateMany({
+    where: { userId, status: "ACTIVE", expiresAt: { lte: now } },
+    data: { status: "EXPIRED" },
+  });
+
+  const sessions = await prisma.session.findMany({
+    where: { userId },
+    select: {
+      id: true,
+      status: true,
+      ipAddress: true,
+      deviceName: true,
+      createdAt: true,
+      lastUsedAt: true,
+      expiresAt: true,
+      revokedAt: true,
+    },
+    orderBy: { lastUsedAt: "desc" },
+  });
+
+  return sessions.map((session) => ({
+    ...session,
+    isCurrent: session.id === currentSessionId,
+  }));
+};
+
+export const revokeUserSession = async (
+  userId: string,
+  sessionId: string,
+) => {
+  const result = await prisma.session.updateMany({
+    where: { id: sessionId, userId, status: "ACTIVE" },
+    data: { status: "REVOKED", revokedAt: new Date() },
+  });
+
+  if (result.count !== 1) {
+    throw new ApiError(404, "Active session not found", "SESSION_NOT_FOUND");
+  }
 };

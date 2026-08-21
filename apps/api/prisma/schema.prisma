@@ -15,6 +15,7 @@ datasource db {
 enum UserRole {
   CANDIDATE
   RECRUITER
+  ORGANIZATION_ADMIN
   SUPER_ADMIN
 }
 
@@ -62,6 +63,9 @@ model User {
   emailVerifiedAt DateTime?
   lastLoginAt     DateTime?
 
+  failedLoginAttempts Int       @default(0)
+  lockedUntil         DateTime?
+
   candidateProfile CandidateProfile?
   recruiterProfile RecruiterProfile?
 
@@ -75,6 +79,7 @@ model User {
 
   @@index([role])
   @@index([status])
+  @@index([lockedUntil])
   @@map("users")
 }
 
@@ -207,16 +212,15 @@ model EmailVerificationToken {
 model PasswordResetToken {
   id String @id @default(uuid()) @db.Uuid
 
-  userId String @db.Uuid
-
+  userId    String @db.Uuid
   tokenHash String @unique
 
   expiresAt DateTime
   usedAt    DateTime?
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
   createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
   @@index([expiresAt])

@@ -10,10 +10,14 @@ import cookieParser from "cookie-parser";
 
 export const app = express();
 
+if (process.env.NODE_ENV === "production") {
+  app.set("trust proxy", 1);
+}
+
 app.use(express.json({ limit: "1mb" }));
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: process.env.CLIENT_URL ?? "http://localhost:3000",
     credentials: true,
   }),
 );
