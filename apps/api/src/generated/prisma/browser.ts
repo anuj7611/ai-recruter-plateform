@@ -52,3 +52,38 @@ export type EmailVerificationToken = Prisma.EmailVerificationTokenModel
  * 
  */
 export type PasswordResetToken = Prisma.PasswordResetTokenModel
+/**
+ * Model AccountInvitation
+ * 
+ */
+export type AccountInvitation = Prisma.AccountInvitationModel
+/**
+ * Model Resume
+ * 
+ */
+export type Resume = Prisma.ResumeModel
+/**
+ * Model ResumeSkill
+ * 
+ */
+export type ResumeSkill = Prisma.ResumeSkillModel
+/**
+ * Model ResumeExperience
+ * 
+ */
+export type ResumeExperience = Prisma.ResumeExperienceModel
+/**
+ * Model ResumeEducation
+ * 
+ */
+export type ResumeEducation = Prisma.ResumeEducationModel
+/**
+ * Model ResumeProject
+ * 
+ */
+export type ResumeProject = Prisma.ResumeProjectModel
+/**
+ * Model ResumeChunk
+ * 
+ */
+export type ResumeChunk = Prisma.ResumeChunkModel

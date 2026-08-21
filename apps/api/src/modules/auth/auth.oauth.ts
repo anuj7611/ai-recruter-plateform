@@ -40,10 +40,20 @@ const getCallbackUrl = (provider: OAuthProvider) =>
   `${getApiUrl()}/api/v1/auth/oauth/${provider}/callback`;
 
 const parseJsonResponse = async <T>(response: Response): Promise<T> => {
-  const body = (await response.json()) as T & {
+  let body: T & {
     error?: string;
     error_description?: string;
   };
+
+  try {
+    body = (await response.json()) as typeof body;
+  } catch {
+    throw new ApiError(
+      502,
+      "OAuth provider returned an invalid response",
+      "OAUTH_PROVIDER_ERROR",
+    );
+  }
 
   if (!response.ok || body.error) {
     throw new ApiError(
@@ -104,6 +114,14 @@ const getGoogleIdentity = async (code: string) => {
     refresh_token?: string;
     expires_in?: number;
   }>(tokenResponse);
+
+  if (!tokenData.access_token) {
+    throw new ApiError(
+      401,
+      "Google did not return an access token",
+      "OAUTH_PROVIDER_ERROR",
+    );
+  }
   const profileResponse = await fetch(
     "https://openidconnect.googleapis.com/v1/userinfo",
     { headers: { authorization: `Bearer ${tokenData.access_token}` } },
@@ -115,6 +133,14 @@ const getGoogleIdentity = async (code: string) => {
     name?: string;
     picture?: string;
   }>(profileResponse);
+
+  if (!profile.sub || !profile.email) {
+    throw new ApiError(
+      400,
+      "Google did not provide the required account information",
+      "OAUTH_PROFILE_INCOMPLETE",
+    );
+  }
 
   return {
     tokens: {
@@ -153,6 +179,14 @@ const getGitHubIdentity = async (code: string) => {
     refresh_token?: string;
     expires_in?: number;
   }>(tokenResponse);
+
+  if (!tokenData.access_token) {
+    throw new ApiError(
+      401,
+      "GitHub did not return an access token",
+      "OAUTH_PROVIDER_ERROR",
+    );
+  }
   const headers = {
     accept: "application/vnd.github+json",
     authorization: `Bearer ${tokenData.access_token}`,
@@ -234,10 +268,26 @@ export const completeOAuthLogin = async (
   } else {
     const existingUser = await prisma.user.findUnique({
       where: { email: identity.profile.email },
-      select: { id: true },
+      select: { id: true, role: true, status: true },
     });
 
     if (existingUser) {
+      if (existingUser.role !== "CANDIDATE") {
+        throw new ApiError(
+          403,
+          "Use the login portal assigned to your account role",
+          "OAUTH_ROLE_NOT_ALLOWED",
+        );
+      }
+
+      if (existingUser.status !== "ACTIVE") {
+        throw new ApiError(
+          403,
+          "This account is currently unavailable",
+          "ACCOUNT_UNAVAILABLE",
+        );
+      }
+
       userId = existingUser.id;
       await prisma.$transaction([
         prisma.account.create({
@@ -262,6 +312,7 @@ export const completeOAuthLogin = async (
           email: identity.profile.email,
           avatarUrl: identity.profile.avatarUrl,
           emailVerifiedAt: new Date(),
+          role: "CANDIDATE",
           candidateProfile: { create: {} },
           accounts: {
             create: {
@@ -296,6 +347,14 @@ export const completeOAuthLogin = async (
       403,
       "This account is currently unavailable",
       "ACCOUNT_UNAVAILABLE",
+    );
+  }
+
+  if (user.role !== "CANDIDATE") {
+    throw new ApiError(
+      403,
+      "Use the login portal assigned to your account role",
+      "OAUTH_ROLE_NOT_ALLOWED",
     );
   }
 

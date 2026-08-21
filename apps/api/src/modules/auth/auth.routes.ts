@@ -5,10 +5,9 @@ import {
   validateParams,
 } from "../../middleware/validate.middleware.js";
 import { createRateLimiter } from "../../middleware/rate-limit.middleware.js";
+import { authorizeRoles } from "../../middleware/authorize.middleware.js";
 import { asyncHandler } from "../../utils/async-handler.js";
 import {
-  registerController,
-  loginController,
   refreshController,
   logoutAllController,
   logoutController,
@@ -21,13 +20,27 @@ import {
   revokeSessionController,
   oauthStartController,
   oauthCallbackController,
+  acceptInvitationController,
+  createInvitationController,
+  invitationDetailsController,
+  candidateRegisterController,
+  candidateLoginController,
+  recruiterRegisterController,
+  recruiterLoginController,
+  organizationAdminRegisterController,
+  organizationAdminLoginController,
+  superAdminRegisterController,
+  superAdminLoginController,
 } from "./auth.controller.js";
 import {
+  acceptInvitationSchema,
+  createInvitationSchema,
   forgotPasswordSchema,
   registerSchema,
   loginSchema,
   resetPasswordSchema,
   sessionParamsSchema,
+  invitationTokenParamsSchema,
   verifyEmailSchema,
 } from "./auth.validation.js";
 
@@ -63,20 +76,62 @@ const emailActionRateLimit = createRateLimiter({
   message: "Too many email requests. Try again later.",
 });
 
+const invitationRateLimit = createRateLimiter({
+  windowMs: 60 * 60 * 1000,
+  max: 20,
+  code: "INVITATION_RATE_LIMIT_EXCEEDED",
+  message: "Too many invitation requests. Try again later.",
+});
+
 authRouter.use(authRateLimit);
 
 authRouter.post(
-  "/register",
+  "/candidate/register",
   registrationRateLimit,
   validateBody(registerSchema),
-  asyncHandler(registerController),
+  asyncHandler(candidateRegisterController),
 );
 
 authRouter.post(
-  "/login",
+  "/candidate/login",
   loginRateLimit,
   validateBody(loginSchema),
-  asyncHandler(loginController),
+  asyncHandler(candidateLoginController),
+);
+
+authRouter.post(
+  "/recruiter/register",
+  registrationRateLimit,
+  validateBody(registerSchema),
+  asyncHandler(recruiterRegisterController),
+);
+
+authRouter.post(
+  "/recruiter/login",
+  loginRateLimit,
+  validateBody(loginSchema),
+  asyncHandler(recruiterLoginController),
+);
+
+authRouter.post(
+  "/organization-admin/register",
+  registrationRateLimit,
+  validateBody(acceptInvitationSchema),
+  asyncHandler(organizationAdminRegisterController),
+);
+
+authRouter.post(
+  "/organization-admin/login",
+  loginRateLimit,
+  validateBody(loginSchema),
+  asyncHandler(organizationAdminLoginController),
+);
+
+authRouter.post(
+  "/super-admin/login",
+  loginRateLimit,
+  validateBody(loginSchema),
+  asyncHandler(superAdminLoginController),
 );
 
 authRouter.get("/me", authenticate, asyncHandler(meController));
@@ -127,4 +182,26 @@ authRouter.get("/oauth/:provider", asyncHandler(oauthStartController));
 authRouter.get(
   "/oauth/:provider/callback",
   asyncHandler(oauthCallbackController),
+);
+
+authRouter.post(
+  "/invitations",
+  invitationRateLimit,
+  authenticate,
+  authorizeRoles("ORGANIZATION_ADMIN", "SUPER_ADMIN"),
+  validateBody(createInvitationSchema),
+  asyncHandler(createInvitationController),
+);
+
+authRouter.get(
+  "/invitations/:token",
+  validateParams(invitationTokenParamsSchema),
+  asyncHandler(invitationDetailsController),
+);
+
+authRouter.post(
+  "/invitations/accept",
+  registrationRateLimit,
+  validateBody(acceptInvitationSchema),
+  asyncHandler(acceptInvitationController),
 );

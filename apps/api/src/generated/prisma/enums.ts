@@ -54,3 +54,33 @@ export const SessionStatus = {
 } as const
 
 export type SessionStatus = (typeof SessionStatus)[keyof typeof SessionStatus]
+
+
+export const ResumeStatus = {
+  PENDING_UPLOAD: 'PENDING_UPLOAD',
+  UPLOADED: 'UPLOADED',
+  PARSING: 'PARSING',
+  PARSED: 'PARSED',
+  ANALYZING: 'ANALYZING',
+  ANALYZED: 'ANALYZED',
+  EMBEDDING: 'EMBEDDING',
+  READY: 'READY',
+  FAILED: 'FAILED'
+} as const
+
+export type ResumeStatus = (typeof ResumeStatus)[keyof typeof ResumeStatus]
+
+
+export const ResumeSection = {
+  SUMMARY: 'SUMMARY',
+  SKILLS: 'SKILLS',
+  EXPERIENCE: 'EXPERIENCE',
+  EDUCATION: 'EDUCATION',
+  PROJECTS: 'PROJECTS',
+  CERTIFICATIONS: 'CERTIFICATIONS',
+  ACHIEVEMENTS: 'ACHIEVEMENTS',
+  LANGUAGES: 'LANGUAGES',
+  OTHER: 'OTHER'
+} as const
+
+export type ResumeSection = (typeof ResumeSection)[keyof typeof ResumeSection]

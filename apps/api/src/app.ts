@@ -7,6 +7,7 @@ import { errorMiddleware } from "./middleware/error.middleware.js";
 import { ApiError } from "./utils/api-error.js";
 import { authRouter } from "./modules/auth/auth.routes.js";
 import cookieParser from "cookie-parser";
+import { candidateRouter } from "./modules/candidate/candidate.routes.js";
 
 export const app = express();
 
@@ -55,6 +56,7 @@ app.get("/api/v1/health", async (_req, res) => {
 });
 
 app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/candidate", candidateRouter);
 
 app.use(notFoundMiddleware);
 app.use(errorMiddleware);

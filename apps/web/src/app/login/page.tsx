@@ -8,27 +8,28 @@ import { Field, PasswordField, StatusMessage, SubmitButton } from "@/components/
 import { OAuthButtons, OrDivider } from "@/components/auth/oauth-buttons";
 import { useAuth } from "@/lib/auth/auth-context";
 import { errorMessage } from "@/lib/auth/api";
+import { getRoleHome } from "@/lib/auth/role-routing";
 
 function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const { login, status } = useAuth();
+  const { login, status, user } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (status === "authenticated") router.replace("/dashboard");
-  }, [router, status]);
+    if (status === "authenticated" && user) router.replace(getRoleHome(user.role));
+  }, [router, status, user]);
 
   const submit = async (event: FormEvent) => {
     event.preventDefault();
     setError("");
     setLoading(true);
     try {
-      await login({ email, password });
-      router.replace("/dashboard");
+      const authenticatedUser = await login({ email, password }, "CANDIDATE");
+      router.replace(getRoleHome(authenticatedUser.role));
     } catch (caught) {
       setError(errorMessage(caught));
     } finally {
@@ -49,6 +50,11 @@ function LoginForm() {
         <SubmitButton loading={loading}>{loading ? "Signing in…" : "Sign in"}</SubmitButton>
       </form>
       <p className="mt-7 text-center text-sm text-slate-500">New to Hirely? <Link href="/register" className="font-semibold text-violet-600 hover:text-violet-800">Create an account</Link></p>
+      <p className="mt-3 text-center text-xs text-slate-400">
+        Hiring team? <Link href="/recruiter/login" className="font-semibold text-violet-600 hover:text-violet-800">Recruiter</Link>
+        {" · "}<Link href="/organization/login" className="font-semibold text-violet-600 hover:text-violet-800">Organization admin</Link>
+        {" · "}<Link href="/admin/login" className="font-semibold text-violet-600 hover:text-violet-800">Super admin</Link>
+      </p>
     </AuthShell>
   );
 }

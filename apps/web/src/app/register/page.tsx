@@ -23,7 +23,10 @@ export default function RegisterPage() {
     if (form.password !== form.confirmPassword) return setError("Passwords do not match.");
     setLoading(true);
     try {
-      const response = await register({ name: form.name, email: form.email, password: form.password });
+      const response = await register(
+        { name: form.name, email: form.email, password: form.password },
+        "CANDIDATE",
+      );
       setResult({ emailSent: response.verificationEmailSent, message: response.message ?? "Account created successfully." });
     } catch (caught) {
       setError(errorMessage(caught));
@@ -47,7 +50,7 @@ export default function RegisterPage() {
   }
 
   return (
-    <AuthShell eyebrow="Create your account" title="Start interviewing smarter" description="Create a secure candidate workspace in less than a minute.">
+    <AuthShell eyebrow="Candidate registration" title="Start interviewing smarter" description="Create a secure candidate workspace in less than a minute.">
       <OAuthButtons />
       <OrDivider />
       <form className="space-y-5" onSubmit={submit}>
@@ -59,6 +62,7 @@ export default function RegisterPage() {
         <SubmitButton loading={loading}>{loading ? "Creating account…" : "Create account"}</SubmitButton>
       </form>
       <p className="mt-7 text-center text-sm text-slate-500">Already have an account? <Link href="/login" className="font-semibold text-violet-600 hover:text-violet-800">Sign in</Link></p>
+      <p className="mt-3 text-center text-xs text-slate-400">Hiring instead? <Link href="/recruiter/register" className="font-semibold text-violet-600 hover:text-violet-800">Register as a recruiter</Link></p>
     </AuthShell>
   );
 }

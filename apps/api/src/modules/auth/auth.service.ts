@@ -28,6 +28,14 @@ import {
 } from "../../services/email/email.service.js";
 import { generateSecureToken, hashToken } from "../../utils/security/crypto.js";
 
+export type AuthPortalRole =
+  | "CANDIDATE"
+  | "RECRUITER"
+  | "ORGANIZATION_ADMIN"
+  | "SUPER_ADMIN";
+
+type PublicRegistrationRole = "CANDIDATE" | "RECRUITER";
+
 const getDeviceName = (userAgent: string | null): string | null => {
   if (!userAgent) return null;
 
@@ -90,7 +98,10 @@ export const createAuthSession = async (
 // REGISTER
 // ====================================
 
-export const registerUser = async (input: RegisterInput) => {
+export const registerUser = async (
+  input: RegisterInput,
+  role: PublicRegistrationRole = "CANDIDATE",
+) => {
   const { name, email, password } = input;
 
   const existingUser = await prisma.user.findUnique({
@@ -119,10 +130,10 @@ export const registerUser = async (input: RegisterInput) => {
         name,
         email,
         passwordHash,
-
-        candidateProfile: {
-          create: {},
-        },
+        role,
+        ...(role === "CANDIDATE"
+          ? { candidateProfile: { create: {} } }
+          : { recruiterProfile: { create: {} } }),
       },
 
       select: {
@@ -139,6 +150,11 @@ export const registerUser = async (input: RegisterInput) => {
             id: true,
             experienceYears: true,
             experienceLevel: true,
+          },
+        },
+        recruiterProfile: {
+          select: {
+            id: true,
           },
         },
       },
@@ -179,7 +195,11 @@ export const registerUser = async (input: RegisterInput) => {
 // LOGIN
 // ====================================
 
-export const loginUser = async (input: LoginInput, metadata: LoginMetadata) => {
+export const loginUser = async (
+  input: LoginInput,
+  metadata: LoginMetadata,
+  expectedRole?: AuthPortalRole,
+) => {
   const { email, password } = input;
 
   // ------------------------------
@@ -288,6 +308,14 @@ export const loginUser = async (input: LoginInput, metadata: LoginMetadata) => {
       403,
       "This account is currently unavailable",
       "ACCOUNT_UNAVAILABLE",
+    );
+  }
+
+  if (expectedRole && user.role !== expectedRole) {
+    throw new ApiError(
+      403,
+      "This account cannot sign in through this portal",
+      "ROLE_PORTAL_MISMATCH",
     );
   }
 

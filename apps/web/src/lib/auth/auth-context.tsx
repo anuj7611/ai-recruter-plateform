@@ -11,7 +11,7 @@ import {
   type ReactNode,
 } from "react";
 import { ApiError, apiRequest } from "./api";
-import type { AuthUser, LoginInput, RegisterInput } from "./types";
+import type { AuthUser, LoginInput, RegisterInput, UserRole } from "./types";
 
 type AuthStatus = "loading" | "authenticated" | "unauthenticated";
 
@@ -24,8 +24,11 @@ interface RegisterResult {
 interface AuthContextValue {
   user: AuthUser | null;
   status: AuthStatus;
-  register: (input: RegisterInput) => Promise<RegisterResult>;
-  login: (input: LoginInput) => Promise<AuthUser>;
+  register: (
+    input: RegisterInput,
+    role: "CANDIDATE" | "RECRUITER",
+  ) => Promise<RegisterResult>;
+  login: (input: LoginInput, role: UserRole) => Promise<AuthUser>;
   restoreSession: () => Promise<AuthUser>;
   requestWithAuth: <T>(path: string, init?: RequestInit) => Promise<T>;
   resendVerification: () => Promise<string>;
@@ -102,11 +105,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     [renewAccessToken],
   );
 
-  const register = useCallback(async (input: RegisterInput) => {
+  const register = useCallback(async (
+    input: RegisterInput,
+    role: "CANDIDATE" | "RECRUITER",
+  ) => {
+    const portal = role === "RECRUITER" ? "recruiter" : "candidate";
     const response = await apiRequest<{
       user: AuthUser;
       verificationEmailSent: boolean;
-    }>("/auth/register", {
+    }>(`/auth/${portal}/register`, {
       method: "POST",
       body: JSON.stringify(input),
     });
@@ -114,11 +121,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return { ...response.data, message: response.message };
   }, []);
 
-  const login = useCallback(async (input: LoginInput) => {
+  const login = useCallback(async (input: LoginInput, role: UserRole) => {
+    const portalByRole: Record<UserRole, string> = {
+      CANDIDATE: "candidate",
+      RECRUITER: "recruiter",
+      ORGANIZATION_ADMIN: "organization-admin",
+      SUPER_ADMIN: "super-admin",
+    };
     const response = await apiRequest<{
       user: AuthUser;
       accessToken: string;
-    }>("/auth/login", {
+    }>(`/auth/${portalByRole[role]}/login`, {
       method: "POST",
       body: JSON.stringify(input),
     });

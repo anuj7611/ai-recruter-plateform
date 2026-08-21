@@ -57,7 +57,14 @@ export const ModelName = {
   Account: 'Account',
   Session: 'Session',
   EmailVerificationToken: 'EmailVerificationToken',
-  PasswordResetToken: 'PasswordResetToken'
+  PasswordResetToken: 'PasswordResetToken',
+  AccountInvitation: 'AccountInvitation',
+  Resume: 'Resume',
+  ResumeSkill: 'ResumeSkill',
+  ResumeExperience: 'ResumeExperience',
+  ResumeEducation: 'ResumeEducation',
+  ResumeProject: 'ResumeProject',
+  ResumeChunk: 'ResumeChunk'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -185,12 +192,156 @@ export const PasswordResetTokenScalarFieldEnum = {
 export type PasswordResetTokenScalarFieldEnum = (typeof PasswordResetTokenScalarFieldEnum)[keyof typeof PasswordResetTokenScalarFieldEnum]
 
 
+export const AccountInvitationScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  name: 'name',
+  role: 'role',
+  tokenHash: 'tokenHash',
+  invitedById: 'invitedById',
+  expiresAt: 'expiresAt',
+  acceptedAt: 'acceptedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AccountInvitationScalarFieldEnum = (typeof AccountInvitationScalarFieldEnum)[keyof typeof AccountInvitationScalarFieldEnum]
+
+
+export const ResumeScalarFieldEnum = {
+  id: 'id',
+  candidateProfileId: 'candidateProfileId',
+  title: 'title',
+  originalFileName: 'originalFileName',
+  mimeType: 'mimeType',
+  fileSize: 'fileSize',
+  storageProvider: 'storageProvider',
+  storageBucket: 'storageBucket',
+  storageKey: 'storageKey',
+  checksum: 'checksum',
+  status: 'status',
+  isPrimary: 'isPrimary',
+  rawText: 'rawText',
+  extractedData: 'extractedData',
+  processingError: 'processingError',
+  failureStage: 'failureStage',
+  uploadedAt: 'uploadedAt',
+  parsedAt: 'parsedAt',
+  analyzedAt: 'analyzedAt',
+  embeddedAt: 'embeddedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ResumeScalarFieldEnum = (typeof ResumeScalarFieldEnum)[keyof typeof ResumeScalarFieldEnum]
+
+
+export const ResumeSkillScalarFieldEnum = {
+  id: 'id',
+  resumeId: 'resumeId',
+  name: 'name',
+  normalizedName: 'normalizedName',
+  category: 'category',
+  yearsExperience: 'yearsExperience',
+  confidence: 'confidence',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ResumeSkillScalarFieldEnum = (typeof ResumeSkillScalarFieldEnum)[keyof typeof ResumeSkillScalarFieldEnum]
+
+
+export const ResumeExperienceScalarFieldEnum = {
+  id: 'id',
+  resumeId: 'resumeId',
+  company: 'company',
+  role: 'role',
+  location: 'location',
+  employmentType: 'employmentType',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  isCurrent: 'isCurrent',
+  description: 'description',
+  achievements: 'achievements',
+  technologies: 'technologies',
+  sortOrder: 'sortOrder',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ResumeExperienceScalarFieldEnum = (typeof ResumeExperienceScalarFieldEnum)[keyof typeof ResumeExperienceScalarFieldEnum]
+
+
+export const ResumeEducationScalarFieldEnum = {
+  id: 'id',
+  resumeId: 'resumeId',
+  institution: 'institution',
+  degree: 'degree',
+  field: 'field',
+  location: 'location',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  grade: 'grade',
+  description: 'description',
+  sortOrder: 'sortOrder',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ResumeEducationScalarFieldEnum = (typeof ResumeEducationScalarFieldEnum)[keyof typeof ResumeEducationScalarFieldEnum]
+
+
+export const ResumeProjectScalarFieldEnum = {
+  id: 'id',
+  resumeId: 'resumeId',
+  name: 'name',
+  role: 'role',
+  description: 'description',
+  projectUrl: 'projectUrl',
+  repositoryUrl: 'repositoryUrl',
+  technologies: 'technologies',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  sortOrder: 'sortOrder',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ResumeProjectScalarFieldEnum = (typeof ResumeProjectScalarFieldEnum)[keyof typeof ResumeProjectScalarFieldEnum]
+
+
+export const ResumeChunkScalarFieldEnum = {
+  id: 'id',
+  resumeId: 'resumeId',
+  chunkIndex: 'chunkIndex',
+  section: 'section',
+  text: 'text',
+  tokenCount: 'tokenCount',
+  contentHash: 'contentHash',
+  qdrantPointId: 'qdrantPointId',
+  embeddingModel: 'embeddingModel',
+  metadata: 'metadata',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ResumeChunkScalarFieldEnum = (typeof ResumeChunkScalarFieldEnum)[keyof typeof ResumeChunkScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
 } as const
 
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+export const NullableJsonNullValueInput = {
+  DbNull: DbNull,
+  JsonNull: JsonNull
+} as const
+
+export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
 
 
 export const QueryMode = {
@@ -207,4 +358,13 @@ export const NullsOrder = {
 } as const
 
 export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+export const JsonNullValueFilter = {
+  DbNull: DbNull,
+  JsonNull: JsonNull,
+  AnyNull: AnyNull
+} as const
+
+export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 

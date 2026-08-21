@@ -12,6 +12,14 @@ interface SendPasswordResetEmailInput {
   resetToken: string;
 }
 
+interface SendAccountInvitationEmailInput {
+  email: string;
+  name: string;
+  inviterName: string;
+  role: string;
+  invitationToken: string;
+}
+
 const escapeHtml = (value: string) =>
   value.replace(
     /[&<>'"]/g,
@@ -152,6 +160,51 @@ export const sendPasswordResetEmail = async ({
 
   if (error) {
     throw new Error(`Failed to send password reset email: ${error.message}`);
+  }
+
+  return data;
+};
+
+export const sendAccountInvitationEmail = async ({
+  email,
+  name,
+  inviterName,
+  role,
+  invitationToken,
+}: SendAccountInvitationEmailInput) => {
+  const from = process.env.EMAIL_FROM;
+  const webUrl = process.env.WEB_URL;
+
+  if (!from) throw new Error("EMAIL_FROM is not defined");
+  if (!webUrl) throw new Error("WEB_URL is not defined");
+
+  const invitationUrl = `${webUrl}/accept-invitation?token=${encodeURIComponent(
+    invitationToken,
+  )}`;
+  const roleLabel = role.replaceAll("_", " ").toLowerCase();
+
+  const { data, error } = await resend.emails.send({
+    from,
+    to: email,
+    subject: `${inviterName} invited you to AI Interview`,
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 32px;">
+        <h1>You're invited</h1>
+        <p>Hi ${escapeHtml(name)},</p>
+        <p>${escapeHtml(inviterName)} invited you to join AI Interview as a ${escapeHtml(roleLabel)}.</p>
+        <p>Accept the invitation to create your password and activate your secure workspace. This invitation expires in 7 days.</p>
+        <a href="${invitationUrl}" style="display: inline-block; padding: 12px 20px; background: #111827; color: white; text-decoration: none; border-radius: 8px;">
+          Accept Invitation
+        </a>
+        <p style="margin-top: 24px; font-size: 13px; color: #6b7280;">
+          If you were not expecting this invitation, you can ignore this email.
+        </p>
+      </div>
+    `,
+  });
+
+  if (error) {
+    throw new Error(`Failed to send account invitation: ${error.message}`);
   }
 
   return data;

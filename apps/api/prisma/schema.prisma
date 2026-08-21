@@ -44,6 +44,30 @@ enum SessionStatus {
   EXPIRED
 }
 
+enum ResumeStatus {
+  PENDING_UPLOAD
+  UPLOADED
+  PARSING
+  PARSED
+  ANALYZING
+  ANALYZED
+  EMBEDDING
+  READY
+  FAILED
+}
+
+enum ResumeSection {
+  SUMMARY
+  SKILLS
+  EXPERIENCE
+  EDUCATION
+  PROJECTS
+  CERTIFICATIONS
+  ACHIEVEMENTS
+  LANGUAGES
+  OTHER
+}
+
 // ================================
 // USER
 // ================================
@@ -73,6 +97,7 @@ model User {
   sessions                Session[]
   emailVerificationTokens EmailVerificationToken[]
   passwordResetTokens     PasswordResetToken[]
+  invitationsSent         AccountInvitation[]      @relation("InvitationSender")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -108,6 +133,8 @@ model CandidateProfile {
   portfolioUrl String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  resumes Resume[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -225,4 +252,232 @@ model PasswordResetToken {
   @@index([userId])
   @@index([expiresAt])
   @@map("password_reset_tokens")
+}
+
+model AccountInvitation {
+  id String @id @default(uuid()) @db.Uuid
+
+  email String
+  name  String
+  role  UserRole
+
+  tokenHash String @unique
+
+  invitedById String @db.Uuid
+  invitedBy   User   @relation("InvitationSender", fields: [invitedById], references: [id], onDelete: Cascade)
+
+  expiresAt  DateTime
+  acceptedAt DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([email])
+  @@index([invitedById])
+  @@index([expiresAt])
+  @@map("account_invitations")
+}
+
+model Resume {
+  id String @id @default(uuid()) @db.Uuid
+
+  candidateProfileId String @db.Uuid
+
+  title String?
+
+  originalFileName String
+  mimeType         String
+  fileSize         Int
+
+  storageProvider String?
+  storageBucket   String?
+  storageKey      String
+
+  checksum String?
+
+  status ResumeStatus @default(PENDING_UPLOAD)
+
+  isPrimary Boolean @default(false)
+
+  rawText String? @db.Text
+
+  extractedData Json?
+
+  processingError String? @db.Text
+  failureStage    String?
+
+  uploadedAt DateTime?
+  parsedAt   DateTime?
+  analyzedAt DateTime?
+  embeddedAt DateTime?
+
+  candidateProfile CandidateProfile @relation(fields: [candidateProfileId], references: [id], onDelete: Cascade)
+
+  skills      ResumeSkill[]
+  experiences ResumeExperience[]
+  educations  ResumeEducation[]
+  projects    ResumeProject[]
+  chunks      ResumeChunk[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([candidateProfileId])
+  @@index([candidateProfileId, createdAt])
+  @@index([status])
+  @@index([isPrimary])
+  @@map("resumes")
+}
+
+model ResumeSkill {
+  id String @id @default(uuid()) @db.Uuid
+
+  resumeId String @db.Uuid
+
+  name           String
+  normalizedName String
+
+  category String?
+
+  yearsExperience Float?
+  confidence      Float?
+
+  resume Resume @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([resumeId, normalizedName])
+  @@index([resumeId])
+  @@index([normalizedName])
+  @@map("resume_skills")
+}
+
+model ResumeExperience {
+  id String @id @default(uuid()) @db.Uuid
+
+  resumeId String @db.Uuid
+
+  company String
+  role    String
+
+  location String?
+
+  employmentType String?
+
+  startDate DateTime?
+  endDate   DateTime?
+
+  isCurrent Boolean @default(false)
+
+  description String? @db.Text
+
+  achievements String[] @default([])
+
+  technologies String[] @default([])
+
+  sortOrder Int @default(0)
+
+  resume Resume @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([resumeId])
+  @@index([company])
+  @@map("resume_experiences")
+}
+
+model ResumeEducation {
+  id String @id @default(uuid()) @db.Uuid
+
+  resumeId String @db.Uuid
+
+  institution String
+
+  degree String?
+  field  String?
+
+  location String?
+
+  startDate DateTime?
+  endDate   DateTime?
+
+  grade String?
+
+  description String? @db.Text
+
+  sortOrder Int @default(0)
+
+  resume Resume @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([resumeId])
+  @@index([institution])
+  @@map("resume_educations")
+}
+
+model ResumeProject {
+  id String @id @default(uuid()) @db.Uuid
+
+  resumeId String @db.Uuid
+
+  name String
+
+  role String?
+
+  description String? @db.Text
+
+  projectUrl    String?
+  repositoryUrl String?
+
+  technologies String[] @default([])
+
+  startDate DateTime?
+  endDate   DateTime?
+
+  sortOrder Int @default(0)
+
+  resume Resume @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([resumeId])
+  @@index([name])
+  @@map("resume_projects")
+}
+
+model ResumeChunk {
+  id String @id @default(uuid()) @db.Uuid
+
+  resumeId String @db.Uuid
+
+  chunkIndex Int
+
+  section ResumeSection @default(OTHER)
+
+  text String @db.Text
+
+  tokenCount Int?
+
+  contentHash String?
+
+  qdrantPointId String? @unique
+
+  embeddingModel String?
+
+  metadata Json?
+
+  resume Resume @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([resumeId, chunkIndex])
+  @@index([resumeId])
+  @@index([section])
+  @@map("resume_chunks")
 }
