@@ -8,6 +8,7 @@ import { ApiError } from "./utils/api-error.js";
 import { authRouter } from "./modules/auth/auth.routes.js";
 import cookieParser from "cookie-parser";
 import { candidateRouter } from "./modules/candidate/candidate.routes.js";
+import {resumeRouter} from "./modules/resume/resume.routes.js"
 
 export const app = express();
 
@@ -57,6 +58,7 @@ app.get("/api/v1/health", async (_req, res) => {
 
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/candidate", candidateRouter);
+app.use("/api/v1/candidate/resume", resumeRouter);
 
 app.use(notFoundMiddleware);
 app.use(errorMiddleware);

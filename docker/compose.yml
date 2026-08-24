@@ -23,6 +23,21 @@ services:
       retries: 10
       start_period: 10s
 
+  qdrant:
+    image: qdrant/qdrant:v1.19.0
+    container_name: ai-interview-qdrant
+
+    restart: unless-stopped
+
+    ports:
+      - "127.0.0.1:6333:6333"
+
+    volumes:
+      - qdrant_data:/qdrant/storage
+
 volumes:
   postgres_data:
     name: ai-interview-postgres-data
+
+  qdrant_data:
+    name: ai-interview-qdrant-data

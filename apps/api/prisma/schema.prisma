@@ -47,12 +47,19 @@ enum SessionStatus {
 enum ResumeStatus {
   PENDING_UPLOAD
   UPLOADED
+
   PARSING
   PARSED
+
   ANALYZING
   ANALYZED
+
+  CHUNKING
+  CHUNKED
+
   EMBEDDING
   READY
+
   FAILED
 }
 
@@ -289,9 +296,11 @@ model Resume {
   mimeType         String
   fileSize         Int
 
-  storageProvider String?
-  storageBucket   String?
-  storageKey      String
+  storageProvider String @default("imagekit")
+
+  storageFileId String
+  storagePath   String
+  storageUrl    String?
 
   checksum String?
 
@@ -299,7 +308,9 @@ model Resume {
 
   isPrimary Boolean @default(false)
 
-  rawText String? @db.Text
+  rawText   String? @db.Text
+  pageCount Int?
+  wordCount Int?
 
   extractedData Json?
 

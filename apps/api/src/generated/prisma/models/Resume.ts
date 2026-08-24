@@ -28,10 +28,14 @@ export type AggregateResume = {
 
 export type ResumeAvgAggregateOutputType = {
   fileSize: number | null
+  pageCount: number | null
+  wordCount: number | null
 }
 
 export type ResumeSumAggregateOutputType = {
   fileSize: number | null
+  pageCount: number | null
+  wordCount: number | null
 }
 
 export type ResumeMinAggregateOutputType = {
@@ -42,12 +46,15 @@ export type ResumeMinAggregateOutputType = {
   mimeType: string | null
   fileSize: number | null
   storageProvider: string | null
-  storageBucket: string | null
-  storageKey: string | null
+  storageFileId: string | null
+  storagePath: string | null
+  storageUrl: string | null
   checksum: string | null
   status: $Enums.ResumeStatus | null
   isPrimary: boolean | null
   rawText: string | null
+  pageCount: number | null
+  wordCount: number | null
   processingError: string | null
   failureStage: string | null
   uploadedAt: Date | null
@@ -66,12 +73,15 @@ export type ResumeMaxAggregateOutputType = {
   mimeType: string | null
   fileSize: number | null
   storageProvider: string | null
-  storageBucket: string | null
-  storageKey: string | null
+  storageFileId: string | null
+  storagePath: string | null
+  storageUrl: string | null
   checksum: string | null
   status: $Enums.ResumeStatus | null
   isPrimary: boolean | null
   rawText: string | null
+  pageCount: number | null
+  wordCount: number | null
   processingError: string | null
   failureStage: string | null
   uploadedAt: Date | null
@@ -90,12 +100,15 @@ export type ResumeCountAggregateOutputType = {
   mimeType: number
   fileSize: number
   storageProvider: number
-  storageBucket: number
-  storageKey: number
+  storageFileId: number
+  storagePath: number
+  storageUrl: number
   checksum: number
   status: number
   isPrimary: number
   rawText: number
+  pageCount: number
+  wordCount: number
   extractedData: number
   processingError: number
   failureStage: number
@@ -111,10 +124,14 @@ export type ResumeCountAggregateOutputType = {
 
 export type ResumeAvgAggregateInputType = {
   fileSize?: true
+  pageCount?: true
+  wordCount?: true
 }
 
 export type ResumeSumAggregateInputType = {
   fileSize?: true
+  pageCount?: true
+  wordCount?: true
 }
 
 export type ResumeMinAggregateInputType = {
@@ -125,12 +142,15 @@ export type ResumeMinAggregateInputType = {
   mimeType?: true
   fileSize?: true
   storageProvider?: true
-  storageBucket?: true
-  storageKey?: true
+  storageFileId?: true
+  storagePath?: true
+  storageUrl?: true
   checksum?: true
   status?: true
   isPrimary?: true
   rawText?: true
+  pageCount?: true
+  wordCount?: true
   processingError?: true
   failureStage?: true
   uploadedAt?: true
@@ -149,12 +169,15 @@ export type ResumeMaxAggregateInputType = {
   mimeType?: true
   fileSize?: true
   storageProvider?: true
-  storageBucket?: true
-  storageKey?: true
+  storageFileId?: true
+  storagePath?: true
+  storageUrl?: true
   checksum?: true
   status?: true
   isPrimary?: true
   rawText?: true
+  pageCount?: true
+  wordCount?: true
   processingError?: true
   failureStage?: true
   uploadedAt?: true
@@ -173,12 +196,15 @@ export type ResumeCountAggregateInputType = {
   mimeType?: true
   fileSize?: true
   storageProvider?: true
-  storageBucket?: true
-  storageKey?: true
+  storageFileId?: true
+  storagePath?: true
+  storageUrl?: true
   checksum?: true
   status?: true
   isPrimary?: true
   rawText?: true
+  pageCount?: true
+  wordCount?: true
   extractedData?: true
   processingError?: true
   failureStage?: true
@@ -284,13 +310,16 @@ export type ResumeGroupByOutputType = {
   originalFileName: string
   mimeType: string
   fileSize: number
-  storageProvider: string | null
-  storageBucket: string | null
-  storageKey: string
+  storageProvider: string
+  storageFileId: string
+  storagePath: string
+  storageUrl: string | null
   checksum: string | null
   status: $Enums.ResumeStatus
   isPrimary: boolean
   rawText: string | null
+  pageCount: number | null
+  wordCount: number | null
   extractedData: runtime.JsonValue | null
   processingError: string | null
   failureStage: string | null
@@ -332,13 +361,16 @@ export type ResumeWhereInput = {
   originalFileName?: Prisma.StringFilter<"Resume"> | string
   mimeType?: Prisma.StringFilter<"Resume"> | string
   fileSize?: Prisma.IntFilter<"Resume"> | number
-  storageProvider?: Prisma.StringNullableFilter<"Resume"> | string | null
-  storageBucket?: Prisma.StringNullableFilter<"Resume"> | string | null
-  storageKey?: Prisma.StringFilter<"Resume"> | string
+  storageProvider?: Prisma.StringFilter<"Resume"> | string
+  storageFileId?: Prisma.StringFilter<"Resume"> | string
+  storagePath?: Prisma.StringFilter<"Resume"> | string
+  storageUrl?: Prisma.StringNullableFilter<"Resume"> | string | null
   checksum?: Prisma.StringNullableFilter<"Resume"> | string | null
   status?: Prisma.EnumResumeStatusFilter<"Resume"> | $Enums.ResumeStatus
   isPrimary?: Prisma.BoolFilter<"Resume"> | boolean
   rawText?: Prisma.StringNullableFilter<"Resume"> | string | null
+  pageCount?: Prisma.IntNullableFilter<"Resume"> | number | null
+  wordCount?: Prisma.IntNullableFilter<"Resume"> | number | null
   extractedData?: Prisma.JsonNullableFilter<"Resume">
   processingError?: Prisma.StringNullableFilter<"Resume"> | string | null
   failureStage?: Prisma.StringNullableFilter<"Resume"> | string | null
@@ -363,13 +395,16 @@ export type ResumeOrderByWithRelationInput = {
   originalFileName?: Prisma.SortOrder
   mimeType?: Prisma.SortOrder
   fileSize?: Prisma.SortOrder
-  storageProvider?: Prisma.SortOrderInput | Prisma.SortOrder
-  storageBucket?: Prisma.SortOrderInput | Prisma.SortOrder
-  storageKey?: Prisma.SortOrder
+  storageProvider?: Prisma.SortOrder
+  storageFileId?: Prisma.SortOrder
+  storagePath?: Prisma.SortOrder
+  storageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   checksum?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   isPrimary?: Prisma.SortOrder
   rawText?: Prisma.SortOrderInput | Prisma.SortOrder
+  pageCount?: Prisma.SortOrderInput | Prisma.SortOrder
+  wordCount?: Prisma.SortOrderInput | Prisma.SortOrder
   extractedData?: Prisma.SortOrderInput | Prisma.SortOrder
   processingError?: Prisma.SortOrderInput | Prisma.SortOrder
   failureStage?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -397,13 +432,16 @@ export type ResumeWhereUniqueInput = Prisma.AtLeast<{
   originalFileName?: Prisma.StringFilter<"Resume"> | string
   mimeType?: Prisma.StringFilter<"Resume"> | string
   fileSize?: Prisma.IntFilter<"Resume"> | number
-  storageProvider?: Prisma.StringNullableFilter<"Resume"> | string | null
-  storageBucket?: Prisma.StringNullableFilter<"Resume"> | string | null
-  storageKey?: Prisma.StringFilter<"Resume"> | string
+  storageProvider?: Prisma.StringFilter<"Resume"> | string
+  storageFileId?: Prisma.StringFilter<"Resume"> | string
+  storagePath?: Prisma.StringFilter<"Resume"> | string
+  storageUrl?: Prisma.StringNullableFilter<"Resume"> | string | null
   checksum?: Prisma.StringNullableFilter<"Resume"> | string | null
   status?: Prisma.EnumResumeStatusFilter<"Resume"> | $Enums.ResumeStatus
   isPrimary?: Prisma.BoolFilter<"Resume"> | boolean
   rawText?: Prisma.StringNullableFilter<"Resume"> | string | null
+  pageCount?: Prisma.IntNullableFilter<"Resume"> | number | null
+  wordCount?: Prisma.IntNullableFilter<"Resume"> | number | null
   extractedData?: Prisma.JsonNullableFilter<"Resume">
   processingError?: Prisma.StringNullableFilter<"Resume"> | string | null
   failureStage?: Prisma.StringNullableFilter<"Resume"> | string | null
@@ -428,13 +466,16 @@ export type ResumeOrderByWithAggregationInput = {
   originalFileName?: Prisma.SortOrder
   mimeType?: Prisma.SortOrder
   fileSize?: Prisma.SortOrder
-  storageProvider?: Prisma.SortOrderInput | Prisma.SortOrder
-  storageBucket?: Prisma.SortOrderInput | Prisma.SortOrder
-  storageKey?: Prisma.SortOrder
+  storageProvider?: Prisma.SortOrder
+  storageFileId?: Prisma.SortOrder
+  storagePath?: Prisma.SortOrder
+  storageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   checksum?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   isPrimary?: Prisma.SortOrder
   rawText?: Prisma.SortOrderInput | Prisma.SortOrder
+  pageCount?: Prisma.SortOrderInput | Prisma.SortOrder
+  wordCount?: Prisma.SortOrderInput | Prisma.SortOrder
   extractedData?: Prisma.SortOrderInput | Prisma.SortOrder
   processingError?: Prisma.SortOrderInput | Prisma.SortOrder
   failureStage?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -461,13 +502,16 @@ export type ResumeScalarWhereWithAggregatesInput = {
   originalFileName?: Prisma.StringWithAggregatesFilter<"Resume"> | string
   mimeType?: Prisma.StringWithAggregatesFilter<"Resume"> | string
   fileSize?: Prisma.IntWithAggregatesFilter<"Resume"> | number
-  storageProvider?: Prisma.StringNullableWithAggregatesFilter<"Resume"> | string | null
-  storageBucket?: Prisma.StringNullableWithAggregatesFilter<"Resume"> | string | null
-  storageKey?: Prisma.StringWithAggregatesFilter<"Resume"> | string
+  storageProvider?: Prisma.StringWithAggregatesFilter<"Resume"> | string
+  storageFileId?: Prisma.StringWithAggregatesFilter<"Resume"> | string
+  storagePath?: Prisma.StringWithAggregatesFilter<"Resume"> | string
+  storageUrl?: Prisma.StringNullableWithAggregatesFilter<"Resume"> | string | null
   checksum?: Prisma.StringNullableWithAggregatesFilter<"Resume"> | string | null
   status?: Prisma.EnumResumeStatusWithAggregatesFilter<"Resume"> | $Enums.ResumeStatus
   isPrimary?: Prisma.BoolWithAggregatesFilter<"Resume"> | boolean
   rawText?: Prisma.StringNullableWithAggregatesFilter<"Resume"> | string | null
+  pageCount?: Prisma.IntNullableWithAggregatesFilter<"Resume"> | number | null
+  wordCount?: Prisma.IntNullableWithAggregatesFilter<"Resume"> | number | null
   extractedData?: Prisma.JsonNullableWithAggregatesFilter<"Resume">
   processingError?: Prisma.StringNullableWithAggregatesFilter<"Resume"> | string | null
   failureStage?: Prisma.StringNullableWithAggregatesFilter<"Resume"> | string | null
@@ -485,13 +529,16 @@ export type ResumeCreateInput = {
   originalFileName: string
   mimeType: string
   fileSize: number
-  storageProvider?: string | null
-  storageBucket?: string | null
-  storageKey: string
+  storageProvider?: string
+  storageFileId: string
+  storagePath: string
+  storageUrl?: string | null
   checksum?: string | null
   status?: $Enums.ResumeStatus
   isPrimary?: boolean
   rawText?: string | null
+  pageCount?: number | null
+  wordCount?: number | null
   extractedData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   processingError?: string | null
   failureStage?: string | null
@@ -516,13 +563,16 @@ export type ResumeUncheckedCreateInput = {
   originalFileName: string
   mimeType: string
   fileSize: number
-  storageProvider?: string | null
-  storageBucket?: string | null
-  storageKey: string
+  storageProvider?: string
+  storageFileId: string
+  storagePath: string
+  storageUrl?: string | null
   checksum?: string | null
   status?: $Enums.ResumeStatus
   isPrimary?: boolean
   rawText?: string | null
+  pageCount?: number | null
+  wordCount?: number | null
   extractedData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   processingError?: string | null
   failureStage?: string | null
@@ -545,13 +595,16 @@ export type ResumeUpdateInput = {
   originalFileName?: Prisma.StringFieldUpdateOperationsInput | string
   mimeType?: Prisma.StringFieldUpdateOperationsInput | string
   fileSize?: Prisma.IntFieldUpdateOperationsInput | number
-  storageProvider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  storageBucket?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  storageKey?: Prisma.StringFieldUpdateOperationsInput | string
+  storageProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  storageFileId?: Prisma.StringFieldUpdateOperationsInput | string
+  storagePath?: Prisma.StringFieldUpdateOperationsInput | string
+  storageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   checksum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumResumeStatusFieldUpdateOperationsInput | $Enums.ResumeStatus
   isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   rawText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pageCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  wordCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   extractedData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   failureStage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -576,13 +629,16 @@ export type ResumeUncheckedUpdateInput = {
   originalFileName?: Prisma.StringFieldUpdateOperationsInput | string
   mimeType?: Prisma.StringFieldUpdateOperationsInput | string
   fileSize?: Prisma.IntFieldUpdateOperationsInput | number
-  storageProvider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  storageBucket?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  storageKey?: Prisma.StringFieldUpdateOperationsInput | string
+  storageProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  storageFileId?: Prisma.StringFieldUpdateOperationsInput | string
+  storagePath?: Prisma.StringFieldUpdateOperationsInput | string
+  storageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   checksum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumResumeStatusFieldUpdateOperationsInput | $Enums.ResumeStatus
   isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   rawText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pageCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  wordCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   extractedData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   failureStage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -606,13 +662,16 @@ export type ResumeCreateManyInput = {
   originalFileName: string
   mimeType: string
   fileSize: number
-  storageProvider?: string | null
-  storageBucket?: string | null
-  storageKey: string
+  storageProvider?: string
+  storageFileId: string
+  storagePath: string
+  storageUrl?: string | null
   checksum?: string | null
   status?: $Enums.ResumeStatus
   isPrimary?: boolean
   rawText?: string | null
+  pageCount?: number | null
+  wordCount?: number | null
   extractedData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   processingError?: string | null
   failureStage?: string | null
@@ -630,13 +689,16 @@ export type ResumeUpdateManyMutationInput = {
   originalFileName?: Prisma.StringFieldUpdateOperationsInput | string
   mimeType?: Prisma.StringFieldUpdateOperationsInput | string
   fileSize?: Prisma.IntFieldUpdateOperationsInput | number
-  storageProvider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  storageBucket?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  storageKey?: Prisma.StringFieldUpdateOperationsInput | string
+  storageProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  storageFileId?: Prisma.StringFieldUpdateOperationsInput | string
+  storagePath?: Prisma.StringFieldUpdateOperationsInput | string
+  storageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   checksum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumResumeStatusFieldUpdateOperationsInput | $Enums.ResumeStatus
   isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   rawText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pageCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  wordCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   extractedData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   failureStage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -655,13 +717,16 @@ export type ResumeUncheckedUpdateManyInput = {
   originalFileName?: Prisma.StringFieldUpdateOperationsInput | string
   mimeType?: Prisma.StringFieldUpdateOperationsInput | string
   fileSize?: Prisma.IntFieldUpdateOperationsInput | number
-  storageProvider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  storageBucket?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  storageKey?: Prisma.StringFieldUpdateOperationsInput | string
+  storageProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  storageFileId?: Prisma.StringFieldUpdateOperationsInput | string
+  storagePath?: Prisma.StringFieldUpdateOperationsInput | string
+  storageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   checksum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumResumeStatusFieldUpdateOperationsInput | $Enums.ResumeStatus
   isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   rawText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pageCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  wordCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   extractedData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   failureStage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -691,12 +756,15 @@ export type ResumeCountOrderByAggregateInput = {
   mimeType?: Prisma.SortOrder
   fileSize?: Prisma.SortOrder
   storageProvider?: Prisma.SortOrder
-  storageBucket?: Prisma.SortOrder
-  storageKey?: Prisma.SortOrder
+  storageFileId?: Prisma.SortOrder
+  storagePath?: Prisma.SortOrder
+  storageUrl?: Prisma.SortOrder
   checksum?: Prisma.SortOrder
   status?: Prisma.SortOrder
   isPrimary?: Prisma.SortOrder
   rawText?: Prisma.SortOrder
+  pageCount?: Prisma.SortOrder
+  wordCount?: Prisma.SortOrder
   extractedData?: Prisma.SortOrder
   processingError?: Prisma.SortOrder
   failureStage?: Prisma.SortOrder
@@ -710,6 +778,8 @@ export type ResumeCountOrderByAggregateInput = {
 
 export type ResumeAvgOrderByAggregateInput = {
   fileSize?: Prisma.SortOrder
+  pageCount?: Prisma.SortOrder
+  wordCount?: Prisma.SortOrder
 }
 
 export type ResumeMaxOrderByAggregateInput = {
@@ -720,12 +790,15 @@ export type ResumeMaxOrderByAggregateInput = {
   mimeType?: Prisma.SortOrder
   fileSize?: Prisma.SortOrder
   storageProvider?: Prisma.SortOrder
-  storageBucket?: Prisma.SortOrder
-  storageKey?: Prisma.SortOrder
+  storageFileId?: Prisma.SortOrder
+  storagePath?: Prisma.SortOrder
+  storageUrl?: Prisma.SortOrder
   checksum?: Prisma.SortOrder
   status?: Prisma.SortOrder
   isPrimary?: Prisma.SortOrder
   rawText?: Prisma.SortOrder
+  pageCount?: Prisma.SortOrder
+  wordCount?: Prisma.SortOrder
   processingError?: Prisma.SortOrder
   failureStage?: Prisma.SortOrder
   uploadedAt?: Prisma.SortOrder
@@ -744,12 +817,15 @@ export type ResumeMinOrderByAggregateInput = {
   mimeType?: Prisma.SortOrder
   fileSize?: Prisma.SortOrder
   storageProvider?: Prisma.SortOrder
-  storageBucket?: Prisma.SortOrder
-  storageKey?: Prisma.SortOrder
+  storageFileId?: Prisma.SortOrder
+  storagePath?: Prisma.SortOrder
+  storageUrl?: Prisma.SortOrder
   checksum?: Prisma.SortOrder
   status?: Prisma.SortOrder
   isPrimary?: Prisma.SortOrder
   rawText?: Prisma.SortOrder
+  pageCount?: Prisma.SortOrder
+  wordCount?: Prisma.SortOrder
   processingError?: Prisma.SortOrder
   failureStage?: Prisma.SortOrder
   uploadedAt?: Prisma.SortOrder
@@ -762,6 +838,8 @@ export type ResumeMinOrderByAggregateInput = {
 
 export type ResumeSumOrderByAggregateInput = {
   fileSize?: Prisma.SortOrder
+  pageCount?: Prisma.SortOrder
+  wordCount?: Prisma.SortOrder
 }
 
 export type ResumeScalarRelationFilter = {
@@ -817,6 +895,14 @@ export type EnumResumeStatusFieldUpdateOperationsInput = {
 
 export type BoolFieldUpdateOperationsInput = {
   set?: boolean
+}
+
+export type NullableIntFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
 }
 
 export type ResumeCreateNestedOneWithoutSkillsInput = {
@@ -895,13 +981,16 @@ export type ResumeCreateWithoutCandidateProfileInput = {
   originalFileName: string
   mimeType: string
   fileSize: number
-  storageProvider?: string | null
-  storageBucket?: string | null
-  storageKey: string
+  storageProvider?: string
+  storageFileId: string
+  storagePath: string
+  storageUrl?: string | null
   checksum?: string | null
   status?: $Enums.ResumeStatus
   isPrimary?: boolean
   rawText?: string | null
+  pageCount?: number | null
+  wordCount?: number | null
   extractedData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   processingError?: string | null
   failureStage?: string | null
@@ -924,13 +1013,16 @@ export type ResumeUncheckedCreateWithoutCandidateProfileInput = {
   originalFileName: string
   mimeType: string
   fileSize: number
-  storageProvider?: string | null
-  storageBucket?: string | null
-  storageKey: string
+  storageProvider?: string
+  storageFileId: string
+  storagePath: string
+  storageUrl?: string | null
   checksum?: string | null
   status?: $Enums.ResumeStatus
   isPrimary?: boolean
   rawText?: string | null
+  pageCount?: number | null
+  wordCount?: number | null
   extractedData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   processingError?: string | null
   failureStage?: string | null
@@ -983,13 +1075,16 @@ export type ResumeScalarWhereInput = {
   originalFileName?: Prisma.StringFilter<"Resume"> | string
   mimeType?: Prisma.StringFilter<"Resume"> | string
   fileSize?: Prisma.IntFilter<"Resume"> | number
-  storageProvider?: Prisma.StringNullableFilter<"Resume"> | string | null
-  storageBucket?: Prisma.StringNullableFilter<"Resume"> | string | null
-  storageKey?: Prisma.StringFilter<"Resume"> | string
+  storageProvider?: Prisma.StringFilter<"Resume"> | string
+  storageFileId?: Prisma.StringFilter<"Resume"> | string
+  storagePath?: Prisma.StringFilter<"Resume"> | string
+  storageUrl?: Prisma.StringNullableFilter<"Resume"> | string | null
   checksum?: Prisma.StringNullableFilter<"Resume"> | string | null
   status?: Prisma.EnumResumeStatusFilter<"Resume"> | $Enums.ResumeStatus
   isPrimary?: Prisma.BoolFilter<"Resume"> | boolean
   rawText?: Prisma.StringNullableFilter<"Resume"> | string | null
+  pageCount?: Prisma.IntNullableFilter<"Resume"> | number | null
+  wordCount?: Prisma.IntNullableFilter<"Resume"> | number | null
   extractedData?: Prisma.JsonNullableFilter<"Resume">
   processingError?: Prisma.StringNullableFilter<"Resume"> | string | null
   failureStage?: Prisma.StringNullableFilter<"Resume"> | string | null
@@ -1007,13 +1102,16 @@ export type ResumeCreateWithoutSkillsInput = {
   originalFileName: string
   mimeType: string
   fileSize: number
-  storageProvider?: string | null
-  storageBucket?: string | null
-  storageKey: string
+  storageProvider?: string
+  storageFileId: string
+  storagePath: string
+  storageUrl?: string | null
   checksum?: string | null
   status?: $Enums.ResumeStatus
   isPrimary?: boolean
   rawText?: string | null
+  pageCount?: number | null
+  wordCount?: number | null
   extractedData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   processingError?: string | null
   failureStage?: string | null
@@ -1037,13 +1135,16 @@ export type ResumeUncheckedCreateWithoutSkillsInput = {
   originalFileName: string
   mimeType: string
   fileSize: number
-  storageProvider?: string | null
-  storageBucket?: string | null
-  storageKey: string
+  storageProvider?: string
+  storageFileId: string
+  storagePath: string
+  storageUrl?: string | null
   checksum?: string | null
   status?: $Enums.ResumeStatus
   isPrimary?: boolean
   rawText?: string | null
+  pageCount?: number | null
+  wordCount?: number | null
   extractedData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   processingError?: string | null
   failureStage?: string | null
@@ -1081,13 +1182,16 @@ export type ResumeUpdateWithoutSkillsInput = {
   originalFileName?: Prisma.StringFieldUpdateOperationsInput | string
   mimeType?: Prisma.StringFieldUpdateOperationsInput | string
   fileSize?: Prisma.IntFieldUpdateOperationsInput | number
-  storageProvider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  storageBucket?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  storageKey?: Prisma.StringFieldUpdateOperationsInput | string
+  storageProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  storageFileId?: Prisma.StringFieldUpdateOperationsInput | string
+  storagePath?: Prisma.StringFieldUpdateOperationsInput | string
+  storageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   checksum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumResumeStatusFieldUpdateOperationsInput | $Enums.ResumeStatus
   isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   rawText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pageCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  wordCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   extractedData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   failureStage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1111,13 +1215,16 @@ export type ResumeUncheckedUpdateWithoutSkillsInput = {
   originalFileName?: Prisma.StringFieldUpdateOperationsInput | string
   mimeType?: Prisma.StringFieldUpdateOperationsInput | string
   fileSize?: Prisma.IntFieldUpdateOperationsInput | number
-  storageProvider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  storageBucket?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  storageKey?: Prisma.StringFieldUpdateOperationsInput | string
+  storageProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  storageFileId?: Prisma.StringFieldUpdateOperationsInput | string
+  storagePath?: Prisma.StringFieldUpdateOperationsInput | string
+  storageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   checksum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumResumeStatusFieldUpdateOperationsInput | $Enums.ResumeStatus
   isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   rawText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pageCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  wordCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   extractedData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   failureStage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1139,13 +1246,16 @@ export type ResumeCreateWithoutExperiencesInput = {
   originalFileName: string
   mimeType: string
   fileSize: number
-  storageProvider?: string | null
-  storageBucket?: string | null
-  storageKey: string
+  storageProvider?: string
+  storageFileId: string
+  storagePath: string
+  storageUrl?: string | null
   checksum?: string | null
   status?: $Enums.ResumeStatus
   isPrimary?: boolean
   rawText?: string | null
+  pageCount?: number | null
+  wordCount?: number | null
   extractedData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   processingError?: string | null
   failureStage?: string | null
@@ -1169,13 +1279,16 @@ export type ResumeUncheckedCreateWithoutExperiencesInput = {
   originalFileName: string
   mimeType: string
   fileSize: number
-  storageProvider?: string | null
-  storageBucket?: string | null
-  storageKey: string
+  storageProvider?: string
+  storageFileId: string
+  storagePath: string
+  storageUrl?: string | null
   checksum?: string | null
   status?: $Enums.ResumeStatus
   isPrimary?: boolean
   rawText?: string | null
+  pageCount?: number | null
+  wordCount?: number | null
   extractedData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   processingError?: string | null
   failureStage?: string | null
@@ -1213,13 +1326,16 @@ export type ResumeUpdateWithoutExperiencesInput = {
   originalFileName?: Prisma.StringFieldUpdateOperationsInput | string
   mimeType?: Prisma.StringFieldUpdateOperationsInput | string
   fileSize?: Prisma.IntFieldUpdateOperationsInput | number
-  storageProvider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  storageBucket?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  storageKey?: Prisma.StringFieldUpdateOperationsInput | string
+  storageProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  storageFileId?: Prisma.StringFieldUpdateOperationsInput | string
+  storagePath?: Prisma.StringFieldUpdateOperationsInput | string
+  storageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   checksum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumResumeStatusFieldUpdateOperationsInput | $Enums.ResumeStatus
   isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   rawText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pageCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  wordCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   extractedData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   failureStage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1243,13 +1359,16 @@ export type ResumeUncheckedUpdateWithoutExperiencesInput = {
   originalFileName?: Prisma.StringFieldUpdateOperationsInput | string
   mimeType?: Prisma.StringFieldUpdateOperationsInput | string
   fileSize?: Prisma.IntFieldUpdateOperationsInput | number
-  storageProvider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  storageBucket?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  storageKey?: Prisma.StringFieldUpdateOperationsInput | string
+  storageProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  storageFileId?: Prisma.StringFieldUpdateOperationsInput | string
+  storagePath?: Prisma.StringFieldUpdateOperationsInput | string
+  storageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   checksum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumResumeStatusFieldUpdateOperationsInput | $Enums.ResumeStatus
   isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   rawText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pageCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  wordCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   extractedData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   failureStage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1271,13 +1390,16 @@ export type ResumeCreateWithoutEducationsInput = {
   originalFileName: string
   mimeType: string
   fileSize: number
-  storageProvider?: string | null
-  storageBucket?: string | null
-  storageKey: string
+  storageProvider?: string
+  storageFileId: string
+  storagePath: string
+  storageUrl?: string | null
   checksum?: string | null
   status?: $Enums.ResumeStatus
   isPrimary?: boolean
   rawText?: string | null
+  pageCount?: number | null
+  wordCount?: number | null
   extractedData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   processingError?: string | null
   failureStage?: string | null
@@ -1301,13 +1423,16 @@ export type ResumeUncheckedCreateWithoutEducationsInput = {
   originalFileName: string
   mimeType: string
   fileSize: number
-  storageProvider?: string | null
-  storageBucket?: string | null
-  storageKey: string
+  storageProvider?: string
+  storageFileId: string
+  storagePath: string
+  storageUrl?: string | null
   checksum?: string | null
   status?: $Enums.ResumeStatus
   isPrimary?: boolean
   rawText?: string | null
+  pageCount?: number | null
+  wordCount?: number | null
   extractedData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   processingError?: string | null
   failureStage?: string | null
@@ -1345,13 +1470,16 @@ export type ResumeUpdateWithoutEducationsInput = {
   originalFileName?: Prisma.StringFieldUpdateOperationsInput | string
   mimeType?: Prisma.StringFieldUpdateOperationsInput | string
   fileSize?: Prisma.IntFieldUpdateOperationsInput | number
-  storageProvider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  storageBucket?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  storageKey?: Prisma.StringFieldUpdateOperationsInput | string
+  storageProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  storageFileId?: Prisma.StringFieldUpdateOperationsInput | string
+  storagePath?: Prisma.StringFieldUpdateOperationsInput | string
+  storageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   checksum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumResumeStatusFieldUpdateOperationsInput | $Enums.ResumeStatus
   isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   rawText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pageCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  wordCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   extractedData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   failureStage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1375,13 +1503,16 @@ export type ResumeUncheckedUpdateWithoutEducationsInput = {
   originalFileName?: Prisma.StringFieldUpdateOperationsInput | string
   mimeType?: Prisma.StringFieldUpdateOperationsInput | string
   fileSize?: Prisma.IntFieldUpdateOperationsInput | number
-  storageProvider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  storageBucket?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  storageKey?: Prisma.StringFieldUpdateOperationsInput | string
+  storageProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  storageFileId?: Prisma.StringFieldUpdateOperationsInput | string
+  storagePath?: Prisma.StringFieldUpdateOperationsInput | string
+  storageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   checksum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumResumeStatusFieldUpdateOperationsInput | $Enums.ResumeStatus
   isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   rawText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pageCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  wordCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   extractedData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   failureStage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1403,13 +1534,16 @@ export type ResumeCreateWithoutProjectsInput = {
   originalFileName: string
   mimeType: string
   fileSize: number
-  storageProvider?: string | null
-  storageBucket?: string | null
-  storageKey: string
+  storageProvider?: string
+  storageFileId: string
+  storagePath: string
+  storageUrl?: string | null
   checksum?: string | null
   status?: $Enums.ResumeStatus
   isPrimary?: boolean
   rawText?: string | null
+  pageCount?: number | null
+  wordCount?: number | null
   extractedData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   processingError?: string | null
   failureStage?: string | null
@@ -1433,13 +1567,16 @@ export type ResumeUncheckedCreateWithoutProjectsInput = {
   originalFileName: string
   mimeType: string
   fileSize: number
-  storageProvider?: string | null
-  storageBucket?: string | null
-  storageKey: string
+  storageProvider?: string
+  storageFileId: string
+  storagePath: string
+  storageUrl?: string | null
   checksum?: string | null
   status?: $Enums.ResumeStatus
   isPrimary?: boolean
   rawText?: string | null
+  pageCount?: number | null
+  wordCount?: number | null
   extractedData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   processingError?: string | null
   failureStage?: string | null
@@ -1477,13 +1614,16 @@ export type ResumeUpdateWithoutProjectsInput = {
   originalFileName?: Prisma.StringFieldUpdateOperationsInput | string
   mimeType?: Prisma.StringFieldUpdateOperationsInput | string
   fileSize?: Prisma.IntFieldUpdateOperationsInput | number
-  storageProvider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  storageBucket?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  storageKey?: Prisma.StringFieldUpdateOperationsInput | string
+  storageProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  storageFileId?: Prisma.StringFieldUpdateOperationsInput | string
+  storagePath?: Prisma.StringFieldUpdateOperationsInput | string
+  storageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   checksum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumResumeStatusFieldUpdateOperationsInput | $Enums.ResumeStatus
   isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   rawText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pageCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  wordCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   extractedData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   failureStage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1507,13 +1647,16 @@ export type ResumeUncheckedUpdateWithoutProjectsInput = {
   originalFileName?: Prisma.StringFieldUpdateOperationsInput | string
   mimeType?: Prisma.StringFieldUpdateOperationsInput | string
   fileSize?: Prisma.IntFieldUpdateOperationsInput | number
-  storageProvider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  storageBucket?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  storageKey?: Prisma.StringFieldUpdateOperationsInput | string
+  storageProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  storageFileId?: Prisma.StringFieldUpdateOperationsInput | string
+  storagePath?: Prisma.StringFieldUpdateOperationsInput | string
+  storageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   checksum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumResumeStatusFieldUpdateOperationsInput | $Enums.ResumeStatus
   isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   rawText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pageCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  wordCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   extractedData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   failureStage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1535,13 +1678,16 @@ export type ResumeCreateWithoutChunksInput = {
   originalFileName: string
   mimeType: string
   fileSize: number
-  storageProvider?: string | null
-  storageBucket?: string | null
-  storageKey: string
+  storageProvider?: string
+  storageFileId: string
+  storagePath: string
+  storageUrl?: string | null
   checksum?: string | null
   status?: $Enums.ResumeStatus
   isPrimary?: boolean
   rawText?: string | null
+  pageCount?: number | null
+  wordCount?: number | null
   extractedData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   processingError?: string | null
   failureStage?: string | null
@@ -1565,13 +1711,16 @@ export type ResumeUncheckedCreateWithoutChunksInput = {
   originalFileName: string
   mimeType: string
   fileSize: number
-  storageProvider?: string | null
-  storageBucket?: string | null
-  storageKey: string
+  storageProvider?: string
+  storageFileId: string
+  storagePath: string
+  storageUrl?: string | null
   checksum?: string | null
   status?: $Enums.ResumeStatus
   isPrimary?: boolean
   rawText?: string | null
+  pageCount?: number | null
+  wordCount?: number | null
   extractedData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   processingError?: string | null
   failureStage?: string | null
@@ -1609,13 +1758,16 @@ export type ResumeUpdateWithoutChunksInput = {
   originalFileName?: Prisma.StringFieldUpdateOperationsInput | string
   mimeType?: Prisma.StringFieldUpdateOperationsInput | string
   fileSize?: Prisma.IntFieldUpdateOperationsInput | number
-  storageProvider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  storageBucket?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  storageKey?: Prisma.StringFieldUpdateOperationsInput | string
+  storageProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  storageFileId?: Prisma.StringFieldUpdateOperationsInput | string
+  storagePath?: Prisma.StringFieldUpdateOperationsInput | string
+  storageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   checksum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumResumeStatusFieldUpdateOperationsInput | $Enums.ResumeStatus
   isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   rawText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pageCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  wordCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   extractedData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   failureStage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1639,13 +1791,16 @@ export type ResumeUncheckedUpdateWithoutChunksInput = {
   originalFileName?: Prisma.StringFieldUpdateOperationsInput | string
   mimeType?: Prisma.StringFieldUpdateOperationsInput | string
   fileSize?: Prisma.IntFieldUpdateOperationsInput | number
-  storageProvider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  storageBucket?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  storageKey?: Prisma.StringFieldUpdateOperationsInput | string
+  storageProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  storageFileId?: Prisma.StringFieldUpdateOperationsInput | string
+  storagePath?: Prisma.StringFieldUpdateOperationsInput | string
+  storageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   checksum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumResumeStatusFieldUpdateOperationsInput | $Enums.ResumeStatus
   isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   rawText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pageCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  wordCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   extractedData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   failureStage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1667,13 +1822,16 @@ export type ResumeCreateManyCandidateProfileInput = {
   originalFileName: string
   mimeType: string
   fileSize: number
-  storageProvider?: string | null
-  storageBucket?: string | null
-  storageKey: string
+  storageProvider?: string
+  storageFileId: string
+  storagePath: string
+  storageUrl?: string | null
   checksum?: string | null
   status?: $Enums.ResumeStatus
   isPrimary?: boolean
   rawText?: string | null
+  pageCount?: number | null
+  wordCount?: number | null
   extractedData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   processingError?: string | null
   failureStage?: string | null
@@ -1691,13 +1849,16 @@ export type ResumeUpdateWithoutCandidateProfileInput = {
   originalFileName?: Prisma.StringFieldUpdateOperationsInput | string
   mimeType?: Prisma.StringFieldUpdateOperationsInput | string
   fileSize?: Prisma.IntFieldUpdateOperationsInput | number
-  storageProvider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  storageBucket?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  storageKey?: Prisma.StringFieldUpdateOperationsInput | string
+  storageProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  storageFileId?: Prisma.StringFieldUpdateOperationsInput | string
+  storagePath?: Prisma.StringFieldUpdateOperationsInput | string
+  storageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   checksum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumResumeStatusFieldUpdateOperationsInput | $Enums.ResumeStatus
   isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   rawText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pageCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  wordCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   extractedData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   failureStage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1720,13 +1881,16 @@ export type ResumeUncheckedUpdateWithoutCandidateProfileInput = {
   originalFileName?: Prisma.StringFieldUpdateOperationsInput | string
   mimeType?: Prisma.StringFieldUpdateOperationsInput | string
   fileSize?: Prisma.IntFieldUpdateOperationsInput | number
-  storageProvider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  storageBucket?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  storageKey?: Prisma.StringFieldUpdateOperationsInput | string
+  storageProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  storageFileId?: Prisma.StringFieldUpdateOperationsInput | string
+  storagePath?: Prisma.StringFieldUpdateOperationsInput | string
+  storageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   checksum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumResumeStatusFieldUpdateOperationsInput | $Enums.ResumeStatus
   isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   rawText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pageCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  wordCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   extractedData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   failureStage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1749,13 +1913,16 @@ export type ResumeUncheckedUpdateManyWithoutCandidateProfileInput = {
   originalFileName?: Prisma.StringFieldUpdateOperationsInput | string
   mimeType?: Prisma.StringFieldUpdateOperationsInput | string
   fileSize?: Prisma.IntFieldUpdateOperationsInput | number
-  storageProvider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  storageBucket?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  storageKey?: Prisma.StringFieldUpdateOperationsInput | string
+  storageProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  storageFileId?: Prisma.StringFieldUpdateOperationsInput | string
+  storagePath?: Prisma.StringFieldUpdateOperationsInput | string
+  storageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   checksum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumResumeStatusFieldUpdateOperationsInput | $Enums.ResumeStatus
   isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   rawText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pageCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  wordCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   extractedData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   failureStage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1842,12 +2009,15 @@ export type ResumeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   mimeType?: boolean
   fileSize?: boolean
   storageProvider?: boolean
-  storageBucket?: boolean
-  storageKey?: boolean
+  storageFileId?: boolean
+  storagePath?: boolean
+  storageUrl?: boolean
   checksum?: boolean
   status?: boolean
   isPrimary?: boolean
   rawText?: boolean
+  pageCount?: boolean
+  wordCount?: boolean
   extractedData?: boolean
   processingError?: boolean
   failureStage?: boolean
@@ -1874,12 +2044,15 @@ export type ResumeSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   mimeType?: boolean
   fileSize?: boolean
   storageProvider?: boolean
-  storageBucket?: boolean
-  storageKey?: boolean
+  storageFileId?: boolean
+  storagePath?: boolean
+  storageUrl?: boolean
   checksum?: boolean
   status?: boolean
   isPrimary?: boolean
   rawText?: boolean
+  pageCount?: boolean
+  wordCount?: boolean
   extractedData?: boolean
   processingError?: boolean
   failureStage?: boolean
@@ -1900,12 +2073,15 @@ export type ResumeSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   mimeType?: boolean
   fileSize?: boolean
   storageProvider?: boolean
-  storageBucket?: boolean
-  storageKey?: boolean
+  storageFileId?: boolean
+  storagePath?: boolean
+  storageUrl?: boolean
   checksum?: boolean
   status?: boolean
   isPrimary?: boolean
   rawText?: boolean
+  pageCount?: boolean
+  wordCount?: boolean
   extractedData?: boolean
   processingError?: boolean
   failureStage?: boolean
@@ -1926,12 +2102,15 @@ export type ResumeSelectScalar = {
   mimeType?: boolean
   fileSize?: boolean
   storageProvider?: boolean
-  storageBucket?: boolean
-  storageKey?: boolean
+  storageFileId?: boolean
+  storagePath?: boolean
+  storageUrl?: boolean
   checksum?: boolean
   status?: boolean
   isPrimary?: boolean
   rawText?: boolean
+  pageCount?: boolean
+  wordCount?: boolean
   extractedData?: boolean
   processingError?: boolean
   failureStage?: boolean
@@ -1943,7 +2122,7 @@ export type ResumeSelectScalar = {
   updatedAt?: boolean
 }
 
-export type ResumeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "candidateProfileId" | "title" | "originalFileName" | "mimeType" | "fileSize" | "storageProvider" | "storageBucket" | "storageKey" | "checksum" | "status" | "isPrimary" | "rawText" | "extractedData" | "processingError" | "failureStage" | "uploadedAt" | "parsedAt" | "analyzedAt" | "embeddedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["resume"]>
+export type ResumeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "candidateProfileId" | "title" | "originalFileName" | "mimeType" | "fileSize" | "storageProvider" | "storageFileId" | "storagePath" | "storageUrl" | "checksum" | "status" | "isPrimary" | "rawText" | "pageCount" | "wordCount" | "extractedData" | "processingError" | "failureStage" | "uploadedAt" | "parsedAt" | "analyzedAt" | "embeddedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["resume"]>
 export type ResumeInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   candidateProfile?: boolean | Prisma.CandidateProfileDefaultArgs<ExtArgs>
   skills?: boolean | Prisma.Resume$skillsArgs<ExtArgs>
@@ -1977,13 +2156,16 @@ export type $ResumePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     originalFileName: string
     mimeType: string
     fileSize: number
-    storageProvider: string | null
-    storageBucket: string | null
-    storageKey: string
+    storageProvider: string
+    storageFileId: string
+    storagePath: string
+    storageUrl: string | null
     checksum: string | null
     status: $Enums.ResumeStatus
     isPrimary: boolean
     rawText: string | null
+    pageCount: number | null
+    wordCount: number | null
     extractedData: runtime.JsonValue | null
     processingError: string | null
     failureStage: string | null
@@ -2429,12 +2611,15 @@ export interface ResumeFieldRefs {
   readonly mimeType: Prisma.FieldRef<"Resume", 'String'>
   readonly fileSize: Prisma.FieldRef<"Resume", 'Int'>
   readonly storageProvider: Prisma.FieldRef<"Resume", 'String'>
-  readonly storageBucket: Prisma.FieldRef<"Resume", 'String'>
-  readonly storageKey: Prisma.FieldRef<"Resume", 'String'>
+  readonly storageFileId: Prisma.FieldRef<"Resume", 'String'>
+  readonly storagePath: Prisma.FieldRef<"Resume", 'String'>
+  readonly storageUrl: Prisma.FieldRef<"Resume", 'String'>
   readonly checksum: Prisma.FieldRef<"Resume", 'String'>
   readonly status: Prisma.FieldRef<"Resume", 'ResumeStatus'>
   readonly isPrimary: Prisma.FieldRef<"Resume", 'Boolean'>
   readonly rawText: Prisma.FieldRef<"Resume", 'String'>
+  readonly pageCount: Prisma.FieldRef<"Resume", 'Int'>
+  readonly wordCount: Prisma.FieldRef<"Resume", 'Int'>
   readonly extractedData: Prisma.FieldRef<"Resume", 'Json'>
   readonly processingError: Prisma.FieldRef<"Resume", 'String'>
   readonly failureStage: Prisma.FieldRef<"Resume", 'String'>
