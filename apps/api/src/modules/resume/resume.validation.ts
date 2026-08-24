@@ -25,3 +25,15 @@ export const resumeParamsSchema = z.object({
 });
 
 export type ResumeParams = z.infer<typeof resumeParamsSchema>;
+
+export const askResumeSchema = z.object({
+  question: z
+    .string()
+    .trim()
+    .min(3, "Question is too short")
+    .max(1000, "Question is too long"),
+
+  limit: z.number().int().min(1).max(10).optional().default(5),
+});
+
+export type AskResumeInput = z.infer<typeof askResumeSchema>;

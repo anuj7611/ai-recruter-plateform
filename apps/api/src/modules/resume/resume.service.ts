@@ -18,6 +18,14 @@ import {
 } from "./resume.helpers.js";
 import { buildResumeChunkDocuments } from "./resume.chunk-documents.js";
 import { createResumeChunks } from "./resume.chunking.service.js";
+import { embedDocuments } from "../../services/ai/embedding.service.js";
+import { GEMINI_EMBEDDING_MODEL } from "../../services/ai/gemini-embeddings.client.js";
+import {
+  deleteResumeVectors,
+  ensureResumeCollection,
+  upsertResumeVectors,
+} from "../../services/vector/resume-vector.service.js";
+import { askResume } from "./resume.rag.service.js";
 
 interface UploadResumeInput {
   userId: string;
@@ -1342,5 +1350,319 @@ export const chunkCandidateResume = async (
     });
 
     throw new ApiError(500, "Unable to chunk resume", "RESUME_CHUNKING_FAILED");
+  }
+};
+
+export const embedCandidateResume = async (
+  userId: string,
+  resumeId: string,
+) => {
+  // =================================
+  // Find resume
+  // =================================
+
+  const resume = await prisma.resume.findFirst({
+    where: {
+      id: resumeId,
+
+      candidateProfile: {
+        userId,
+      },
+    },
+
+    select: {
+      id: true,
+
+      candidateProfileId: true,
+
+      status: true,
+
+      failureStage: true,
+
+      chunks: {
+        orderBy: {
+          chunkIndex: "asc",
+        },
+
+        select: {
+          id: true,
+
+          chunkIndex: true,
+
+          section: true,
+
+          text: true,
+
+          contentHash: true,
+
+          metadata: true,
+        },
+      },
+    },
+  });
+
+  if (!resume) {
+    throw new ApiError(404, "Resume not found", "RESUME_NOT_FOUND");
+  }
+
+  // =================================
+  // State validation
+  // =================================
+
+  if (resume.status === "EMBEDDING") {
+    throw new ApiError(
+      409,
+      "Resume embeddings are already being generated",
+      "RESUME_ALREADY_EMBEDDING",
+    );
+  }
+
+  if (resume.status === "READY") {
+    throw new ApiError(409, "Resume is already ready", "RESUME_ALREADY_READY");
+  }
+
+  const canEmbed =
+    resume.status === "CHUNKED" ||
+    (resume.status === "FAILED" && resume.failureStage === "EMBEDDING");
+
+  if (!canEmbed) {
+    throw new ApiError(
+      409,
+      "Resume must be chunked before generating embeddings",
+      "RESUME_NOT_CHUNKED",
+    );
+  }
+
+  if (!resume.chunks.length) {
+    throw new ApiError(
+      409,
+      "Resume has no chunks to embed",
+      "RESUME_CHUNKS_NOT_FOUND",
+    );
+  }
+
+  // =================================
+  // Mark EMBEDDING
+  // =================================
+
+  await prisma.resume.update({
+    where: {
+      id: resume.id,
+    },
+
+    data: {
+      status: "EMBEDDING",
+
+      processingError: null,
+
+      failureStage: null,
+    },
+  });
+
+  try {
+    // =================================
+    // Make sure Qdrant exists
+    // =================================
+
+    await ensureResumeCollection();
+
+    // =================================
+    // Generate Gemini embeddings
+    // =================================
+
+    const vectors = await embedDocuments(
+      resume.chunks.map((chunk) => chunk.text),
+    );
+
+    if (vectors.length !== resume.chunks.length) {
+      throw new Error(
+        "Generated embedding count does not match resume chunk count",
+      );
+    }
+
+    // =================================
+    // Remove previous vectors
+    // =================================
+
+    await deleteResumeVectors(resume.id);
+
+    // =================================
+    // Build Qdrant points
+    // =================================
+
+    const points = resume.chunks.map((chunk, index) => {
+      const vector = vectors[index];
+
+      if (!vector) {
+        throw new Error(`Missing vector for chunk ${chunk.id}`);
+      }
+
+      return {
+        id: chunk.id,
+
+        vector,
+
+        resumeId: resume.id,
+
+        candidateProfileId: resume.candidateProfileId,
+
+        chunkIndex: chunk.chunkIndex,
+
+        section: chunk.section,
+
+        text: chunk.text,
+
+        contentHash: chunk.contentHash,
+
+        metadata: chunk.metadata,
+      };
+    });
+
+    // =================================
+    // Store in Qdrant
+    // =================================
+
+    await upsertResumeVectors(points);
+
+    // =================================
+    // Update PostgreSQL
+    // =================================
+
+    const result = await prisma.$transaction(async (tx) => {
+      for (const chunk of resume.chunks) {
+        await tx.resumeChunk.update({
+          where: {
+            id: chunk.id,
+          },
+
+          data: {
+            qdrantPointId: chunk.id,
+
+            embeddingModel: GEMINI_EMBEDDING_MODEL,
+          },
+        });
+      }
+
+      return tx.resume.update({
+        where: {
+          id: resume.id,
+        },
+
+        data: {
+          status: "READY",
+
+          embeddedAt: new Date(),
+
+          processingError: null,
+
+          failureStage: null,
+        },
+
+        select: {
+          id: true,
+
+          title: true,
+
+          status: true,
+
+          embeddedAt: true,
+
+          _count: {
+            select: {
+              chunks: true,
+            },
+          },
+        },
+      });
+    });
+
+    return result;
+  } catch (error) {
+    console.error(`Resume embedding failed for ${resume.id}:`, error);
+
+    /*
+     * Remove possible partial/stale
+     * Qdrant points.
+     */
+
+    try {
+      await deleteResumeVectors(resume.id);
+    } catch (cleanupError) {
+      console.error("Failed to clean Qdrant vectors:", cleanupError);
+    }
+
+    await prisma.resume.update({
+      where: {
+        id: resume.id,
+      },
+
+      data: {
+        status: "FAILED",
+
+        failureStage: "EMBEDDING",
+
+        processingError:
+          error instanceof Error ? error.message : "Resume embedding failed",
+      },
+    });
+
+    throw new ApiError(
+      502,
+      "Unable to generate resume embeddings",
+      "RESUME_EMBEDDING_FAILED",
+    );
+  }
+};
+
+export const askCandidateResume = async (
+  userId: string,
+  resumeId: string,
+  question: string,
+  limit = 5,
+) => {
+  // =================================
+  // Verify ownership + status
+  // =================================
+
+  const resume = await prisma.resume.findFirst({
+    where: {
+      id: resumeId,
+
+      candidateProfile: {
+        userId,
+      },
+    },
+
+    select: {
+      id: true,
+
+      status: true,
+    },
+  });
+
+  if (!resume) {
+    throw new ApiError(404, "Resume not found", "RESUME_NOT_FOUND");
+  }
+
+  if (resume.status !== "READY") {
+    throw new ApiError(
+      409,
+      "Resume is not ready for AI retrieval",
+      "RESUME_NOT_READY",
+    );
+  }
+
+  try {
+    return await askResume({
+      resumeId: resume.id,
+
+      question,
+
+      limit,
+    });
+  } catch (error) {
+    console.error(`Resume RAG failed for ${resume.id}:`, error);
+
+    throw new ApiError(502, "Unable to query resume", "RESUME_RAG_FAILED");
   }
 };

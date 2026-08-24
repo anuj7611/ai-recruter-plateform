@@ -9,8 +9,15 @@ import {
   parseCandidateResume,
   analyzeCandidateResume,
   chunkCandidateResume,
+  embedCandidateResume,
+  askCandidateResume,
 } from "./resume.service.js";
-import type { CreateResumeInput, ResumeParams } from "./resume.validation.js";
+import type {
+  CreateResumeInput,
+  ResumeParams,
+  AskResumeInput,
+} from "./resume.validation.js";
+import { processCandidateResume } from "./resume.processing.service.js";
 
 export const uploadResumeController = async (req: Request, res: Response) => {
   const userId = req.auth?.userId;
@@ -214,6 +221,82 @@ export const chunkResumeController = async (req: Request, res: Response) => {
     success: true,
 
     message: "Resume chunked successfully",
+
+    data: {
+      resume,
+    },
+  });
+};
+
+export const embedResumeController = async (req: Request, res: Response) => {
+  const userId = req.auth?.userId;
+
+  if (!userId) {
+    throw new ApiError(
+      401,
+      "Authentication required",
+      "AUTHENTICATION_REQUIRED",
+    );
+  }
+
+  const { resumeId } = req.params as ResumeParams;
+
+  const resume = await embedCandidateResume(userId, resumeId);
+
+  return res.status(200).json({
+    success: true,
+
+    message: "Resume embeddings generated successfully",
+
+    data: {
+      resume,
+    },
+  });
+};
+
+export const askResumeController = async (req: Request, res: Response) => {
+  const userId = req.auth?.userId;
+
+  if (!userId) {
+    throw new ApiError(
+      401,
+      "Authentication required",
+      "AUTHENTICATION_REQUIRED",
+    );
+  }
+
+  const { resumeId } = req.params as ResumeParams;
+
+  const { question, limit } = req.body as AskResumeInput;
+
+  const result = await askCandidateResume(userId, resumeId, question, limit);
+
+  return res.status(200).json({
+    success: true,
+
+    data: result,
+  });
+};
+
+export const processResumeController = async (req: Request, res: Response) => {
+  const userId = req.auth?.userId;
+
+  if (!userId) {
+    throw new ApiError(
+      401,
+      "Authentication required",
+      "AUTHENTICATION_REQUIRED",
+    );
+  }
+
+  const { resumeId } = req.params as ResumeParams;
+
+  const resume = await processCandidateResume(userId, resumeId);
+
+  return res.status(200).json({
+    success: true,
+
+    message: "Resume processed successfully",
 
     data: {
       resume,

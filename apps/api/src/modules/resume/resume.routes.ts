@@ -15,9 +15,16 @@ import {
   parseResumeController,
   analyzeResumeController,
   chunkResumeController,
+  embedResumeController,
+  askResumeController,
+  processResumeController,
 } from "./resume.controller.js";
 import { resumeUpload } from "./resume.upload.js";
-import { createResumeSchema, resumeParamsSchema } from "./resume.validation.js";
+import {
+  createResumeSchema,
+  resumeParamsSchema,
+  askResumeSchema,
+} from "./resume.validation.js";
 
 export const resumeRouter = Router();
 
@@ -54,6 +61,32 @@ resumeRouter.post(
   validateParams(resumeParamsSchema),
 
   asyncHandler(chunkResumeController),
+);
+
+resumeRouter.post(
+  "/:resumeId/embed",
+
+  validateParams(resumeParamsSchema),
+
+  asyncHandler(embedResumeController),
+);
+
+resumeRouter.post(
+  "/:resumeId/ask",
+
+  validateParams(resumeParamsSchema),
+
+  validateBody(askResumeSchema),
+
+  asyncHandler(askResumeController),
+);
+
+resumeRouter.post(
+  "/:resumeId/process",
+
+  validateParams(resumeParamsSchema),
+
+  asyncHandler(processResumeController),
 );
 
 resumeRouter.get(
