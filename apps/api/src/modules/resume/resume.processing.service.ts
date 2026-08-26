@@ -6,6 +6,7 @@ import {
   embedCandidateResume,
   parseCandidateResume,
 } from "./resume.service.js";
+import { enqueueResumeProcessing } from "../../queues/resume-processing.queue.js";
 
 type ProcessingStage = "PARSING" | "ANALYZING" | "CHUNKING" | "EMBEDDING";
 
@@ -191,4 +192,57 @@ export const processCandidateResume = async (
   }
 
   return resume;
+};
+
+export const queueCandidateResumeProcessing = async (
+  userId: string,
+  resumeId: string,
+) => {
+  const resume = await prisma.resume.findFirst({
+    where: {
+      id: resumeId,
+
+      candidateProfile: {
+        userId,
+      },
+    },
+
+    select: {
+      id: true,
+      status: true,
+    },
+  });
+
+  if (!resume) {
+    throw new ApiError(404, "Resume not found", "RESUME_NOT_FOUND");
+  }
+
+  // Nothing left to process
+  if (resume.status === "READY") {
+    return {
+      queued: false,
+
+      jobId: null,
+
+      resumeId: resume.id,
+
+      status: resume.status,
+    };
+  }
+
+  const job = await enqueueResumeProcessing({
+    resumeId: resume.id,
+
+    userId,
+  });
+
+  return {
+    queued: true,
+
+    jobId: job.id ?? null,
+
+    resumeId: resume.id,
+
+    status: resume.status,
+  };
 };

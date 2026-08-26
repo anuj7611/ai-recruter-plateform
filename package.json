@@ -7,7 +7,8 @@
     "apps/api"
   ],
   "scripts": {
-    "dev": "concurrently -k -n WEB,API \"npm run dev:web\" \"npm run dev:api\"",
+    "dev": "concurrently -k -n WEB,API,WORKER \"npm run dev:web\" \"npm run dev:api\" \"npm run dev:worker\"",
+    "dev:worker": "npm run dev:worker --workspace apps/api",
     "dev:web": "npm run dev --workspace=web",
     "dev:api": "npm run dev --workspace=api",
     "build": "npm run build --workspaces --if-present",

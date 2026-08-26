@@ -5,11 +5,15 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsx watch src/server.ts",
+    "dev:worker": "tsx watch src/workers/resume.worker.ts",
     "build": "tsc -p tsconfig.json",
     "start": "node dist/server.js",
+    "start:worker": "node dist/workers/resume.worker.js",
     "typecheck": "tsc --noEmit",
     "prebootstrap:super-admin": "npm run build --silent",
-    "bootstrap:super-admin": "node dist/scripts/create-super-admin.js"
+    "bootstrap:super-admin": "node dist/scripts/create-super-admin.js",
+    "dev:email-worker": "tsx watch src/workers/email-notification.worker.ts",
+    "start:email-worker": "node dist/workers/email-notification.worker.js"
   },
   "keywords": [],
   "author": "",

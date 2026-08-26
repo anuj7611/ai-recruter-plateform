@@ -386,6 +386,7 @@ export type ResumeWhereInput = {
   educations?: Prisma.ResumeEducationListRelationFilter
   projects?: Prisma.ResumeProjectListRelationFilter
   chunks?: Prisma.ResumeChunkListRelationFilter
+  interviews?: Prisma.InterviewListRelationFilter
 }
 
 export type ResumeOrderByWithRelationInput = {
@@ -420,6 +421,7 @@ export type ResumeOrderByWithRelationInput = {
   educations?: Prisma.ResumeEducationOrderByRelationAggregateInput
   projects?: Prisma.ResumeProjectOrderByRelationAggregateInput
   chunks?: Prisma.ResumeChunkOrderByRelationAggregateInput
+  interviews?: Prisma.InterviewOrderByRelationAggregateInput
 }
 
 export type ResumeWhereUniqueInput = Prisma.AtLeast<{
@@ -457,6 +459,7 @@ export type ResumeWhereUniqueInput = Prisma.AtLeast<{
   educations?: Prisma.ResumeEducationListRelationFilter
   projects?: Prisma.ResumeProjectListRelationFilter
   chunks?: Prisma.ResumeChunkListRelationFilter
+  interviews?: Prisma.InterviewListRelationFilter
 }, "id">
 
 export type ResumeOrderByWithAggregationInput = {
@@ -554,6 +557,7 @@ export type ResumeCreateInput = {
   educations?: Prisma.ResumeEducationCreateNestedManyWithoutResumeInput
   projects?: Prisma.ResumeProjectCreateNestedManyWithoutResumeInput
   chunks?: Prisma.ResumeChunkCreateNestedManyWithoutResumeInput
+  interviews?: Prisma.InterviewCreateNestedManyWithoutResumeInput
 }
 
 export type ResumeUncheckedCreateInput = {
@@ -587,6 +591,7 @@ export type ResumeUncheckedCreateInput = {
   educations?: Prisma.ResumeEducationUncheckedCreateNestedManyWithoutResumeInput
   projects?: Prisma.ResumeProjectUncheckedCreateNestedManyWithoutResumeInput
   chunks?: Prisma.ResumeChunkUncheckedCreateNestedManyWithoutResumeInput
+  interviews?: Prisma.InterviewUncheckedCreateNestedManyWithoutResumeInput
 }
 
 export type ResumeUpdateInput = {
@@ -620,6 +625,7 @@ export type ResumeUpdateInput = {
   educations?: Prisma.ResumeEducationUpdateManyWithoutResumeNestedInput
   projects?: Prisma.ResumeProjectUpdateManyWithoutResumeNestedInput
   chunks?: Prisma.ResumeChunkUpdateManyWithoutResumeNestedInput
+  interviews?: Prisma.InterviewUpdateManyWithoutResumeNestedInput
 }
 
 export type ResumeUncheckedUpdateInput = {
@@ -653,6 +659,7 @@ export type ResumeUncheckedUpdateInput = {
   educations?: Prisma.ResumeEducationUncheckedUpdateManyWithoutResumeNestedInput
   projects?: Prisma.ResumeProjectUncheckedUpdateManyWithoutResumeNestedInput
   chunks?: Prisma.ResumeChunkUncheckedUpdateManyWithoutResumeNestedInput
+  interviews?: Prisma.InterviewUncheckedUpdateManyWithoutResumeNestedInput
 }
 
 export type ResumeCreateManyInput = {
@@ -847,6 +854,11 @@ export type ResumeScalarRelationFilter = {
   isNot?: Prisma.ResumeWhereInput
 }
 
+export type ResumeNullableScalarRelationFilter = {
+  is?: Prisma.ResumeWhereInput | null
+  isNot?: Prisma.ResumeWhereInput | null
+}
+
 export type ResumeCreateNestedManyWithoutCandidateProfileInput = {
   create?: Prisma.XOR<Prisma.ResumeCreateWithoutCandidateProfileInput, Prisma.ResumeUncheckedCreateWithoutCandidateProfileInput> | Prisma.ResumeCreateWithoutCandidateProfileInput[] | Prisma.ResumeUncheckedCreateWithoutCandidateProfileInput[]
   connectOrCreate?: Prisma.ResumeCreateOrConnectWithoutCandidateProfileInput | Prisma.ResumeCreateOrConnectWithoutCandidateProfileInput[]
@@ -975,6 +987,22 @@ export type ResumeUpdateOneRequiredWithoutChunksNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ResumeUpdateToOneWithWhereWithoutChunksInput, Prisma.ResumeUpdateWithoutChunksInput>, Prisma.ResumeUncheckedUpdateWithoutChunksInput>
 }
 
+export type ResumeCreateNestedOneWithoutInterviewsInput = {
+  create?: Prisma.XOR<Prisma.ResumeCreateWithoutInterviewsInput, Prisma.ResumeUncheckedCreateWithoutInterviewsInput>
+  connectOrCreate?: Prisma.ResumeCreateOrConnectWithoutInterviewsInput
+  connect?: Prisma.ResumeWhereUniqueInput
+}
+
+export type ResumeUpdateOneWithoutInterviewsNestedInput = {
+  create?: Prisma.XOR<Prisma.ResumeCreateWithoutInterviewsInput, Prisma.ResumeUncheckedCreateWithoutInterviewsInput>
+  connectOrCreate?: Prisma.ResumeCreateOrConnectWithoutInterviewsInput
+  upsert?: Prisma.ResumeUpsertWithoutInterviewsInput
+  disconnect?: Prisma.ResumeWhereInput | boolean
+  delete?: Prisma.ResumeWhereInput | boolean
+  connect?: Prisma.ResumeWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ResumeUpdateToOneWithWhereWithoutInterviewsInput, Prisma.ResumeUpdateWithoutInterviewsInput>, Prisma.ResumeUncheckedUpdateWithoutInterviewsInput>
+}
+
 export type ResumeCreateWithoutCandidateProfileInput = {
   id?: string
   title?: string | null
@@ -1005,6 +1033,7 @@ export type ResumeCreateWithoutCandidateProfileInput = {
   educations?: Prisma.ResumeEducationCreateNestedManyWithoutResumeInput
   projects?: Prisma.ResumeProjectCreateNestedManyWithoutResumeInput
   chunks?: Prisma.ResumeChunkCreateNestedManyWithoutResumeInput
+  interviews?: Prisma.InterviewCreateNestedManyWithoutResumeInput
 }
 
 export type ResumeUncheckedCreateWithoutCandidateProfileInput = {
@@ -1037,6 +1066,7 @@ export type ResumeUncheckedCreateWithoutCandidateProfileInput = {
   educations?: Prisma.ResumeEducationUncheckedCreateNestedManyWithoutResumeInput
   projects?: Prisma.ResumeProjectUncheckedCreateNestedManyWithoutResumeInput
   chunks?: Prisma.ResumeChunkUncheckedCreateNestedManyWithoutResumeInput
+  interviews?: Prisma.InterviewUncheckedCreateNestedManyWithoutResumeInput
 }
 
 export type ResumeCreateOrConnectWithoutCandidateProfileInput = {
@@ -1126,6 +1156,7 @@ export type ResumeCreateWithoutSkillsInput = {
   educations?: Prisma.ResumeEducationCreateNestedManyWithoutResumeInput
   projects?: Prisma.ResumeProjectCreateNestedManyWithoutResumeInput
   chunks?: Prisma.ResumeChunkCreateNestedManyWithoutResumeInput
+  interviews?: Prisma.InterviewCreateNestedManyWithoutResumeInput
 }
 
 export type ResumeUncheckedCreateWithoutSkillsInput = {
@@ -1158,6 +1189,7 @@ export type ResumeUncheckedCreateWithoutSkillsInput = {
   educations?: Prisma.ResumeEducationUncheckedCreateNestedManyWithoutResumeInput
   projects?: Prisma.ResumeProjectUncheckedCreateNestedManyWithoutResumeInput
   chunks?: Prisma.ResumeChunkUncheckedCreateNestedManyWithoutResumeInput
+  interviews?: Prisma.InterviewUncheckedCreateNestedManyWithoutResumeInput
 }
 
 export type ResumeCreateOrConnectWithoutSkillsInput = {
@@ -1206,6 +1238,7 @@ export type ResumeUpdateWithoutSkillsInput = {
   educations?: Prisma.ResumeEducationUpdateManyWithoutResumeNestedInput
   projects?: Prisma.ResumeProjectUpdateManyWithoutResumeNestedInput
   chunks?: Prisma.ResumeChunkUpdateManyWithoutResumeNestedInput
+  interviews?: Prisma.InterviewUpdateManyWithoutResumeNestedInput
 }
 
 export type ResumeUncheckedUpdateWithoutSkillsInput = {
@@ -1238,6 +1271,7 @@ export type ResumeUncheckedUpdateWithoutSkillsInput = {
   educations?: Prisma.ResumeEducationUncheckedUpdateManyWithoutResumeNestedInput
   projects?: Prisma.ResumeProjectUncheckedUpdateManyWithoutResumeNestedInput
   chunks?: Prisma.ResumeChunkUncheckedUpdateManyWithoutResumeNestedInput
+  interviews?: Prisma.InterviewUncheckedUpdateManyWithoutResumeNestedInput
 }
 
 export type ResumeCreateWithoutExperiencesInput = {
@@ -1270,6 +1304,7 @@ export type ResumeCreateWithoutExperiencesInput = {
   educations?: Prisma.ResumeEducationCreateNestedManyWithoutResumeInput
   projects?: Prisma.ResumeProjectCreateNestedManyWithoutResumeInput
   chunks?: Prisma.ResumeChunkCreateNestedManyWithoutResumeInput
+  interviews?: Prisma.InterviewCreateNestedManyWithoutResumeInput
 }
 
 export type ResumeUncheckedCreateWithoutExperiencesInput = {
@@ -1302,6 +1337,7 @@ export type ResumeUncheckedCreateWithoutExperiencesInput = {
   educations?: Prisma.ResumeEducationUncheckedCreateNestedManyWithoutResumeInput
   projects?: Prisma.ResumeProjectUncheckedCreateNestedManyWithoutResumeInput
   chunks?: Prisma.ResumeChunkUncheckedCreateNestedManyWithoutResumeInput
+  interviews?: Prisma.InterviewUncheckedCreateNestedManyWithoutResumeInput
 }
 
 export type ResumeCreateOrConnectWithoutExperiencesInput = {
@@ -1350,6 +1386,7 @@ export type ResumeUpdateWithoutExperiencesInput = {
   educations?: Prisma.ResumeEducationUpdateManyWithoutResumeNestedInput
   projects?: Prisma.ResumeProjectUpdateManyWithoutResumeNestedInput
   chunks?: Prisma.ResumeChunkUpdateManyWithoutResumeNestedInput
+  interviews?: Prisma.InterviewUpdateManyWithoutResumeNestedInput
 }
 
 export type ResumeUncheckedUpdateWithoutExperiencesInput = {
@@ -1382,6 +1419,7 @@ export type ResumeUncheckedUpdateWithoutExperiencesInput = {
   educations?: Prisma.ResumeEducationUncheckedUpdateManyWithoutResumeNestedInput
   projects?: Prisma.ResumeProjectUncheckedUpdateManyWithoutResumeNestedInput
   chunks?: Prisma.ResumeChunkUncheckedUpdateManyWithoutResumeNestedInput
+  interviews?: Prisma.InterviewUncheckedUpdateManyWithoutResumeNestedInput
 }
 
 export type ResumeCreateWithoutEducationsInput = {
@@ -1414,6 +1452,7 @@ export type ResumeCreateWithoutEducationsInput = {
   experiences?: Prisma.ResumeExperienceCreateNestedManyWithoutResumeInput
   projects?: Prisma.ResumeProjectCreateNestedManyWithoutResumeInput
   chunks?: Prisma.ResumeChunkCreateNestedManyWithoutResumeInput
+  interviews?: Prisma.InterviewCreateNestedManyWithoutResumeInput
 }
 
 export type ResumeUncheckedCreateWithoutEducationsInput = {
@@ -1446,6 +1485,7 @@ export type ResumeUncheckedCreateWithoutEducationsInput = {
   experiences?: Prisma.ResumeExperienceUncheckedCreateNestedManyWithoutResumeInput
   projects?: Prisma.ResumeProjectUncheckedCreateNestedManyWithoutResumeInput
   chunks?: Prisma.ResumeChunkUncheckedCreateNestedManyWithoutResumeInput
+  interviews?: Prisma.InterviewUncheckedCreateNestedManyWithoutResumeInput
 }
 
 export type ResumeCreateOrConnectWithoutEducationsInput = {
@@ -1494,6 +1534,7 @@ export type ResumeUpdateWithoutEducationsInput = {
   experiences?: Prisma.ResumeExperienceUpdateManyWithoutResumeNestedInput
   projects?: Prisma.ResumeProjectUpdateManyWithoutResumeNestedInput
   chunks?: Prisma.ResumeChunkUpdateManyWithoutResumeNestedInput
+  interviews?: Prisma.InterviewUpdateManyWithoutResumeNestedInput
 }
 
 export type ResumeUncheckedUpdateWithoutEducationsInput = {
@@ -1526,6 +1567,7 @@ export type ResumeUncheckedUpdateWithoutEducationsInput = {
   experiences?: Prisma.ResumeExperienceUncheckedUpdateManyWithoutResumeNestedInput
   projects?: Prisma.ResumeProjectUncheckedUpdateManyWithoutResumeNestedInput
   chunks?: Prisma.ResumeChunkUncheckedUpdateManyWithoutResumeNestedInput
+  interviews?: Prisma.InterviewUncheckedUpdateManyWithoutResumeNestedInput
 }
 
 export type ResumeCreateWithoutProjectsInput = {
@@ -1558,6 +1600,7 @@ export type ResumeCreateWithoutProjectsInput = {
   experiences?: Prisma.ResumeExperienceCreateNestedManyWithoutResumeInput
   educations?: Prisma.ResumeEducationCreateNestedManyWithoutResumeInput
   chunks?: Prisma.ResumeChunkCreateNestedManyWithoutResumeInput
+  interviews?: Prisma.InterviewCreateNestedManyWithoutResumeInput
 }
 
 export type ResumeUncheckedCreateWithoutProjectsInput = {
@@ -1590,6 +1633,7 @@ export type ResumeUncheckedCreateWithoutProjectsInput = {
   experiences?: Prisma.ResumeExperienceUncheckedCreateNestedManyWithoutResumeInput
   educations?: Prisma.ResumeEducationUncheckedCreateNestedManyWithoutResumeInput
   chunks?: Prisma.ResumeChunkUncheckedCreateNestedManyWithoutResumeInput
+  interviews?: Prisma.InterviewUncheckedCreateNestedManyWithoutResumeInput
 }
 
 export type ResumeCreateOrConnectWithoutProjectsInput = {
@@ -1638,6 +1682,7 @@ export type ResumeUpdateWithoutProjectsInput = {
   experiences?: Prisma.ResumeExperienceUpdateManyWithoutResumeNestedInput
   educations?: Prisma.ResumeEducationUpdateManyWithoutResumeNestedInput
   chunks?: Prisma.ResumeChunkUpdateManyWithoutResumeNestedInput
+  interviews?: Prisma.InterviewUpdateManyWithoutResumeNestedInput
 }
 
 export type ResumeUncheckedUpdateWithoutProjectsInput = {
@@ -1670,6 +1715,7 @@ export type ResumeUncheckedUpdateWithoutProjectsInput = {
   experiences?: Prisma.ResumeExperienceUncheckedUpdateManyWithoutResumeNestedInput
   educations?: Prisma.ResumeEducationUncheckedUpdateManyWithoutResumeNestedInput
   chunks?: Prisma.ResumeChunkUncheckedUpdateManyWithoutResumeNestedInput
+  interviews?: Prisma.InterviewUncheckedUpdateManyWithoutResumeNestedInput
 }
 
 export type ResumeCreateWithoutChunksInput = {
@@ -1702,6 +1748,7 @@ export type ResumeCreateWithoutChunksInput = {
   experiences?: Prisma.ResumeExperienceCreateNestedManyWithoutResumeInput
   educations?: Prisma.ResumeEducationCreateNestedManyWithoutResumeInput
   projects?: Prisma.ResumeProjectCreateNestedManyWithoutResumeInput
+  interviews?: Prisma.InterviewCreateNestedManyWithoutResumeInput
 }
 
 export type ResumeUncheckedCreateWithoutChunksInput = {
@@ -1734,6 +1781,7 @@ export type ResumeUncheckedCreateWithoutChunksInput = {
   experiences?: Prisma.ResumeExperienceUncheckedCreateNestedManyWithoutResumeInput
   educations?: Prisma.ResumeEducationUncheckedCreateNestedManyWithoutResumeInput
   projects?: Prisma.ResumeProjectUncheckedCreateNestedManyWithoutResumeInput
+  interviews?: Prisma.InterviewUncheckedCreateNestedManyWithoutResumeInput
 }
 
 export type ResumeCreateOrConnectWithoutChunksInput = {
@@ -1782,6 +1830,7 @@ export type ResumeUpdateWithoutChunksInput = {
   experiences?: Prisma.ResumeExperienceUpdateManyWithoutResumeNestedInput
   educations?: Prisma.ResumeEducationUpdateManyWithoutResumeNestedInput
   projects?: Prisma.ResumeProjectUpdateManyWithoutResumeNestedInput
+  interviews?: Prisma.InterviewUpdateManyWithoutResumeNestedInput
 }
 
 export type ResumeUncheckedUpdateWithoutChunksInput = {
@@ -1814,6 +1863,155 @@ export type ResumeUncheckedUpdateWithoutChunksInput = {
   experiences?: Prisma.ResumeExperienceUncheckedUpdateManyWithoutResumeNestedInput
   educations?: Prisma.ResumeEducationUncheckedUpdateManyWithoutResumeNestedInput
   projects?: Prisma.ResumeProjectUncheckedUpdateManyWithoutResumeNestedInput
+  interviews?: Prisma.InterviewUncheckedUpdateManyWithoutResumeNestedInput
+}
+
+export type ResumeCreateWithoutInterviewsInput = {
+  id?: string
+  title?: string | null
+  originalFileName: string
+  mimeType: string
+  fileSize: number
+  storageProvider?: string
+  storageFileId: string
+  storagePath: string
+  storageUrl?: string | null
+  checksum?: string | null
+  status?: $Enums.ResumeStatus
+  isPrimary?: boolean
+  rawText?: string | null
+  pageCount?: number | null
+  wordCount?: number | null
+  extractedData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  processingError?: string | null
+  failureStage?: string | null
+  uploadedAt?: Date | string | null
+  parsedAt?: Date | string | null
+  analyzedAt?: Date | string | null
+  embeddedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  candidateProfile: Prisma.CandidateProfileCreateNestedOneWithoutResumesInput
+  skills?: Prisma.ResumeSkillCreateNestedManyWithoutResumeInput
+  experiences?: Prisma.ResumeExperienceCreateNestedManyWithoutResumeInput
+  educations?: Prisma.ResumeEducationCreateNestedManyWithoutResumeInput
+  projects?: Prisma.ResumeProjectCreateNestedManyWithoutResumeInput
+  chunks?: Prisma.ResumeChunkCreateNestedManyWithoutResumeInput
+}
+
+export type ResumeUncheckedCreateWithoutInterviewsInput = {
+  id?: string
+  candidateProfileId: string
+  title?: string | null
+  originalFileName: string
+  mimeType: string
+  fileSize: number
+  storageProvider?: string
+  storageFileId: string
+  storagePath: string
+  storageUrl?: string | null
+  checksum?: string | null
+  status?: $Enums.ResumeStatus
+  isPrimary?: boolean
+  rawText?: string | null
+  pageCount?: number | null
+  wordCount?: number | null
+  extractedData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  processingError?: string | null
+  failureStage?: string | null
+  uploadedAt?: Date | string | null
+  parsedAt?: Date | string | null
+  analyzedAt?: Date | string | null
+  embeddedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  skills?: Prisma.ResumeSkillUncheckedCreateNestedManyWithoutResumeInput
+  experiences?: Prisma.ResumeExperienceUncheckedCreateNestedManyWithoutResumeInput
+  educations?: Prisma.ResumeEducationUncheckedCreateNestedManyWithoutResumeInput
+  projects?: Prisma.ResumeProjectUncheckedCreateNestedManyWithoutResumeInput
+  chunks?: Prisma.ResumeChunkUncheckedCreateNestedManyWithoutResumeInput
+}
+
+export type ResumeCreateOrConnectWithoutInterviewsInput = {
+  where: Prisma.ResumeWhereUniqueInput
+  create: Prisma.XOR<Prisma.ResumeCreateWithoutInterviewsInput, Prisma.ResumeUncheckedCreateWithoutInterviewsInput>
+}
+
+export type ResumeUpsertWithoutInterviewsInput = {
+  update: Prisma.XOR<Prisma.ResumeUpdateWithoutInterviewsInput, Prisma.ResumeUncheckedUpdateWithoutInterviewsInput>
+  create: Prisma.XOR<Prisma.ResumeCreateWithoutInterviewsInput, Prisma.ResumeUncheckedCreateWithoutInterviewsInput>
+  where?: Prisma.ResumeWhereInput
+}
+
+export type ResumeUpdateToOneWithWhereWithoutInterviewsInput = {
+  where?: Prisma.ResumeWhereInput
+  data: Prisma.XOR<Prisma.ResumeUpdateWithoutInterviewsInput, Prisma.ResumeUncheckedUpdateWithoutInterviewsInput>
+}
+
+export type ResumeUpdateWithoutInterviewsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  originalFileName?: Prisma.StringFieldUpdateOperationsInput | string
+  mimeType?: Prisma.StringFieldUpdateOperationsInput | string
+  fileSize?: Prisma.IntFieldUpdateOperationsInput | number
+  storageProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  storageFileId?: Prisma.StringFieldUpdateOperationsInput | string
+  storagePath?: Prisma.StringFieldUpdateOperationsInput | string
+  storageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  checksum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumResumeStatusFieldUpdateOperationsInput | $Enums.ResumeStatus
+  isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  rawText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pageCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  wordCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  extractedData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  failureStage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  uploadedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  parsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  analyzedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  embeddedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  candidateProfile?: Prisma.CandidateProfileUpdateOneRequiredWithoutResumesNestedInput
+  skills?: Prisma.ResumeSkillUpdateManyWithoutResumeNestedInput
+  experiences?: Prisma.ResumeExperienceUpdateManyWithoutResumeNestedInput
+  educations?: Prisma.ResumeEducationUpdateManyWithoutResumeNestedInput
+  projects?: Prisma.ResumeProjectUpdateManyWithoutResumeNestedInput
+  chunks?: Prisma.ResumeChunkUpdateManyWithoutResumeNestedInput
+}
+
+export type ResumeUncheckedUpdateWithoutInterviewsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  candidateProfileId?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  originalFileName?: Prisma.StringFieldUpdateOperationsInput | string
+  mimeType?: Prisma.StringFieldUpdateOperationsInput | string
+  fileSize?: Prisma.IntFieldUpdateOperationsInput | number
+  storageProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  storageFileId?: Prisma.StringFieldUpdateOperationsInput | string
+  storagePath?: Prisma.StringFieldUpdateOperationsInput | string
+  storageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  checksum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumResumeStatusFieldUpdateOperationsInput | $Enums.ResumeStatus
+  isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  rawText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pageCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  wordCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  extractedData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  failureStage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  uploadedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  parsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  analyzedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  embeddedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  skills?: Prisma.ResumeSkillUncheckedUpdateManyWithoutResumeNestedInput
+  experiences?: Prisma.ResumeExperienceUncheckedUpdateManyWithoutResumeNestedInput
+  educations?: Prisma.ResumeEducationUncheckedUpdateManyWithoutResumeNestedInput
+  projects?: Prisma.ResumeProjectUncheckedUpdateManyWithoutResumeNestedInput
+  chunks?: Prisma.ResumeChunkUncheckedUpdateManyWithoutResumeNestedInput
 }
 
 export type ResumeCreateManyCandidateProfileInput = {
@@ -1873,6 +2071,7 @@ export type ResumeUpdateWithoutCandidateProfileInput = {
   educations?: Prisma.ResumeEducationUpdateManyWithoutResumeNestedInput
   projects?: Prisma.ResumeProjectUpdateManyWithoutResumeNestedInput
   chunks?: Prisma.ResumeChunkUpdateManyWithoutResumeNestedInput
+  interviews?: Prisma.InterviewUpdateManyWithoutResumeNestedInput
 }
 
 export type ResumeUncheckedUpdateWithoutCandidateProfileInput = {
@@ -1905,6 +2104,7 @@ export type ResumeUncheckedUpdateWithoutCandidateProfileInput = {
   educations?: Prisma.ResumeEducationUncheckedUpdateManyWithoutResumeNestedInput
   projects?: Prisma.ResumeProjectUncheckedUpdateManyWithoutResumeNestedInput
   chunks?: Prisma.ResumeChunkUncheckedUpdateManyWithoutResumeNestedInput
+  interviews?: Prisma.InterviewUncheckedUpdateManyWithoutResumeNestedInput
 }
 
 export type ResumeUncheckedUpdateManyWithoutCandidateProfileInput = {
@@ -1945,6 +2145,7 @@ export type ResumeCountOutputType = {
   educations: number
   projects: number
   chunks: number
+  interviews: number
 }
 
 export type ResumeCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1953,6 +2154,7 @@ export type ResumeCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions
   educations?: boolean | ResumeCountOutputTypeCountEducationsArgs
   projects?: boolean | ResumeCountOutputTypeCountProjectsArgs
   chunks?: boolean | ResumeCountOutputTypeCountChunksArgs
+  interviews?: boolean | ResumeCountOutputTypeCountInterviewsArgs
 }
 
 /**
@@ -2000,6 +2202,13 @@ export type ResumeCountOutputTypeCountChunksArgs<ExtArgs extends runtime.Types.E
   where?: Prisma.ResumeChunkWhereInput
 }
 
+/**
+ * ResumeCountOutputType without action
+ */
+export type ResumeCountOutputTypeCountInterviewsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.InterviewWhereInput
+}
+
 
 export type ResumeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -2033,6 +2242,7 @@ export type ResumeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   educations?: boolean | Prisma.Resume$educationsArgs<ExtArgs>
   projects?: boolean | Prisma.Resume$projectsArgs<ExtArgs>
   chunks?: boolean | Prisma.Resume$chunksArgs<ExtArgs>
+  interviews?: boolean | Prisma.Resume$interviewsArgs<ExtArgs>
   _count?: boolean | Prisma.ResumeCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["resume"]>
 
@@ -2130,6 +2340,7 @@ export type ResumeInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   educations?: boolean | Prisma.Resume$educationsArgs<ExtArgs>
   projects?: boolean | Prisma.Resume$projectsArgs<ExtArgs>
   chunks?: boolean | Prisma.Resume$chunksArgs<ExtArgs>
+  interviews?: boolean | Prisma.Resume$interviewsArgs<ExtArgs>
   _count?: boolean | Prisma.ResumeCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ResumeIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2148,6 +2359,7 @@ export type $ResumePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     educations: Prisma.$ResumeEducationPayload<ExtArgs>[]
     projects: Prisma.$ResumeProjectPayload<ExtArgs>[]
     chunks: Prisma.$ResumeChunkPayload<ExtArgs>[]
+    interviews: Prisma.$InterviewPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2575,6 +2787,7 @@ export interface Prisma__ResumeClient<T, Null = never, ExtArgs extends runtime.T
   educations<T extends Prisma.Resume$educationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Resume$educationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ResumeEducationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   projects<T extends Prisma.Resume$projectsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Resume$projectsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ResumeProjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   chunks<T extends Prisma.Resume$chunksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Resume$chunksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ResumeChunkPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  interviews<T extends Prisma.Resume$interviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Resume$interviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InterviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3147,6 +3360,30 @@ export type Resume$chunksArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   distinct?: Prisma.ResumeChunkScalarFieldEnum | Prisma.ResumeChunkScalarFieldEnum[]
+}
+
+/**
+ * Resume.interviews
+ */
+export type Resume$interviewsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Interview
+   */
+  select?: Prisma.InterviewSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Interview
+   */
+  omit?: Prisma.InterviewOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.InterviewInclude<ExtArgs> | null
+  where?: Prisma.InterviewWhereInput
+  orderBy?: Prisma.InterviewOrderByWithRelationInput | Prisma.InterviewOrderByWithRelationInput[]
+  cursor?: Prisma.InterviewWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.InterviewScalarFieldEnum | Prisma.InterviewScalarFieldEnum[]
 }
 
 /**

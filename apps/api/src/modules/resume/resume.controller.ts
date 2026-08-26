@@ -17,7 +17,11 @@ import type {
   ResumeParams,
   AskResumeInput,
 } from "./resume.validation.js";
-import { processCandidateResume } from "./resume.processing.service.js";
+import {
+  processCandidateResume,
+  queueCandidateResumeProcessing,
+} from "./resume.processing.service.js";
+import { enqueueResumeProcessing } from "../../queues/resume-processing.queue.js";
 
 export const uploadResumeController = async (req: Request, res: Response) => {
   const userId = req.auth?.userId;
@@ -42,13 +46,47 @@ export const uploadResumeController = async (req: Request, res: Response) => {
     data,
   });
 
+  let processingQueued = false;
+
+  let processingJobId: string | null = null;
+
+  try {
+    const job = await enqueueResumeProcessing({
+      resumeId: resume.id,
+
+      userId,
+    });
+
+    processingQueued = true;
+
+    processingJobId = job.id ?? null;
+  } catch (error) {
+    /*
+     * Do NOT delete the successfully
+     * uploaded resume simply because
+     * Redis is temporarily unavailable.
+     *
+     * Candidate can retry /process.
+     */
+
+    console.error(`Unable to queue resume ${resume.id}:`, error);
+  }
+
   return res.status(201).json({
     success: true,
 
-    message: "Resume uploaded successfully",
+    message: processingQueued
+      ? "Resume uploaded and processing started"
+      : "Resume uploaded but processing could not be queued",
 
     data: {
       resume,
+
+      processing: {
+        queued: processingQueued,
+
+        jobId: processingJobId,
+      },
     },
   });
 };
@@ -291,15 +329,23 @@ export const processResumeController = async (req: Request, res: Response) => {
 
   const { resumeId } = req.params as ResumeParams;
 
-  const resume = await processCandidateResume(userId, resumeId);
+  const result = await queueCandidateResumeProcessing(userId, resumeId);
 
-  return res.status(200).json({
+  if (!result.queued) {
+    return res.status(200).json({
+      success: true,
+
+      message: "Resume is already ready",
+
+      data: result,
+    });
+  }
+
+  return res.status(202).json({
     success: true,
 
-    message: "Resume processed successfully",
+    message: "Resume processing queued successfully",
 
-    data: {
-      resume,
-    },
+    data: result,
   });
 };

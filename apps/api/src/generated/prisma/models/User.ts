@@ -287,6 +287,12 @@ export type UserWhereInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenListRelationFilter
   passwordResetTokens?: Prisma.PasswordResetTokenListRelationFilter
   invitationsSent?: Prisma.AccountInvitationListRelationFilter
+  notifications?: Prisma.NotificationListRelationFilter
+  jobOpenings?: Prisma.JobOpeningListRelationFilter
+  interviewTemplates?: Prisma.InterviewTemplateListRelationFilter
+  createdInterviews?: Prisma.InterviewListRelationFilter
+  sentInterviewInvitations?: Prisma.InterviewInvitationListRelationFilter
+  receivedInterviewInvitations?: Prisma.InterviewInvitationListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -310,6 +316,12 @@ export type UserOrderByWithRelationInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenOrderByRelationAggregateInput
   passwordResetTokens?: Prisma.PasswordResetTokenOrderByRelationAggregateInput
   invitationsSent?: Prisma.AccountInvitationOrderByRelationAggregateInput
+  notifications?: Prisma.NotificationOrderByRelationAggregateInput
+  jobOpenings?: Prisma.JobOpeningOrderByRelationAggregateInput
+  interviewTemplates?: Prisma.InterviewTemplateOrderByRelationAggregateInput
+  createdInterviews?: Prisma.InterviewOrderByRelationAggregateInput
+  sentInterviewInvitations?: Prisma.InterviewInvitationOrderByRelationAggregateInput
+  receivedInterviewInvitations?: Prisma.InterviewInvitationOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -336,6 +348,12 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   emailVerificationTokens?: Prisma.EmailVerificationTokenListRelationFilter
   passwordResetTokens?: Prisma.PasswordResetTokenListRelationFilter
   invitationsSent?: Prisma.AccountInvitationListRelationFilter
+  notifications?: Prisma.NotificationListRelationFilter
+  jobOpenings?: Prisma.JobOpeningListRelationFilter
+  interviewTemplates?: Prisma.InterviewTemplateListRelationFilter
+  createdInterviews?: Prisma.InterviewListRelationFilter
+  sentInterviewInvitations?: Prisma.InterviewInvitationListRelationFilter
+  receivedInterviewInvitations?: Prisma.InterviewInvitationListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -399,6 +417,12 @@ export type UserCreateInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   invitationsSent?: Prisma.AccountInvitationCreateNestedManyWithoutInvitedByInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  jobOpenings?: Prisma.JobOpeningCreateNestedManyWithoutCreatedByInput
+  interviewTemplates?: Prisma.InterviewTemplateCreateNestedManyWithoutCreatedByInput
+  createdInterviews?: Prisma.InterviewCreateNestedManyWithoutCreatedByInput
+  sentInterviewInvitations?: Prisma.InterviewInvitationCreateNestedManyWithoutInvitedByInput
+  receivedInterviewInvitations?: Prisma.InterviewInvitationCreateNestedManyWithoutCandidateUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -422,6 +446,12 @@ export type UserUncheckedCreateInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   invitationsSent?: Prisma.AccountInvitationUncheckedCreateNestedManyWithoutInvitedByInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  jobOpenings?: Prisma.JobOpeningUncheckedCreateNestedManyWithoutCreatedByInput
+  interviewTemplates?: Prisma.InterviewTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+  createdInterviews?: Prisma.InterviewUncheckedCreateNestedManyWithoutCreatedByInput
+  sentInterviewInvitations?: Prisma.InterviewInvitationUncheckedCreateNestedManyWithoutInvitedByInput
+  receivedInterviewInvitations?: Prisma.InterviewInvitationUncheckedCreateNestedManyWithoutCandidateUserInput
 }
 
 export type UserUpdateInput = {
@@ -445,6 +475,12 @@ export type UserUpdateInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   invitationsSent?: Prisma.AccountInvitationUpdateManyWithoutInvitedByNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  jobOpenings?: Prisma.JobOpeningUpdateManyWithoutCreatedByNestedInput
+  interviewTemplates?: Prisma.InterviewTemplateUpdateManyWithoutCreatedByNestedInput
+  createdInterviews?: Prisma.InterviewUpdateManyWithoutCreatedByNestedInput
+  sentInterviewInvitations?: Prisma.InterviewInvitationUpdateManyWithoutInvitedByNestedInput
+  receivedInterviewInvitations?: Prisma.InterviewInvitationUpdateManyWithoutCandidateUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -468,6 +504,12 @@ export type UserUncheckedUpdateInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   invitationsSent?: Prisma.AccountInvitationUncheckedUpdateManyWithoutInvitedByNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  jobOpenings?: Prisma.JobOpeningUncheckedUpdateManyWithoutCreatedByNestedInput
+  interviewTemplates?: Prisma.InterviewTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdInterviews?: Prisma.InterviewUncheckedUpdateManyWithoutCreatedByNestedInput
+  sentInterviewInvitations?: Prisma.InterviewInvitationUncheckedUpdateManyWithoutInvitedByNestedInput
+  receivedInterviewInvitations?: Prisma.InterviewInvitationUncheckedUpdateManyWithoutCandidateUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -577,6 +619,11 @@ export type UserSumOrderByAggregateInput = {
 export type UserScalarRelationFilter = {
   is?: Prisma.UserWhereInput
   isNot?: Prisma.UserWhereInput
+}
+
+export type UserNullableScalarRelationFilter = {
+  is?: Prisma.UserWhereInput | null
+  isNot?: Prisma.UserWhereInput | null
 }
 
 export type StringFieldUpdateOperationsInput = {
@@ -709,6 +756,92 @@ export type UserUpdateOneRequiredWithoutInvitationsSentNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutInvitationsSentInput, Prisma.UserUpdateWithoutInvitationsSentInput>, Prisma.UserUncheckedUpdateWithoutInvitationsSentInput>
 }
 
+export type UserCreateNestedOneWithoutJobOpeningsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutJobOpeningsInput, Prisma.UserUncheckedCreateWithoutJobOpeningsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutJobOpeningsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutJobOpeningsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutJobOpeningsInput, Prisma.UserUncheckedCreateWithoutJobOpeningsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutJobOpeningsInput
+  upsert?: Prisma.UserUpsertWithoutJobOpeningsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutJobOpeningsInput, Prisma.UserUpdateWithoutJobOpeningsInput>, Prisma.UserUncheckedUpdateWithoutJobOpeningsInput>
+}
+
+export type UserCreateNestedOneWithoutInterviewTemplatesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutInterviewTemplatesInput, Prisma.UserUncheckedCreateWithoutInterviewTemplatesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutInterviewTemplatesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutInterviewTemplatesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutInterviewTemplatesInput, Prisma.UserUncheckedCreateWithoutInterviewTemplatesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutInterviewTemplatesInput
+  upsert?: Prisma.UserUpsertWithoutInterviewTemplatesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutInterviewTemplatesInput, Prisma.UserUpdateWithoutInterviewTemplatesInput>, Prisma.UserUncheckedUpdateWithoutInterviewTemplatesInput>
+}
+
+export type UserCreateNestedOneWithoutCreatedInterviewsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedInterviewsInput, Prisma.UserUncheckedCreateWithoutCreatedInterviewsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedInterviewsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutCreatedInterviewsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedInterviewsInput, Prisma.UserUncheckedCreateWithoutCreatedInterviewsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedInterviewsInput
+  upsert?: Prisma.UserUpsertWithoutCreatedInterviewsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCreatedInterviewsInput, Prisma.UserUpdateWithoutCreatedInterviewsInput>, Prisma.UserUncheckedUpdateWithoutCreatedInterviewsInput>
+}
+
+export type UserCreateNestedOneWithoutSentInterviewInvitationsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSentInterviewInvitationsInput, Prisma.UserUncheckedCreateWithoutSentInterviewInvitationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSentInterviewInvitationsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutReceivedInterviewInvitationsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReceivedInterviewInvitationsInput, Prisma.UserUncheckedCreateWithoutReceivedInterviewInvitationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReceivedInterviewInvitationsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutSentInterviewInvitationsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSentInterviewInvitationsInput, Prisma.UserUncheckedCreateWithoutSentInterviewInvitationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSentInterviewInvitationsInput
+  upsert?: Prisma.UserUpsertWithoutSentInterviewInvitationsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSentInterviewInvitationsInput, Prisma.UserUpdateWithoutSentInterviewInvitationsInput>, Prisma.UserUncheckedUpdateWithoutSentInterviewInvitationsInput>
+}
+
+export type UserUpdateOneRequiredWithoutReceivedInterviewInvitationsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReceivedInterviewInvitationsInput, Prisma.UserUncheckedCreateWithoutReceivedInterviewInvitationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReceivedInterviewInvitationsInput
+  upsert?: Prisma.UserUpsertWithoutReceivedInterviewInvitationsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutReceivedInterviewInvitationsInput, Prisma.UserUpdateWithoutReceivedInterviewInvitationsInput>, Prisma.UserUncheckedUpdateWithoutReceivedInterviewInvitationsInput>
+}
+
+export type UserCreateNestedOneWithoutNotificationsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutNotificationsInput, Prisma.UserUncheckedCreateWithoutNotificationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNotificationsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutNotificationsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutNotificationsInput, Prisma.UserUncheckedCreateWithoutNotificationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNotificationsInput
+  upsert?: Prisma.UserUpsertWithoutNotificationsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutNotificationsInput, Prisma.UserUpdateWithoutNotificationsInput>, Prisma.UserUncheckedUpdateWithoutNotificationsInput>
+}
+
 export type UserCreateWithoutCandidateProfileInput = {
   id?: string
   name: string
@@ -729,6 +862,12 @@ export type UserCreateWithoutCandidateProfileInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   invitationsSent?: Prisma.AccountInvitationCreateNestedManyWithoutInvitedByInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  jobOpenings?: Prisma.JobOpeningCreateNestedManyWithoutCreatedByInput
+  interviewTemplates?: Prisma.InterviewTemplateCreateNestedManyWithoutCreatedByInput
+  createdInterviews?: Prisma.InterviewCreateNestedManyWithoutCreatedByInput
+  sentInterviewInvitations?: Prisma.InterviewInvitationCreateNestedManyWithoutInvitedByInput
+  receivedInterviewInvitations?: Prisma.InterviewInvitationCreateNestedManyWithoutCandidateUserInput
 }
 
 export type UserUncheckedCreateWithoutCandidateProfileInput = {
@@ -751,6 +890,12 @@ export type UserUncheckedCreateWithoutCandidateProfileInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   invitationsSent?: Prisma.AccountInvitationUncheckedCreateNestedManyWithoutInvitedByInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  jobOpenings?: Prisma.JobOpeningUncheckedCreateNestedManyWithoutCreatedByInput
+  interviewTemplates?: Prisma.InterviewTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+  createdInterviews?: Prisma.InterviewUncheckedCreateNestedManyWithoutCreatedByInput
+  sentInterviewInvitations?: Prisma.InterviewInvitationUncheckedCreateNestedManyWithoutInvitedByInput
+  receivedInterviewInvitations?: Prisma.InterviewInvitationUncheckedCreateNestedManyWithoutCandidateUserInput
 }
 
 export type UserCreateOrConnectWithoutCandidateProfileInput = {
@@ -789,6 +934,12 @@ export type UserUpdateWithoutCandidateProfileInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   invitationsSent?: Prisma.AccountInvitationUpdateManyWithoutInvitedByNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  jobOpenings?: Prisma.JobOpeningUpdateManyWithoutCreatedByNestedInput
+  interviewTemplates?: Prisma.InterviewTemplateUpdateManyWithoutCreatedByNestedInput
+  createdInterviews?: Prisma.InterviewUpdateManyWithoutCreatedByNestedInput
+  sentInterviewInvitations?: Prisma.InterviewInvitationUpdateManyWithoutInvitedByNestedInput
+  receivedInterviewInvitations?: Prisma.InterviewInvitationUpdateManyWithoutCandidateUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCandidateProfileInput = {
@@ -811,6 +962,12 @@ export type UserUncheckedUpdateWithoutCandidateProfileInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   invitationsSent?: Prisma.AccountInvitationUncheckedUpdateManyWithoutInvitedByNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  jobOpenings?: Prisma.JobOpeningUncheckedUpdateManyWithoutCreatedByNestedInput
+  interviewTemplates?: Prisma.InterviewTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdInterviews?: Prisma.InterviewUncheckedUpdateManyWithoutCreatedByNestedInput
+  sentInterviewInvitations?: Prisma.InterviewInvitationUncheckedUpdateManyWithoutInvitedByNestedInput
+  receivedInterviewInvitations?: Prisma.InterviewInvitationUncheckedUpdateManyWithoutCandidateUserNestedInput
 }
 
 export type UserCreateWithoutRecruiterProfileInput = {
@@ -833,6 +990,12 @@ export type UserCreateWithoutRecruiterProfileInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   invitationsSent?: Prisma.AccountInvitationCreateNestedManyWithoutInvitedByInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  jobOpenings?: Prisma.JobOpeningCreateNestedManyWithoutCreatedByInput
+  interviewTemplates?: Prisma.InterviewTemplateCreateNestedManyWithoutCreatedByInput
+  createdInterviews?: Prisma.InterviewCreateNestedManyWithoutCreatedByInput
+  sentInterviewInvitations?: Prisma.InterviewInvitationCreateNestedManyWithoutInvitedByInput
+  receivedInterviewInvitations?: Prisma.InterviewInvitationCreateNestedManyWithoutCandidateUserInput
 }
 
 export type UserUncheckedCreateWithoutRecruiterProfileInput = {
@@ -855,6 +1018,12 @@ export type UserUncheckedCreateWithoutRecruiterProfileInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   invitationsSent?: Prisma.AccountInvitationUncheckedCreateNestedManyWithoutInvitedByInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  jobOpenings?: Prisma.JobOpeningUncheckedCreateNestedManyWithoutCreatedByInput
+  interviewTemplates?: Prisma.InterviewTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+  createdInterviews?: Prisma.InterviewUncheckedCreateNestedManyWithoutCreatedByInput
+  sentInterviewInvitations?: Prisma.InterviewInvitationUncheckedCreateNestedManyWithoutInvitedByInput
+  receivedInterviewInvitations?: Prisma.InterviewInvitationUncheckedCreateNestedManyWithoutCandidateUserInput
 }
 
 export type UserCreateOrConnectWithoutRecruiterProfileInput = {
@@ -893,6 +1062,12 @@ export type UserUpdateWithoutRecruiterProfileInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   invitationsSent?: Prisma.AccountInvitationUpdateManyWithoutInvitedByNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  jobOpenings?: Prisma.JobOpeningUpdateManyWithoutCreatedByNestedInput
+  interviewTemplates?: Prisma.InterviewTemplateUpdateManyWithoutCreatedByNestedInput
+  createdInterviews?: Prisma.InterviewUpdateManyWithoutCreatedByNestedInput
+  sentInterviewInvitations?: Prisma.InterviewInvitationUpdateManyWithoutInvitedByNestedInput
+  receivedInterviewInvitations?: Prisma.InterviewInvitationUpdateManyWithoutCandidateUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRecruiterProfileInput = {
@@ -915,6 +1090,12 @@ export type UserUncheckedUpdateWithoutRecruiterProfileInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   invitationsSent?: Prisma.AccountInvitationUncheckedUpdateManyWithoutInvitedByNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  jobOpenings?: Prisma.JobOpeningUncheckedUpdateManyWithoutCreatedByNestedInput
+  interviewTemplates?: Prisma.InterviewTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdInterviews?: Prisma.InterviewUncheckedUpdateManyWithoutCreatedByNestedInput
+  sentInterviewInvitations?: Prisma.InterviewInvitationUncheckedUpdateManyWithoutInvitedByNestedInput
+  receivedInterviewInvitations?: Prisma.InterviewInvitationUncheckedUpdateManyWithoutCandidateUserNestedInput
 }
 
 export type UserCreateWithoutAccountsInput = {
@@ -937,6 +1118,12 @@ export type UserCreateWithoutAccountsInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   invitationsSent?: Prisma.AccountInvitationCreateNestedManyWithoutInvitedByInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  jobOpenings?: Prisma.JobOpeningCreateNestedManyWithoutCreatedByInput
+  interviewTemplates?: Prisma.InterviewTemplateCreateNestedManyWithoutCreatedByInput
+  createdInterviews?: Prisma.InterviewCreateNestedManyWithoutCreatedByInput
+  sentInterviewInvitations?: Prisma.InterviewInvitationCreateNestedManyWithoutInvitedByInput
+  receivedInterviewInvitations?: Prisma.InterviewInvitationCreateNestedManyWithoutCandidateUserInput
 }
 
 export type UserUncheckedCreateWithoutAccountsInput = {
@@ -959,6 +1146,12 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   invitationsSent?: Prisma.AccountInvitationUncheckedCreateNestedManyWithoutInvitedByInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  jobOpenings?: Prisma.JobOpeningUncheckedCreateNestedManyWithoutCreatedByInput
+  interviewTemplates?: Prisma.InterviewTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+  createdInterviews?: Prisma.InterviewUncheckedCreateNestedManyWithoutCreatedByInput
+  sentInterviewInvitations?: Prisma.InterviewInvitationUncheckedCreateNestedManyWithoutInvitedByInput
+  receivedInterviewInvitations?: Prisma.InterviewInvitationUncheckedCreateNestedManyWithoutCandidateUserInput
 }
 
 export type UserCreateOrConnectWithoutAccountsInput = {
@@ -997,6 +1190,12 @@ export type UserUpdateWithoutAccountsInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   invitationsSent?: Prisma.AccountInvitationUpdateManyWithoutInvitedByNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  jobOpenings?: Prisma.JobOpeningUpdateManyWithoutCreatedByNestedInput
+  interviewTemplates?: Prisma.InterviewTemplateUpdateManyWithoutCreatedByNestedInput
+  createdInterviews?: Prisma.InterviewUpdateManyWithoutCreatedByNestedInput
+  sentInterviewInvitations?: Prisma.InterviewInvitationUpdateManyWithoutInvitedByNestedInput
+  receivedInterviewInvitations?: Prisma.InterviewInvitationUpdateManyWithoutCandidateUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -1019,6 +1218,12 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   invitationsSent?: Prisma.AccountInvitationUncheckedUpdateManyWithoutInvitedByNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  jobOpenings?: Prisma.JobOpeningUncheckedUpdateManyWithoutCreatedByNestedInput
+  interviewTemplates?: Prisma.InterviewTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdInterviews?: Prisma.InterviewUncheckedUpdateManyWithoutCreatedByNestedInput
+  sentInterviewInvitations?: Prisma.InterviewInvitationUncheckedUpdateManyWithoutInvitedByNestedInput
+  receivedInterviewInvitations?: Prisma.InterviewInvitationUncheckedUpdateManyWithoutCandidateUserNestedInput
 }
 
 export type UserCreateWithoutSessionsInput = {
@@ -1041,6 +1246,12 @@ export type UserCreateWithoutSessionsInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   invitationsSent?: Prisma.AccountInvitationCreateNestedManyWithoutInvitedByInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  jobOpenings?: Prisma.JobOpeningCreateNestedManyWithoutCreatedByInput
+  interviewTemplates?: Prisma.InterviewTemplateCreateNestedManyWithoutCreatedByInput
+  createdInterviews?: Prisma.InterviewCreateNestedManyWithoutCreatedByInput
+  sentInterviewInvitations?: Prisma.InterviewInvitationCreateNestedManyWithoutInvitedByInput
+  receivedInterviewInvitations?: Prisma.InterviewInvitationCreateNestedManyWithoutCandidateUserInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -1063,6 +1274,12 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   invitationsSent?: Prisma.AccountInvitationUncheckedCreateNestedManyWithoutInvitedByInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  jobOpenings?: Prisma.JobOpeningUncheckedCreateNestedManyWithoutCreatedByInput
+  interviewTemplates?: Prisma.InterviewTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+  createdInterviews?: Prisma.InterviewUncheckedCreateNestedManyWithoutCreatedByInput
+  sentInterviewInvitations?: Prisma.InterviewInvitationUncheckedCreateNestedManyWithoutInvitedByInput
+  receivedInterviewInvitations?: Prisma.InterviewInvitationUncheckedCreateNestedManyWithoutCandidateUserInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -1101,6 +1318,12 @@ export type UserUpdateWithoutSessionsInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   invitationsSent?: Prisma.AccountInvitationUpdateManyWithoutInvitedByNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  jobOpenings?: Prisma.JobOpeningUpdateManyWithoutCreatedByNestedInput
+  interviewTemplates?: Prisma.InterviewTemplateUpdateManyWithoutCreatedByNestedInput
+  createdInterviews?: Prisma.InterviewUpdateManyWithoutCreatedByNestedInput
+  sentInterviewInvitations?: Prisma.InterviewInvitationUpdateManyWithoutInvitedByNestedInput
+  receivedInterviewInvitations?: Prisma.InterviewInvitationUpdateManyWithoutCandidateUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -1123,6 +1346,12 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   invitationsSent?: Prisma.AccountInvitationUncheckedUpdateManyWithoutInvitedByNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  jobOpenings?: Prisma.JobOpeningUncheckedUpdateManyWithoutCreatedByNestedInput
+  interviewTemplates?: Prisma.InterviewTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdInterviews?: Prisma.InterviewUncheckedUpdateManyWithoutCreatedByNestedInput
+  sentInterviewInvitations?: Prisma.InterviewInvitationUncheckedUpdateManyWithoutInvitedByNestedInput
+  receivedInterviewInvitations?: Prisma.InterviewInvitationUncheckedUpdateManyWithoutCandidateUserNestedInput
 }
 
 export type UserCreateWithoutEmailVerificationTokensInput = {
@@ -1145,6 +1374,12 @@ export type UserCreateWithoutEmailVerificationTokensInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   invitationsSent?: Prisma.AccountInvitationCreateNestedManyWithoutInvitedByInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  jobOpenings?: Prisma.JobOpeningCreateNestedManyWithoutCreatedByInput
+  interviewTemplates?: Prisma.InterviewTemplateCreateNestedManyWithoutCreatedByInput
+  createdInterviews?: Prisma.InterviewCreateNestedManyWithoutCreatedByInput
+  sentInterviewInvitations?: Prisma.InterviewInvitationCreateNestedManyWithoutInvitedByInput
+  receivedInterviewInvitations?: Prisma.InterviewInvitationCreateNestedManyWithoutCandidateUserInput
 }
 
 export type UserUncheckedCreateWithoutEmailVerificationTokensInput = {
@@ -1167,6 +1402,12 @@ export type UserUncheckedCreateWithoutEmailVerificationTokensInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   invitationsSent?: Prisma.AccountInvitationUncheckedCreateNestedManyWithoutInvitedByInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  jobOpenings?: Prisma.JobOpeningUncheckedCreateNestedManyWithoutCreatedByInput
+  interviewTemplates?: Prisma.InterviewTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+  createdInterviews?: Prisma.InterviewUncheckedCreateNestedManyWithoutCreatedByInput
+  sentInterviewInvitations?: Prisma.InterviewInvitationUncheckedCreateNestedManyWithoutInvitedByInput
+  receivedInterviewInvitations?: Prisma.InterviewInvitationUncheckedCreateNestedManyWithoutCandidateUserInput
 }
 
 export type UserCreateOrConnectWithoutEmailVerificationTokensInput = {
@@ -1205,6 +1446,12 @@ export type UserUpdateWithoutEmailVerificationTokensInput = {
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   invitationsSent?: Prisma.AccountInvitationUpdateManyWithoutInvitedByNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  jobOpenings?: Prisma.JobOpeningUpdateManyWithoutCreatedByNestedInput
+  interviewTemplates?: Prisma.InterviewTemplateUpdateManyWithoutCreatedByNestedInput
+  createdInterviews?: Prisma.InterviewUpdateManyWithoutCreatedByNestedInput
+  sentInterviewInvitations?: Prisma.InterviewInvitationUpdateManyWithoutInvitedByNestedInput
+  receivedInterviewInvitations?: Prisma.InterviewInvitationUpdateManyWithoutCandidateUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutEmailVerificationTokensInput = {
@@ -1227,6 +1474,12 @@ export type UserUncheckedUpdateWithoutEmailVerificationTokensInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   invitationsSent?: Prisma.AccountInvitationUncheckedUpdateManyWithoutInvitedByNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  jobOpenings?: Prisma.JobOpeningUncheckedUpdateManyWithoutCreatedByNestedInput
+  interviewTemplates?: Prisma.InterviewTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdInterviews?: Prisma.InterviewUncheckedUpdateManyWithoutCreatedByNestedInput
+  sentInterviewInvitations?: Prisma.InterviewInvitationUncheckedUpdateManyWithoutInvitedByNestedInput
+  receivedInterviewInvitations?: Prisma.InterviewInvitationUncheckedUpdateManyWithoutCandidateUserNestedInput
 }
 
 export type UserCreateWithoutPasswordResetTokensInput = {
@@ -1249,6 +1502,12 @@ export type UserCreateWithoutPasswordResetTokensInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   invitationsSent?: Prisma.AccountInvitationCreateNestedManyWithoutInvitedByInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  jobOpenings?: Prisma.JobOpeningCreateNestedManyWithoutCreatedByInput
+  interviewTemplates?: Prisma.InterviewTemplateCreateNestedManyWithoutCreatedByInput
+  createdInterviews?: Prisma.InterviewCreateNestedManyWithoutCreatedByInput
+  sentInterviewInvitations?: Prisma.InterviewInvitationCreateNestedManyWithoutInvitedByInput
+  receivedInterviewInvitations?: Prisma.InterviewInvitationCreateNestedManyWithoutCandidateUserInput
 }
 
 export type UserUncheckedCreateWithoutPasswordResetTokensInput = {
@@ -1271,6 +1530,12 @@ export type UserUncheckedCreateWithoutPasswordResetTokensInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   invitationsSent?: Prisma.AccountInvitationUncheckedCreateNestedManyWithoutInvitedByInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  jobOpenings?: Prisma.JobOpeningUncheckedCreateNestedManyWithoutCreatedByInput
+  interviewTemplates?: Prisma.InterviewTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+  createdInterviews?: Prisma.InterviewUncheckedCreateNestedManyWithoutCreatedByInput
+  sentInterviewInvitations?: Prisma.InterviewInvitationUncheckedCreateNestedManyWithoutInvitedByInput
+  receivedInterviewInvitations?: Prisma.InterviewInvitationUncheckedCreateNestedManyWithoutCandidateUserInput
 }
 
 export type UserCreateOrConnectWithoutPasswordResetTokensInput = {
@@ -1309,6 +1574,12 @@ export type UserUpdateWithoutPasswordResetTokensInput = {
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   invitationsSent?: Prisma.AccountInvitationUpdateManyWithoutInvitedByNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  jobOpenings?: Prisma.JobOpeningUpdateManyWithoutCreatedByNestedInput
+  interviewTemplates?: Prisma.InterviewTemplateUpdateManyWithoutCreatedByNestedInput
+  createdInterviews?: Prisma.InterviewUpdateManyWithoutCreatedByNestedInput
+  sentInterviewInvitations?: Prisma.InterviewInvitationUpdateManyWithoutInvitedByNestedInput
+  receivedInterviewInvitations?: Prisma.InterviewInvitationUpdateManyWithoutCandidateUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPasswordResetTokensInput = {
@@ -1331,6 +1602,12 @@ export type UserUncheckedUpdateWithoutPasswordResetTokensInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   invitationsSent?: Prisma.AccountInvitationUncheckedUpdateManyWithoutInvitedByNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  jobOpenings?: Prisma.JobOpeningUncheckedUpdateManyWithoutCreatedByNestedInput
+  interviewTemplates?: Prisma.InterviewTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdInterviews?: Prisma.InterviewUncheckedUpdateManyWithoutCreatedByNestedInput
+  sentInterviewInvitations?: Prisma.InterviewInvitationUncheckedUpdateManyWithoutInvitedByNestedInput
+  receivedInterviewInvitations?: Prisma.InterviewInvitationUncheckedUpdateManyWithoutCandidateUserNestedInput
 }
 
 export type UserCreateWithoutInvitationsSentInput = {
@@ -1353,6 +1630,12 @@ export type UserCreateWithoutInvitationsSentInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  jobOpenings?: Prisma.JobOpeningCreateNestedManyWithoutCreatedByInput
+  interviewTemplates?: Prisma.InterviewTemplateCreateNestedManyWithoutCreatedByInput
+  createdInterviews?: Prisma.InterviewCreateNestedManyWithoutCreatedByInput
+  sentInterviewInvitations?: Prisma.InterviewInvitationCreateNestedManyWithoutInvitedByInput
+  receivedInterviewInvitations?: Prisma.InterviewInvitationCreateNestedManyWithoutCandidateUserInput
 }
 
 export type UserUncheckedCreateWithoutInvitationsSentInput = {
@@ -1375,6 +1658,12 @@ export type UserUncheckedCreateWithoutInvitationsSentInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  jobOpenings?: Prisma.JobOpeningUncheckedCreateNestedManyWithoutCreatedByInput
+  interviewTemplates?: Prisma.InterviewTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+  createdInterviews?: Prisma.InterviewUncheckedCreateNestedManyWithoutCreatedByInput
+  sentInterviewInvitations?: Prisma.InterviewInvitationUncheckedCreateNestedManyWithoutInvitedByInput
+  receivedInterviewInvitations?: Prisma.InterviewInvitationUncheckedCreateNestedManyWithoutCandidateUserInput
 }
 
 export type UserCreateOrConnectWithoutInvitationsSentInput = {
@@ -1413,6 +1702,12 @@ export type UserUpdateWithoutInvitationsSentInput = {
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  jobOpenings?: Prisma.JobOpeningUpdateManyWithoutCreatedByNestedInput
+  interviewTemplates?: Prisma.InterviewTemplateUpdateManyWithoutCreatedByNestedInput
+  createdInterviews?: Prisma.InterviewUpdateManyWithoutCreatedByNestedInput
+  sentInterviewInvitations?: Prisma.InterviewInvitationUpdateManyWithoutInvitedByNestedInput
+  receivedInterviewInvitations?: Prisma.InterviewInvitationUpdateManyWithoutCandidateUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutInvitationsSentInput = {
@@ -1435,6 +1730,780 @@ export type UserUncheckedUpdateWithoutInvitationsSentInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  jobOpenings?: Prisma.JobOpeningUncheckedUpdateManyWithoutCreatedByNestedInput
+  interviewTemplates?: Prisma.InterviewTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdInterviews?: Prisma.InterviewUncheckedUpdateManyWithoutCreatedByNestedInput
+  sentInterviewInvitations?: Prisma.InterviewInvitationUncheckedUpdateManyWithoutInvitedByNestedInput
+  receivedInterviewInvitations?: Prisma.InterviewInvitationUncheckedUpdateManyWithoutCandidateUserNestedInput
+}
+
+export type UserCreateWithoutJobOpeningsInput = {
+  id?: string
+  name: string
+  email: string
+  passwordHash?: string | null
+  avatarUrl?: string | null
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  failedLoginAttempts?: number
+  lockedUntil?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  candidateProfile?: Prisma.CandidateProfileCreateNestedOneWithoutUserInput
+  recruiterProfile?: Prisma.RecruiterProfileCreateNestedOneWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  invitationsSent?: Prisma.AccountInvitationCreateNestedManyWithoutInvitedByInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  interviewTemplates?: Prisma.InterviewTemplateCreateNestedManyWithoutCreatedByInput
+  createdInterviews?: Prisma.InterviewCreateNestedManyWithoutCreatedByInput
+  sentInterviewInvitations?: Prisma.InterviewInvitationCreateNestedManyWithoutInvitedByInput
+  receivedInterviewInvitations?: Prisma.InterviewInvitationCreateNestedManyWithoutCandidateUserInput
+}
+
+export type UserUncheckedCreateWithoutJobOpeningsInput = {
+  id?: string
+  name: string
+  email: string
+  passwordHash?: string | null
+  avatarUrl?: string | null
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  failedLoginAttempts?: number
+  lockedUntil?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  candidateProfile?: Prisma.CandidateProfileUncheckedCreateNestedOneWithoutUserInput
+  recruiterProfile?: Prisma.RecruiterProfileUncheckedCreateNestedOneWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  invitationsSent?: Prisma.AccountInvitationUncheckedCreateNestedManyWithoutInvitedByInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  interviewTemplates?: Prisma.InterviewTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+  createdInterviews?: Prisma.InterviewUncheckedCreateNestedManyWithoutCreatedByInput
+  sentInterviewInvitations?: Prisma.InterviewInvitationUncheckedCreateNestedManyWithoutInvitedByInput
+  receivedInterviewInvitations?: Prisma.InterviewInvitationUncheckedCreateNestedManyWithoutCandidateUserInput
+}
+
+export type UserCreateOrConnectWithoutJobOpeningsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutJobOpeningsInput, Prisma.UserUncheckedCreateWithoutJobOpeningsInput>
+}
+
+export type UserUpsertWithoutJobOpeningsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutJobOpeningsInput, Prisma.UserUncheckedUpdateWithoutJobOpeningsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutJobOpeningsInput, Prisma.UserUncheckedCreateWithoutJobOpeningsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutJobOpeningsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutJobOpeningsInput, Prisma.UserUncheckedUpdateWithoutJobOpeningsInput>
+}
+
+export type UserUpdateWithoutJobOpeningsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  failedLoginAttempts?: Prisma.IntFieldUpdateOperationsInput | number
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  candidateProfile?: Prisma.CandidateProfileUpdateOneWithoutUserNestedInput
+  recruiterProfile?: Prisma.RecruiterProfileUpdateOneWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  invitationsSent?: Prisma.AccountInvitationUpdateManyWithoutInvitedByNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  interviewTemplates?: Prisma.InterviewTemplateUpdateManyWithoutCreatedByNestedInput
+  createdInterviews?: Prisma.InterviewUpdateManyWithoutCreatedByNestedInput
+  sentInterviewInvitations?: Prisma.InterviewInvitationUpdateManyWithoutInvitedByNestedInput
+  receivedInterviewInvitations?: Prisma.InterviewInvitationUpdateManyWithoutCandidateUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutJobOpeningsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  failedLoginAttempts?: Prisma.IntFieldUpdateOperationsInput | number
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  candidateProfile?: Prisma.CandidateProfileUncheckedUpdateOneWithoutUserNestedInput
+  recruiterProfile?: Prisma.RecruiterProfileUncheckedUpdateOneWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  invitationsSent?: Prisma.AccountInvitationUncheckedUpdateManyWithoutInvitedByNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  interviewTemplates?: Prisma.InterviewTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdInterviews?: Prisma.InterviewUncheckedUpdateManyWithoutCreatedByNestedInput
+  sentInterviewInvitations?: Prisma.InterviewInvitationUncheckedUpdateManyWithoutInvitedByNestedInput
+  receivedInterviewInvitations?: Prisma.InterviewInvitationUncheckedUpdateManyWithoutCandidateUserNestedInput
+}
+
+export type UserCreateWithoutInterviewTemplatesInput = {
+  id?: string
+  name: string
+  email: string
+  passwordHash?: string | null
+  avatarUrl?: string | null
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  failedLoginAttempts?: number
+  lockedUntil?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  candidateProfile?: Prisma.CandidateProfileCreateNestedOneWithoutUserInput
+  recruiterProfile?: Prisma.RecruiterProfileCreateNestedOneWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  invitationsSent?: Prisma.AccountInvitationCreateNestedManyWithoutInvitedByInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  jobOpenings?: Prisma.JobOpeningCreateNestedManyWithoutCreatedByInput
+  createdInterviews?: Prisma.InterviewCreateNestedManyWithoutCreatedByInput
+  sentInterviewInvitations?: Prisma.InterviewInvitationCreateNestedManyWithoutInvitedByInput
+  receivedInterviewInvitations?: Prisma.InterviewInvitationCreateNestedManyWithoutCandidateUserInput
+}
+
+export type UserUncheckedCreateWithoutInterviewTemplatesInput = {
+  id?: string
+  name: string
+  email: string
+  passwordHash?: string | null
+  avatarUrl?: string | null
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  failedLoginAttempts?: number
+  lockedUntil?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  candidateProfile?: Prisma.CandidateProfileUncheckedCreateNestedOneWithoutUserInput
+  recruiterProfile?: Prisma.RecruiterProfileUncheckedCreateNestedOneWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  invitationsSent?: Prisma.AccountInvitationUncheckedCreateNestedManyWithoutInvitedByInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  jobOpenings?: Prisma.JobOpeningUncheckedCreateNestedManyWithoutCreatedByInput
+  createdInterviews?: Prisma.InterviewUncheckedCreateNestedManyWithoutCreatedByInput
+  sentInterviewInvitations?: Prisma.InterviewInvitationUncheckedCreateNestedManyWithoutInvitedByInput
+  receivedInterviewInvitations?: Prisma.InterviewInvitationUncheckedCreateNestedManyWithoutCandidateUserInput
+}
+
+export type UserCreateOrConnectWithoutInterviewTemplatesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutInterviewTemplatesInput, Prisma.UserUncheckedCreateWithoutInterviewTemplatesInput>
+}
+
+export type UserUpsertWithoutInterviewTemplatesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutInterviewTemplatesInput, Prisma.UserUncheckedUpdateWithoutInterviewTemplatesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutInterviewTemplatesInput, Prisma.UserUncheckedCreateWithoutInterviewTemplatesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutInterviewTemplatesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutInterviewTemplatesInput, Prisma.UserUncheckedUpdateWithoutInterviewTemplatesInput>
+}
+
+export type UserUpdateWithoutInterviewTemplatesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  failedLoginAttempts?: Prisma.IntFieldUpdateOperationsInput | number
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  candidateProfile?: Prisma.CandidateProfileUpdateOneWithoutUserNestedInput
+  recruiterProfile?: Prisma.RecruiterProfileUpdateOneWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  invitationsSent?: Prisma.AccountInvitationUpdateManyWithoutInvitedByNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  jobOpenings?: Prisma.JobOpeningUpdateManyWithoutCreatedByNestedInput
+  createdInterviews?: Prisma.InterviewUpdateManyWithoutCreatedByNestedInput
+  sentInterviewInvitations?: Prisma.InterviewInvitationUpdateManyWithoutInvitedByNestedInput
+  receivedInterviewInvitations?: Prisma.InterviewInvitationUpdateManyWithoutCandidateUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutInterviewTemplatesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  failedLoginAttempts?: Prisma.IntFieldUpdateOperationsInput | number
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  candidateProfile?: Prisma.CandidateProfileUncheckedUpdateOneWithoutUserNestedInput
+  recruiterProfile?: Prisma.RecruiterProfileUncheckedUpdateOneWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  invitationsSent?: Prisma.AccountInvitationUncheckedUpdateManyWithoutInvitedByNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  jobOpenings?: Prisma.JobOpeningUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdInterviews?: Prisma.InterviewUncheckedUpdateManyWithoutCreatedByNestedInput
+  sentInterviewInvitations?: Prisma.InterviewInvitationUncheckedUpdateManyWithoutInvitedByNestedInput
+  receivedInterviewInvitations?: Prisma.InterviewInvitationUncheckedUpdateManyWithoutCandidateUserNestedInput
+}
+
+export type UserCreateWithoutCreatedInterviewsInput = {
+  id?: string
+  name: string
+  email: string
+  passwordHash?: string | null
+  avatarUrl?: string | null
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  failedLoginAttempts?: number
+  lockedUntil?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  candidateProfile?: Prisma.CandidateProfileCreateNestedOneWithoutUserInput
+  recruiterProfile?: Prisma.RecruiterProfileCreateNestedOneWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  invitationsSent?: Prisma.AccountInvitationCreateNestedManyWithoutInvitedByInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  jobOpenings?: Prisma.JobOpeningCreateNestedManyWithoutCreatedByInput
+  interviewTemplates?: Prisma.InterviewTemplateCreateNestedManyWithoutCreatedByInput
+  sentInterviewInvitations?: Prisma.InterviewInvitationCreateNestedManyWithoutInvitedByInput
+  receivedInterviewInvitations?: Prisma.InterviewInvitationCreateNestedManyWithoutCandidateUserInput
+}
+
+export type UserUncheckedCreateWithoutCreatedInterviewsInput = {
+  id?: string
+  name: string
+  email: string
+  passwordHash?: string | null
+  avatarUrl?: string | null
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  failedLoginAttempts?: number
+  lockedUntil?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  candidateProfile?: Prisma.CandidateProfileUncheckedCreateNestedOneWithoutUserInput
+  recruiterProfile?: Prisma.RecruiterProfileUncheckedCreateNestedOneWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  invitationsSent?: Prisma.AccountInvitationUncheckedCreateNestedManyWithoutInvitedByInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  jobOpenings?: Prisma.JobOpeningUncheckedCreateNestedManyWithoutCreatedByInput
+  interviewTemplates?: Prisma.InterviewTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+  sentInterviewInvitations?: Prisma.InterviewInvitationUncheckedCreateNestedManyWithoutInvitedByInput
+  receivedInterviewInvitations?: Prisma.InterviewInvitationUncheckedCreateNestedManyWithoutCandidateUserInput
+}
+
+export type UserCreateOrConnectWithoutCreatedInterviewsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedInterviewsInput, Prisma.UserUncheckedCreateWithoutCreatedInterviewsInput>
+}
+
+export type UserUpsertWithoutCreatedInterviewsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCreatedInterviewsInput, Prisma.UserUncheckedUpdateWithoutCreatedInterviewsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedInterviewsInput, Prisma.UserUncheckedCreateWithoutCreatedInterviewsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutCreatedInterviewsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCreatedInterviewsInput, Prisma.UserUncheckedUpdateWithoutCreatedInterviewsInput>
+}
+
+export type UserUpdateWithoutCreatedInterviewsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  failedLoginAttempts?: Prisma.IntFieldUpdateOperationsInput | number
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  candidateProfile?: Prisma.CandidateProfileUpdateOneWithoutUserNestedInput
+  recruiterProfile?: Prisma.RecruiterProfileUpdateOneWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  invitationsSent?: Prisma.AccountInvitationUpdateManyWithoutInvitedByNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  jobOpenings?: Prisma.JobOpeningUpdateManyWithoutCreatedByNestedInput
+  interviewTemplates?: Prisma.InterviewTemplateUpdateManyWithoutCreatedByNestedInput
+  sentInterviewInvitations?: Prisma.InterviewInvitationUpdateManyWithoutInvitedByNestedInput
+  receivedInterviewInvitations?: Prisma.InterviewInvitationUpdateManyWithoutCandidateUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutCreatedInterviewsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  failedLoginAttempts?: Prisma.IntFieldUpdateOperationsInput | number
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  candidateProfile?: Prisma.CandidateProfileUncheckedUpdateOneWithoutUserNestedInput
+  recruiterProfile?: Prisma.RecruiterProfileUncheckedUpdateOneWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  invitationsSent?: Prisma.AccountInvitationUncheckedUpdateManyWithoutInvitedByNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  jobOpenings?: Prisma.JobOpeningUncheckedUpdateManyWithoutCreatedByNestedInput
+  interviewTemplates?: Prisma.InterviewTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+  sentInterviewInvitations?: Prisma.InterviewInvitationUncheckedUpdateManyWithoutInvitedByNestedInput
+  receivedInterviewInvitations?: Prisma.InterviewInvitationUncheckedUpdateManyWithoutCandidateUserNestedInput
+}
+
+export type UserCreateWithoutSentInterviewInvitationsInput = {
+  id?: string
+  name: string
+  email: string
+  passwordHash?: string | null
+  avatarUrl?: string | null
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  failedLoginAttempts?: number
+  lockedUntil?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  candidateProfile?: Prisma.CandidateProfileCreateNestedOneWithoutUserInput
+  recruiterProfile?: Prisma.RecruiterProfileCreateNestedOneWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  invitationsSent?: Prisma.AccountInvitationCreateNestedManyWithoutInvitedByInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  jobOpenings?: Prisma.JobOpeningCreateNestedManyWithoutCreatedByInput
+  interviewTemplates?: Prisma.InterviewTemplateCreateNestedManyWithoutCreatedByInput
+  createdInterviews?: Prisma.InterviewCreateNestedManyWithoutCreatedByInput
+  receivedInterviewInvitations?: Prisma.InterviewInvitationCreateNestedManyWithoutCandidateUserInput
+}
+
+export type UserUncheckedCreateWithoutSentInterviewInvitationsInput = {
+  id?: string
+  name: string
+  email: string
+  passwordHash?: string | null
+  avatarUrl?: string | null
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  failedLoginAttempts?: number
+  lockedUntil?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  candidateProfile?: Prisma.CandidateProfileUncheckedCreateNestedOneWithoutUserInput
+  recruiterProfile?: Prisma.RecruiterProfileUncheckedCreateNestedOneWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  invitationsSent?: Prisma.AccountInvitationUncheckedCreateNestedManyWithoutInvitedByInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  jobOpenings?: Prisma.JobOpeningUncheckedCreateNestedManyWithoutCreatedByInput
+  interviewTemplates?: Prisma.InterviewTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+  createdInterviews?: Prisma.InterviewUncheckedCreateNestedManyWithoutCreatedByInput
+  receivedInterviewInvitations?: Prisma.InterviewInvitationUncheckedCreateNestedManyWithoutCandidateUserInput
+}
+
+export type UserCreateOrConnectWithoutSentInterviewInvitationsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutSentInterviewInvitationsInput, Prisma.UserUncheckedCreateWithoutSentInterviewInvitationsInput>
+}
+
+export type UserCreateWithoutReceivedInterviewInvitationsInput = {
+  id?: string
+  name: string
+  email: string
+  passwordHash?: string | null
+  avatarUrl?: string | null
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  failedLoginAttempts?: number
+  lockedUntil?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  candidateProfile?: Prisma.CandidateProfileCreateNestedOneWithoutUserInput
+  recruiterProfile?: Prisma.RecruiterProfileCreateNestedOneWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  invitationsSent?: Prisma.AccountInvitationCreateNestedManyWithoutInvitedByInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  jobOpenings?: Prisma.JobOpeningCreateNestedManyWithoutCreatedByInput
+  interviewTemplates?: Prisma.InterviewTemplateCreateNestedManyWithoutCreatedByInput
+  createdInterviews?: Prisma.InterviewCreateNestedManyWithoutCreatedByInput
+  sentInterviewInvitations?: Prisma.InterviewInvitationCreateNestedManyWithoutInvitedByInput
+}
+
+export type UserUncheckedCreateWithoutReceivedInterviewInvitationsInput = {
+  id?: string
+  name: string
+  email: string
+  passwordHash?: string | null
+  avatarUrl?: string | null
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  failedLoginAttempts?: number
+  lockedUntil?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  candidateProfile?: Prisma.CandidateProfileUncheckedCreateNestedOneWithoutUserInput
+  recruiterProfile?: Prisma.RecruiterProfileUncheckedCreateNestedOneWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  invitationsSent?: Prisma.AccountInvitationUncheckedCreateNestedManyWithoutInvitedByInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  jobOpenings?: Prisma.JobOpeningUncheckedCreateNestedManyWithoutCreatedByInput
+  interviewTemplates?: Prisma.InterviewTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+  createdInterviews?: Prisma.InterviewUncheckedCreateNestedManyWithoutCreatedByInput
+  sentInterviewInvitations?: Prisma.InterviewInvitationUncheckedCreateNestedManyWithoutInvitedByInput
+}
+
+export type UserCreateOrConnectWithoutReceivedInterviewInvitationsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutReceivedInterviewInvitationsInput, Prisma.UserUncheckedCreateWithoutReceivedInterviewInvitationsInput>
+}
+
+export type UserUpsertWithoutSentInterviewInvitationsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutSentInterviewInvitationsInput, Prisma.UserUncheckedUpdateWithoutSentInterviewInvitationsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutSentInterviewInvitationsInput, Prisma.UserUncheckedCreateWithoutSentInterviewInvitationsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutSentInterviewInvitationsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutSentInterviewInvitationsInput, Prisma.UserUncheckedUpdateWithoutSentInterviewInvitationsInput>
+}
+
+export type UserUpdateWithoutSentInterviewInvitationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  failedLoginAttempts?: Prisma.IntFieldUpdateOperationsInput | number
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  candidateProfile?: Prisma.CandidateProfileUpdateOneWithoutUserNestedInput
+  recruiterProfile?: Prisma.RecruiterProfileUpdateOneWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  invitationsSent?: Prisma.AccountInvitationUpdateManyWithoutInvitedByNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  jobOpenings?: Prisma.JobOpeningUpdateManyWithoutCreatedByNestedInput
+  interviewTemplates?: Prisma.InterviewTemplateUpdateManyWithoutCreatedByNestedInput
+  createdInterviews?: Prisma.InterviewUpdateManyWithoutCreatedByNestedInput
+  receivedInterviewInvitations?: Prisma.InterviewInvitationUpdateManyWithoutCandidateUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutSentInterviewInvitationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  failedLoginAttempts?: Prisma.IntFieldUpdateOperationsInput | number
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  candidateProfile?: Prisma.CandidateProfileUncheckedUpdateOneWithoutUserNestedInput
+  recruiterProfile?: Prisma.RecruiterProfileUncheckedUpdateOneWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  invitationsSent?: Prisma.AccountInvitationUncheckedUpdateManyWithoutInvitedByNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  jobOpenings?: Prisma.JobOpeningUncheckedUpdateManyWithoutCreatedByNestedInput
+  interviewTemplates?: Prisma.InterviewTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdInterviews?: Prisma.InterviewUncheckedUpdateManyWithoutCreatedByNestedInput
+  receivedInterviewInvitations?: Prisma.InterviewInvitationUncheckedUpdateManyWithoutCandidateUserNestedInput
+}
+
+export type UserUpsertWithoutReceivedInterviewInvitationsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutReceivedInterviewInvitationsInput, Prisma.UserUncheckedUpdateWithoutReceivedInterviewInvitationsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutReceivedInterviewInvitationsInput, Prisma.UserUncheckedCreateWithoutReceivedInterviewInvitationsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutReceivedInterviewInvitationsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutReceivedInterviewInvitationsInput, Prisma.UserUncheckedUpdateWithoutReceivedInterviewInvitationsInput>
+}
+
+export type UserUpdateWithoutReceivedInterviewInvitationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  failedLoginAttempts?: Prisma.IntFieldUpdateOperationsInput | number
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  candidateProfile?: Prisma.CandidateProfileUpdateOneWithoutUserNestedInput
+  recruiterProfile?: Prisma.RecruiterProfileUpdateOneWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  invitationsSent?: Prisma.AccountInvitationUpdateManyWithoutInvitedByNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  jobOpenings?: Prisma.JobOpeningUpdateManyWithoutCreatedByNestedInput
+  interviewTemplates?: Prisma.InterviewTemplateUpdateManyWithoutCreatedByNestedInput
+  createdInterviews?: Prisma.InterviewUpdateManyWithoutCreatedByNestedInput
+  sentInterviewInvitations?: Prisma.InterviewInvitationUpdateManyWithoutInvitedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutReceivedInterviewInvitationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  failedLoginAttempts?: Prisma.IntFieldUpdateOperationsInput | number
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  candidateProfile?: Prisma.CandidateProfileUncheckedUpdateOneWithoutUserNestedInput
+  recruiterProfile?: Prisma.RecruiterProfileUncheckedUpdateOneWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  invitationsSent?: Prisma.AccountInvitationUncheckedUpdateManyWithoutInvitedByNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  jobOpenings?: Prisma.JobOpeningUncheckedUpdateManyWithoutCreatedByNestedInput
+  interviewTemplates?: Prisma.InterviewTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdInterviews?: Prisma.InterviewUncheckedUpdateManyWithoutCreatedByNestedInput
+  sentInterviewInvitations?: Prisma.InterviewInvitationUncheckedUpdateManyWithoutInvitedByNestedInput
+}
+
+export type UserCreateWithoutNotificationsInput = {
+  id?: string
+  name: string
+  email: string
+  passwordHash?: string | null
+  avatarUrl?: string | null
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  failedLoginAttempts?: number
+  lockedUntil?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  candidateProfile?: Prisma.CandidateProfileCreateNestedOneWithoutUserInput
+  recruiterProfile?: Prisma.RecruiterProfileCreateNestedOneWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  invitationsSent?: Prisma.AccountInvitationCreateNestedManyWithoutInvitedByInput
+  jobOpenings?: Prisma.JobOpeningCreateNestedManyWithoutCreatedByInput
+  interviewTemplates?: Prisma.InterviewTemplateCreateNestedManyWithoutCreatedByInput
+  createdInterviews?: Prisma.InterviewCreateNestedManyWithoutCreatedByInput
+  sentInterviewInvitations?: Prisma.InterviewInvitationCreateNestedManyWithoutInvitedByInput
+  receivedInterviewInvitations?: Prisma.InterviewInvitationCreateNestedManyWithoutCandidateUserInput
+}
+
+export type UserUncheckedCreateWithoutNotificationsInput = {
+  id?: string
+  name: string
+  email: string
+  passwordHash?: string | null
+  avatarUrl?: string | null
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  failedLoginAttempts?: number
+  lockedUntil?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  candidateProfile?: Prisma.CandidateProfileUncheckedCreateNestedOneWithoutUserInput
+  recruiterProfile?: Prisma.RecruiterProfileUncheckedCreateNestedOneWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  invitationsSent?: Prisma.AccountInvitationUncheckedCreateNestedManyWithoutInvitedByInput
+  jobOpenings?: Prisma.JobOpeningUncheckedCreateNestedManyWithoutCreatedByInput
+  interviewTemplates?: Prisma.InterviewTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+  createdInterviews?: Prisma.InterviewUncheckedCreateNestedManyWithoutCreatedByInput
+  sentInterviewInvitations?: Prisma.InterviewInvitationUncheckedCreateNestedManyWithoutInvitedByInput
+  receivedInterviewInvitations?: Prisma.InterviewInvitationUncheckedCreateNestedManyWithoutCandidateUserInput
+}
+
+export type UserCreateOrConnectWithoutNotificationsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutNotificationsInput, Prisma.UserUncheckedCreateWithoutNotificationsInput>
+}
+
+export type UserUpsertWithoutNotificationsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutNotificationsInput, Prisma.UserUncheckedUpdateWithoutNotificationsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutNotificationsInput, Prisma.UserUncheckedCreateWithoutNotificationsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutNotificationsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutNotificationsInput, Prisma.UserUncheckedUpdateWithoutNotificationsInput>
+}
+
+export type UserUpdateWithoutNotificationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  failedLoginAttempts?: Prisma.IntFieldUpdateOperationsInput | number
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  candidateProfile?: Prisma.CandidateProfileUpdateOneWithoutUserNestedInput
+  recruiterProfile?: Prisma.RecruiterProfileUpdateOneWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  invitationsSent?: Prisma.AccountInvitationUpdateManyWithoutInvitedByNestedInput
+  jobOpenings?: Prisma.JobOpeningUpdateManyWithoutCreatedByNestedInput
+  interviewTemplates?: Prisma.InterviewTemplateUpdateManyWithoutCreatedByNestedInput
+  createdInterviews?: Prisma.InterviewUpdateManyWithoutCreatedByNestedInput
+  sentInterviewInvitations?: Prisma.InterviewInvitationUpdateManyWithoutInvitedByNestedInput
+  receivedInterviewInvitations?: Prisma.InterviewInvitationUpdateManyWithoutCandidateUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutNotificationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  failedLoginAttempts?: Prisma.IntFieldUpdateOperationsInput | number
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  candidateProfile?: Prisma.CandidateProfileUncheckedUpdateOneWithoutUserNestedInput
+  recruiterProfile?: Prisma.RecruiterProfileUncheckedUpdateOneWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  invitationsSent?: Prisma.AccountInvitationUncheckedUpdateManyWithoutInvitedByNestedInput
+  jobOpenings?: Prisma.JobOpeningUncheckedUpdateManyWithoutCreatedByNestedInput
+  interviewTemplates?: Prisma.InterviewTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdInterviews?: Prisma.InterviewUncheckedUpdateManyWithoutCreatedByNestedInput
+  sentInterviewInvitations?: Prisma.InterviewInvitationUncheckedUpdateManyWithoutInvitedByNestedInput
+  receivedInterviewInvitations?: Prisma.InterviewInvitationUncheckedUpdateManyWithoutCandidateUserNestedInput
 }
 
 
@@ -1448,6 +2517,12 @@ export type UserCountOutputType = {
   emailVerificationTokens: number
   passwordResetTokens: number
   invitationsSent: number
+  notifications: number
+  jobOpenings: number
+  interviewTemplates: number
+  createdInterviews: number
+  sentInterviewInvitations: number
+  receivedInterviewInvitations: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1456,6 +2531,12 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   emailVerificationTokens?: boolean | UserCountOutputTypeCountEmailVerificationTokensArgs
   passwordResetTokens?: boolean | UserCountOutputTypeCountPasswordResetTokensArgs
   invitationsSent?: boolean | UserCountOutputTypeCountInvitationsSentArgs
+  notifications?: boolean | UserCountOutputTypeCountNotificationsArgs
+  jobOpenings?: boolean | UserCountOutputTypeCountJobOpeningsArgs
+  interviewTemplates?: boolean | UserCountOutputTypeCountInterviewTemplatesArgs
+  createdInterviews?: boolean | UserCountOutputTypeCountCreatedInterviewsArgs
+  sentInterviewInvitations?: boolean | UserCountOutputTypeCountSentInterviewInvitationsArgs
+  receivedInterviewInvitations?: boolean | UserCountOutputTypeCountReceivedInterviewInvitationsArgs
 }
 
 /**
@@ -1503,6 +2584,48 @@ export type UserCountOutputTypeCountInvitationsSentArgs<ExtArgs extends runtime.
   where?: Prisma.AccountInvitationWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountNotificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.NotificationWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountJobOpeningsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.JobOpeningWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountInterviewTemplatesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.InterviewTemplateWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCreatedInterviewsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.InterviewWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountSentInterviewInvitationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.InterviewInvitationWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountReceivedInterviewInvitationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.InterviewInvitationWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1525,6 +2648,12 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   emailVerificationTokens?: boolean | Prisma.User$emailVerificationTokensArgs<ExtArgs>
   passwordResetTokens?: boolean | Prisma.User$passwordResetTokensArgs<ExtArgs>
   invitationsSent?: boolean | Prisma.User$invitationsSentArgs<ExtArgs>
+  notifications?: boolean | Prisma.User$notificationsArgs<ExtArgs>
+  jobOpenings?: boolean | Prisma.User$jobOpeningsArgs<ExtArgs>
+  interviewTemplates?: boolean | Prisma.User$interviewTemplatesArgs<ExtArgs>
+  createdInterviews?: boolean | Prisma.User$createdInterviewsArgs<ExtArgs>
+  sentInterviewInvitations?: boolean | Prisma.User$sentInterviewInvitationsArgs<ExtArgs>
+  receivedInterviewInvitations?: boolean | Prisma.User$receivedInterviewInvitationsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1585,6 +2714,12 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   emailVerificationTokens?: boolean | Prisma.User$emailVerificationTokensArgs<ExtArgs>
   passwordResetTokens?: boolean | Prisma.User$passwordResetTokensArgs<ExtArgs>
   invitationsSent?: boolean | Prisma.User$invitationsSentArgs<ExtArgs>
+  notifications?: boolean | Prisma.User$notificationsArgs<ExtArgs>
+  jobOpenings?: boolean | Prisma.User$jobOpeningsArgs<ExtArgs>
+  interviewTemplates?: boolean | Prisma.User$interviewTemplatesArgs<ExtArgs>
+  createdInterviews?: boolean | Prisma.User$createdInterviewsArgs<ExtArgs>
+  sentInterviewInvitations?: boolean | Prisma.User$sentInterviewInvitationsArgs<ExtArgs>
+  receivedInterviewInvitations?: boolean | Prisma.User$receivedInterviewInvitationsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1600,6 +2735,12 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     emailVerificationTokens: Prisma.$EmailVerificationTokenPayload<ExtArgs>[]
     passwordResetTokens: Prisma.$PasswordResetTokenPayload<ExtArgs>[]
     invitationsSent: Prisma.$AccountInvitationPayload<ExtArgs>[]
+    notifications: Prisma.$NotificationPayload<ExtArgs>[]
+    jobOpenings: Prisma.$JobOpeningPayload<ExtArgs>[]
+    interviewTemplates: Prisma.$InterviewTemplatePayload<ExtArgs>[]
+    createdInterviews: Prisma.$InterviewPayload<ExtArgs>[]
+    sentInterviewInvitations: Prisma.$InterviewInvitationPayload<ExtArgs>[]
+    receivedInterviewInvitations: Prisma.$InterviewInvitationPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2016,6 +3157,12 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   emailVerificationTokens<T extends Prisma.User$emailVerificationTokensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$emailVerificationTokensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EmailVerificationTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   passwordResetTokens<T extends Prisma.User$passwordResetTokensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$passwordResetTokensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PasswordResetTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   invitationsSent<T extends Prisma.User$invitationsSentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$invitationsSentArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AccountInvitationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  notifications<T extends Prisma.User$notificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  jobOpenings<T extends Prisma.User$jobOpeningsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$jobOpeningsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$JobOpeningPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  interviewTemplates<T extends Prisma.User$interviewTemplatesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$interviewTemplatesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InterviewTemplatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  createdInterviews<T extends Prisma.User$createdInterviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdInterviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InterviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  sentInterviewInvitations<T extends Prisma.User$sentInterviewInvitationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sentInterviewInvitationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InterviewInvitationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  receivedInterviewInvitations<T extends Prisma.User$receivedInterviewInvitationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$receivedInterviewInvitationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InterviewInvitationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2606,6 +3753,150 @@ export type User$invitationsSentArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   distinct?: Prisma.AccountInvitationScalarFieldEnum | Prisma.AccountInvitationScalarFieldEnum[]
+}
+
+/**
+ * User.notifications
+ */
+export type User$notificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Notification
+   */
+  select?: Prisma.NotificationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Notification
+   */
+  omit?: Prisma.NotificationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.NotificationInclude<ExtArgs> | null
+  where?: Prisma.NotificationWhereInput
+  orderBy?: Prisma.NotificationOrderByWithRelationInput | Prisma.NotificationOrderByWithRelationInput[]
+  cursor?: Prisma.NotificationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.NotificationScalarFieldEnum | Prisma.NotificationScalarFieldEnum[]
+}
+
+/**
+ * User.jobOpenings
+ */
+export type User$jobOpeningsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the JobOpening
+   */
+  select?: Prisma.JobOpeningSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the JobOpening
+   */
+  omit?: Prisma.JobOpeningOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.JobOpeningInclude<ExtArgs> | null
+  where?: Prisma.JobOpeningWhereInput
+  orderBy?: Prisma.JobOpeningOrderByWithRelationInput | Prisma.JobOpeningOrderByWithRelationInput[]
+  cursor?: Prisma.JobOpeningWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.JobOpeningScalarFieldEnum | Prisma.JobOpeningScalarFieldEnum[]
+}
+
+/**
+ * User.interviewTemplates
+ */
+export type User$interviewTemplatesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the InterviewTemplate
+   */
+  select?: Prisma.InterviewTemplateSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the InterviewTemplate
+   */
+  omit?: Prisma.InterviewTemplateOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.InterviewTemplateInclude<ExtArgs> | null
+  where?: Prisma.InterviewTemplateWhereInput
+  orderBy?: Prisma.InterviewTemplateOrderByWithRelationInput | Prisma.InterviewTemplateOrderByWithRelationInput[]
+  cursor?: Prisma.InterviewTemplateWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.InterviewTemplateScalarFieldEnum | Prisma.InterviewTemplateScalarFieldEnum[]
+}
+
+/**
+ * User.createdInterviews
+ */
+export type User$createdInterviewsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Interview
+   */
+  select?: Prisma.InterviewSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Interview
+   */
+  omit?: Prisma.InterviewOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.InterviewInclude<ExtArgs> | null
+  where?: Prisma.InterviewWhereInput
+  orderBy?: Prisma.InterviewOrderByWithRelationInput | Prisma.InterviewOrderByWithRelationInput[]
+  cursor?: Prisma.InterviewWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.InterviewScalarFieldEnum | Prisma.InterviewScalarFieldEnum[]
+}
+
+/**
+ * User.sentInterviewInvitations
+ */
+export type User$sentInterviewInvitationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the InterviewInvitation
+   */
+  select?: Prisma.InterviewInvitationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the InterviewInvitation
+   */
+  omit?: Prisma.InterviewInvitationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.InterviewInvitationInclude<ExtArgs> | null
+  where?: Prisma.InterviewInvitationWhereInput
+  orderBy?: Prisma.InterviewInvitationOrderByWithRelationInput | Prisma.InterviewInvitationOrderByWithRelationInput[]
+  cursor?: Prisma.InterviewInvitationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.InterviewInvitationScalarFieldEnum | Prisma.InterviewInvitationScalarFieldEnum[]
+}
+
+/**
+ * User.receivedInterviewInvitations
+ */
+export type User$receivedInterviewInvitationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the InterviewInvitation
+   */
+  select?: Prisma.InterviewInvitationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the InterviewInvitation
+   */
+  omit?: Prisma.InterviewInvitationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.InterviewInvitationInclude<ExtArgs> | null
+  where?: Prisma.InterviewInvitationWhereInput
+  orderBy?: Prisma.InterviewInvitationOrderByWithRelationInput | Prisma.InterviewInvitationOrderByWithRelationInput[]
+  cursor?: Prisma.InterviewInvitationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.InterviewInvitationScalarFieldEnum | Prisma.InterviewInvitationScalarFieldEnum[]
 }
 
 /**

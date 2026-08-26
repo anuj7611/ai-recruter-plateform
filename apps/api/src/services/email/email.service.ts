@@ -20,6 +20,12 @@ interface SendAccountInvitationEmailInput {
   invitationToken: string;
 }
 
+interface SendEmailInput {
+  to: string;
+  subject: string;
+  html: string;
+}
+
 const escapeHtml = (value: string) =>
   value.replace(
     /[&<>'"]/g,
@@ -32,6 +38,27 @@ const escapeHtml = (value: string) =>
         '"': "&quot;",
       })[character] ?? character,
   );
+
+export const sendEmail = async ({ to, subject, html }: SendEmailInput) => {
+  const from = process.env.EMAIL_FROM;
+
+  if (!from) {
+    throw new Error("EMAIL_FROM is not defined");
+  }
+
+  const { data, error } = await resend.emails.send({
+    from,
+    to,
+    subject,
+    html,
+  });
+
+  if (error) {
+    throw new Error(`Failed to send email: ${error.message}`);
+  }
+
+  return data;
+};
 
 export const sendVerificationEmail = async ({
   email,

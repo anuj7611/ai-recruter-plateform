@@ -64,7 +64,14 @@ export const ModelName = {
   ResumeExperience: 'ResumeExperience',
   ResumeEducation: 'ResumeEducation',
   ResumeProject: 'ResumeProject',
-  ResumeChunk: 'ResumeChunk'
+  ResumeChunk: 'ResumeChunk',
+  JobOpening: 'JobOpening',
+  InterviewTemplate: 'InterviewTemplate',
+  Interview: 'Interview',
+  InterviewQuestion: 'InterviewQuestion',
+  InterviewAnswer: 'InterviewAnswer',
+  InterviewInvitation: 'InterviewInvitation',
+  Notification: 'Notification'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -329,6 +336,163 @@ export const ResumeChunkScalarFieldEnum = {
 } as const
 
 export type ResumeChunkScalarFieldEnum = (typeof ResumeChunkScalarFieldEnum)[keyof typeof ResumeChunkScalarFieldEnum]
+
+
+export const JobOpeningScalarFieldEnum = {
+  id: 'id',
+  createdById: 'createdById',
+  title: 'title',
+  description: 'description',
+  department: 'department',
+  location: 'location',
+  employmentType: 'employmentType',
+  experienceLevel: 'experienceLevel',
+  requiredSkills: 'requiredSkills',
+  preferredSkills: 'preferredSkills',
+  minExperienceYears: 'minExperienceYears',
+  maxExperienceYears: 'maxExperienceYears',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type JobOpeningScalarFieldEnum = (typeof JobOpeningScalarFieldEnum)[keyof typeof JobOpeningScalarFieldEnum]
+
+
+export const InterviewTemplateScalarFieldEnum = {
+  id: 'id',
+  createdById: 'createdById',
+  name: 'name',
+  description: 'description',
+  type: 'type',
+  difficulty: 'difficulty',
+  durationMinutes: 'durationMinutes',
+  questionCount: 'questionCount',
+  includeResumeQuestions: 'includeResumeQuestions',
+  includeJobQuestions: 'includeJobQuestions',
+  includeCodingQuestions: 'includeCodingQuestions',
+  adaptiveFollowUpsEnabled: 'adaptiveFollowUpsEnabled',
+  maxFollowUpQuestions: 'maxFollowUpQuestions',
+  systemPrompt: 'systemPrompt',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type InterviewTemplateScalarFieldEnum = (typeof InterviewTemplateScalarFieldEnum)[keyof typeof InterviewTemplateScalarFieldEnum]
+
+
+export const InterviewScalarFieldEnum = {
+  id: 'id',
+  candidateProfileId: 'candidateProfileId',
+  createdById: 'createdById',
+  resumeId: 'resumeId',
+  jobId: 'jobId',
+  templateId: 'templateId',
+  title: 'title',
+  type: 'type',
+  difficulty: 'difficulty',
+  status: 'status',
+  durationMinutes: 'durationMinutes',
+  questionCount: 'questionCount',
+  currentQuestionIndex: 'currentQuestionIndex',
+  adaptiveFollowUpsEnabled: 'adaptiveFollowUpsEnabled',
+  maxFollowUpQuestions: 'maxFollowUpQuestions',
+  followUpCount: 'followUpCount',
+  scheduledAt: 'scheduledAt',
+  startedAt: 'startedAt',
+  completedAt: 'completedAt',
+  expiresAt: 'expiresAt',
+  overallScore: 'overallScore',
+  finalFeedback: 'finalFeedback',
+  evaluationData: 'evaluationData',
+  processingError: 'processingError',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type InterviewScalarFieldEnum = (typeof InterviewScalarFieldEnum)[keyof typeof InterviewScalarFieldEnum]
+
+
+export const InterviewQuestionScalarFieldEnum = {
+  id: 'id',
+  interviewId: 'interviewId',
+  order: 'order',
+  question: 'question',
+  type: 'type',
+  source: 'source',
+  difficulty: 'difficulty',
+  section: 'section',
+  expectedTopics: 'expectedTopics',
+  referenceContext: 'referenceContext',
+  maxScore: 'maxScore',
+  sequence: 'sequence',
+  isFollowUp: 'isFollowUp',
+  parentQuestionId: 'parentQuestionId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type InterviewQuestionScalarFieldEnum = (typeof InterviewQuestionScalarFieldEnum)[keyof typeof InterviewQuestionScalarFieldEnum]
+
+
+export const InterviewAnswerScalarFieldEnum = {
+  id: 'id',
+  questionId: 'questionId',
+  answerText: 'answerText',
+  codeAnswer: 'codeAnswer',
+  programmingLanguage: 'programmingLanguage',
+  startedAt: 'startedAt',
+  answeredAt: 'answeredAt',
+  durationSeconds: 'durationSeconds',
+  score: 'score',
+  aiFeedback: 'aiFeedback',
+  evaluationData: 'evaluationData',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type InterviewAnswerScalarFieldEnum = (typeof InterviewAnswerScalarFieldEnum)[keyof typeof InterviewAnswerScalarFieldEnum]
+
+
+export const InterviewInvitationScalarFieldEnum = {
+  id: 'id',
+  interviewId: 'interviewId',
+  invitedById: 'invitedById',
+  candidateUserId: 'candidateUserId',
+  email: 'email',
+  tokenHash: 'tokenHash',
+  status: 'status',
+  sentAt: 'sentAt',
+  openedAt: 'openedAt',
+  acceptedAt: 'acceptedAt',
+  revokedAt: 'revokedAt',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type InterviewInvitationScalarFieldEnum = (typeof InterviewInvitationScalarFieldEnum)[keyof typeof InterviewInvitationScalarFieldEnum]
+
+
+export const NotificationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  type: 'type',
+  status: 'status',
+  recipientEmail: 'recipientEmail',
+  subject: 'subject',
+  message: 'message',
+  metadata: 'metadata',
+  providerMessageId: 'providerMessageId',
+  attemptCount: 'attemptCount',
+  processingError: 'processingError',
+  sentAt: 'sentAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
 
 
 export const SortOrder = {

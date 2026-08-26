@@ -87,3 +87,38 @@ export type ResumeProject = Prisma.ResumeProjectModel
  * 
  */
 export type ResumeChunk = Prisma.ResumeChunkModel
+/**
+ * Model JobOpening
+ * 
+ */
+export type JobOpening = Prisma.JobOpeningModel
+/**
+ * Model InterviewTemplate
+ * 
+ */
+export type InterviewTemplate = Prisma.InterviewTemplateModel
+/**
+ * Model Interview
+ * 
+ */
+export type Interview = Prisma.InterviewModel
+/**
+ * Model InterviewQuestion
+ * 
+ */
+export type InterviewQuestion = Prisma.InterviewQuestionModel
+/**
+ * Model InterviewAnswer
+ * 
+ */
+export type InterviewAnswer = Prisma.InterviewAnswerModel
+/**
+ * Model InterviewInvitation
+ * 
+ */
+export type InterviewInvitation = Prisma.InterviewInvitationModel
+/**
+ * Model Notification
+ * 
+ */
+export type Notification = Prisma.NotificationModel

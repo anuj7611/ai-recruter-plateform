@@ -86,3 +86,100 @@ export const ResumeSection = {
 } as const
 
 export type ResumeSection = (typeof ResumeSection)[keyof typeof ResumeSection]
+
+
+export const JobStatus = {
+  DRAFT: 'DRAFT',
+  ACTIVE: 'ACTIVE',
+  CLOSED: 'CLOSED',
+  ARCHIVED: 'ARCHIVED'
+} as const
+
+export type JobStatus = (typeof JobStatus)[keyof typeof JobStatus]
+
+
+export const InterviewType = {
+  TECHNICAL: 'TECHNICAL',
+  BEHAVIORAL: 'BEHAVIORAL',
+  HR: 'HR',
+  MIXED: 'MIXED'
+} as const
+
+export type InterviewType = (typeof InterviewType)[keyof typeof InterviewType]
+
+
+export const InterviewDifficulty = {
+  EASY: 'EASY',
+  MEDIUM: 'MEDIUM',
+  HARD: 'HARD',
+  ADAPTIVE: 'ADAPTIVE'
+} as const
+
+export type InterviewDifficulty = (typeof InterviewDifficulty)[keyof typeof InterviewDifficulty]
+
+
+export const InterviewStatus = {
+  CREATED: 'CREATED',
+  READY: 'READY',
+  SCHEDULED: 'SCHEDULED',
+  IN_PROGRESS: 'IN_PROGRESS',
+  COMPLETED: 'COMPLETED',
+  CANCELLED: 'CANCELLED',
+  EXPIRED: 'EXPIRED',
+  FAILED: 'FAILED'
+} as const
+
+export type InterviewStatus = (typeof InterviewStatus)[keyof typeof InterviewStatus]
+
+
+export const InterviewQuestionType = {
+  TEXT: 'TEXT',
+  CODING: 'CODING',
+  MCQ: 'MCQ',
+  SYSTEM_DESIGN: 'SYSTEM_DESIGN'
+} as const
+
+export type InterviewQuestionType = (typeof InterviewQuestionType)[keyof typeof InterviewQuestionType]
+
+
+export const InterviewQuestionSource = {
+  TEMPLATE: 'TEMPLATE',
+  RESUME: 'RESUME',
+  JOB_DESCRIPTION: 'JOB_DESCRIPTION',
+  AI_GENERATED: 'AI_GENERATED',
+  FOLLOW_UP: 'FOLLOW_UP'
+} as const
+
+export type InterviewQuestionSource = (typeof InterviewQuestionSource)[keyof typeof InterviewQuestionSource]
+
+
+export const InterviewInvitationStatus = {
+  PENDING: 'PENDING',
+  SENT: 'SENT',
+  OPENED: 'OPENED',
+  ACCEPTED: 'ACCEPTED',
+  REVOKED: 'REVOKED',
+  EXPIRED: 'EXPIRED'
+} as const
+
+export type InterviewInvitationStatus = (typeof InterviewInvitationStatus)[keyof typeof InterviewInvitationStatus]
+
+
+export const NotificationType = {
+  INTERVIEW_INVITATION: 'INTERVIEW_INVITATION',
+  INTERVIEW_REMINDER: 'INTERVIEW_REMINDER',
+  INTERVIEW_COMPLETED: 'INTERVIEW_COMPLETED',
+  INTERVIEW_RESULT_READY: 'INTERVIEW_RESULT_READY'
+} as const
+
+export type NotificationType = (typeof NotificationType)[keyof typeof NotificationType]
+
+
+export const NotificationStatus = {
+  PENDING: 'PENDING',
+  PROCESSING: 'PROCESSING',
+  SENT: 'SENT',
+  FAILED: 'FAILED'
+} as const
+
+export type NotificationStatus = (typeof NotificationStatus)[keyof typeof NotificationStatus]

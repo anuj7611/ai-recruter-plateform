@@ -75,6 +75,76 @@ enum ResumeSection {
   OTHER
 }
 
+enum JobStatus {
+  DRAFT
+  ACTIVE
+  CLOSED
+  ARCHIVED
+}
+
+enum InterviewType {
+  TECHNICAL
+  BEHAVIORAL
+  HR
+  MIXED
+}
+
+enum InterviewDifficulty {
+  EASY
+  MEDIUM
+  HARD
+  ADAPTIVE
+}
+
+enum InterviewStatus {
+  CREATED
+  READY
+  SCHEDULED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+  EXPIRED
+  FAILED
+}
+
+enum InterviewQuestionType {
+  TEXT
+  CODING
+  MCQ
+  SYSTEM_DESIGN
+}
+
+enum InterviewQuestionSource {
+  TEMPLATE
+  RESUME
+  JOB_DESCRIPTION
+  AI_GENERATED
+  FOLLOW_UP
+}
+
+enum InterviewInvitationStatus {
+  PENDING
+  SENT
+  OPENED
+  ACCEPTED
+  REVOKED
+  EXPIRED
+}
+
+enum NotificationType {
+  INTERVIEW_INVITATION
+  INTERVIEW_REMINDER
+  INTERVIEW_COMPLETED
+  INTERVIEW_RESULT_READY
+}
+
+enum NotificationStatus {
+  PENDING
+  PROCESSING
+  SENT
+  FAILED
+}
+
 // ================================
 // USER
 // ================================
@@ -105,6 +175,17 @@ model User {
   emailVerificationTokens EmailVerificationToken[]
   passwordResetTokens     PasswordResetToken[]
   invitationsSent         AccountInvitation[]      @relation("InvitationSender")
+  notifications           Notification[]
+
+  jobOpenings JobOpening[] @relation("JobOpeningCreatedBy")
+
+  interviewTemplates InterviewTemplate[] @relation("InterviewTemplateCreatedBy")
+
+  createdInterviews Interview[] @relation("InterviewCreatedBy")
+
+  sentInterviewInvitations InterviewInvitation[] @relation("InterviewInvitationInvitedBy")
+
+  receivedInterviewInvitations InterviewInvitation[] @relation("InterviewInvitationCandidate")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -141,7 +222,8 @@ model CandidateProfile {
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  resumes Resume[]
+  resumes    Resume[]
+  interviews Interview[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -329,6 +411,7 @@ model Resume {
   educations  ResumeEducation[]
   projects    ResumeProject[]
   chunks      ResumeChunk[]
+  interviews  Interview[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -491,4 +574,297 @@ model ResumeChunk {
   @@index([resumeId])
   @@index([section])
   @@map("resume_chunks")
+}
+
+model JobOpening {
+  id String @id @default(uuid()) @db.Uuid
+
+  createdById String @db.Uuid
+
+  title       String
+  description String @db.Text
+
+  department     String?
+  location       String?
+  employmentType String?
+
+  experienceLevel String?
+
+  requiredSkills  String[] @default([])
+  preferredSkills String[] @default([])
+
+  minExperienceYears Int?
+  maxExperienceYears Int?
+
+  status JobStatus @default(DRAFT)
+
+  createdBy User @relation("JobOpeningCreatedBy", fields: [createdById], references: [id], onDelete: Cascade)
+
+  interviews Interview[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([createdById])
+  @@index([status])
+  @@index([createdAt])
+  @@map("job_openings")
+}
+
+model InterviewTemplate {
+  id String @id @default(uuid()) @db.Uuid
+
+  createdById String @db.Uuid
+
+  name        String
+  description String? @db.Text
+
+  type       InterviewType
+  difficulty InterviewDifficulty
+
+  durationMinutes Int @default(45)
+  questionCount   Int @default(10)
+
+  includeResumeQuestions   Boolean @default(true)
+  includeJobQuestions      Boolean @default(true)
+  includeCodingQuestions   Boolean @default(false)
+  adaptiveFollowUpsEnabled Boolean @default(false)
+
+  maxFollowUpQuestions Int @default(3)
+
+  systemPrompt String? @db.Text
+
+  isActive Boolean @default(true)
+
+  createdBy User @relation("InterviewTemplateCreatedBy", fields: [createdById], references: [id], onDelete: Cascade)
+
+  interviews Interview[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([createdById])
+  @@index([isActive])
+  @@map("interview_templates")
+}
+
+model Interview {
+  id String @id @default(uuid()) @db.Uuid
+
+  candidateProfileId String @db.Uuid
+
+  createdById String? @db.Uuid
+
+  resumeId   String? @db.Uuid
+  jobId      String? @db.Uuid
+  templateId String? @db.Uuid
+
+  title String
+
+  type       InterviewType
+  difficulty InterviewDifficulty
+
+  status InterviewStatus @default(CREATED)
+
+  durationMinutes Int @default(45)
+  questionCount   Int @default(10)
+
+  currentQuestionIndex Int @default(0)
+
+  adaptiveFollowUpsEnabled Boolean @default(false)
+
+  maxFollowUpQuestions Int @default(0)
+
+  followUpCount Int @default(0)
+
+  scheduledAt DateTime?
+  startedAt   DateTime?
+  completedAt DateTime?
+  expiresAt   DateTime?
+
+  overallScore Float?
+
+  finalFeedback String? @db.Text
+
+  evaluationData Json?
+
+  processingError String? @db.Text
+
+  candidateProfile CandidateProfile @relation(fields: [candidateProfileId], references: [id], onDelete: Cascade)
+
+  createdBy User? @relation("InterviewCreatedBy", fields: [createdById], references: [id], onDelete: SetNull)
+
+  resume Resume? @relation(fields: [resumeId], references: [id], onDelete: SetNull)
+
+  job JobOpening? @relation(fields: [jobId], references: [id], onDelete: SetNull)
+
+  template InterviewTemplate? @relation(fields: [templateId], references: [id], onDelete: SetNull)
+
+  questions   InterviewQuestion[]
+  invitations InterviewInvitation[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([candidateProfileId])
+  @@index([createdById])
+  @@index([resumeId])
+  @@index([jobId])
+  @@index([templateId])
+  @@index([status])
+  @@index([scheduledAt])
+  @@map("interviews")
+}
+
+model InterviewQuestion {
+  id String @id @default(uuid()) @db.Uuid
+
+  interviewId String @db.Uuid
+
+  order Int
+
+  question String @db.Text
+
+  type InterviewQuestionType @default(TEXT)
+
+  source InterviewQuestionSource
+
+  difficulty InterviewDifficulty
+
+  section String?
+
+  expectedTopics String[] @default([])
+
+  referenceContext Json?
+
+  maxScore Float @default(10)
+
+  sequence Int?
+
+  isFollowUp Boolean @default(false)
+
+  parentQuestionId String? @db.Uuid
+
+  parentQuestion InterviewQuestion? @relation("InterviewQuestionFollowUps", fields: [parentQuestionId], references: [id], onDelete: SetNull)
+
+  followUps InterviewQuestion[] @relation("InterviewQuestionFollowUps")
+
+  interview Interview @relation(fields: [interviewId], references: [id], onDelete: Cascade)
+
+  answer InterviewAnswer?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([interviewId, order])
+  @@index([interviewId])
+  @@index([source])
+  @@index([type])
+  @@index([interviewId, sequence])
+  @@index([parentQuestionId])
+  @@map("interview_questions")
+}
+
+model InterviewAnswer {
+  id String @id @default(uuid()) @db.Uuid
+
+  questionId String @unique @db.Uuid
+
+  answerText String? @db.Text
+
+  codeAnswer String? @db.Text
+
+  programmingLanguage String?
+
+  startedAt  DateTime?
+  answeredAt DateTime?
+
+  durationSeconds Int?
+
+  score Float?
+
+  aiFeedback String? @db.Text
+
+  evaluationData Json?
+
+  question InterviewQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([questionId])
+  @@map("interview_answers")
+}
+
+model InterviewInvitation {
+  id String @id @default(uuid()) @db.Uuid
+
+  interviewId String @db.Uuid
+
+  invitedById     String @db.Uuid
+  candidateUserId String @db.Uuid
+
+  email String
+
+  tokenHash String @unique
+
+  status InterviewInvitationStatus @default(PENDING)
+
+  sentAt     DateTime?
+  openedAt   DateTime?
+  acceptedAt DateTime?
+  revokedAt  DateTime?
+
+  expiresAt DateTime
+
+  interview Interview @relation(fields: [interviewId], references: [id], onDelete: Cascade)
+
+  invitedBy User @relation("InterviewInvitationInvitedBy", fields: [invitedById], references: [id], onDelete: Cascade)
+
+  candidateUser User @relation("InterviewInvitationCandidate", fields: [candidateUserId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([interviewId])
+  @@index([candidateUserId])
+  @@index([invitedById])
+  @@index([status])
+  @@index([expiresAt])
+  @@map("interview_invitations")
+}
+
+model Notification {
+  id String @id @default(uuid()) @db.Uuid
+
+  userId String @db.Uuid
+
+  type   NotificationType
+  status NotificationStatus @default(PENDING)
+
+  recipientEmail String
+
+  subject String
+  message String @db.Text
+
+  metadata Json?
+
+  providerMessageId String?
+
+  attemptCount Int @default(0)
+
+  processingError String? @db.Text
+
+  sentAt DateTime?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([type])
+  @@index([status])
+  @@index([createdAt])
+  @@map("notifications")
 }

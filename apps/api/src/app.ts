@@ -8,7 +8,13 @@ import { ApiError } from "./utils/api-error.js";
 import { authRouter } from "./modules/auth/auth.routes.js";
 import cookieParser from "cookie-parser";
 import { candidateRouter } from "./modules/candidate/candidate.routes.js";
-import {resumeRouter} from "./modules/resume/resume.routes.js"
+import { resumeRouter } from "./modules/resume/resume.routes.js";
+import { jobRouter } from "./modules/jobs/job.route.js";
+import { interviewTemplateRouter } from "./modules/interview-template/interview-template.route.js";
+import { interviewRouter } from "./modules/interview/interview.route.js";
+import { candidateInterviewRouter } from "./modules/interview/candidate-interview.routes.js";
+import { interviewInvitationRouter } from "./modules/interview/interview-invitation.routes.js";
+import { notificationRouter } from "./modules/notification/notification.routes.js";
 
 export const app = express();
 
@@ -59,6 +65,12 @@ app.get("/api/v1/health", async (_req, res) => {
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/candidate", candidateRouter);
 app.use("/api/v1/candidate/resume", resumeRouter);
+app.use("/api/v1/jobs", jobRouter);
+app.use("/api/v1/interview-templates", interviewTemplateRouter);
+app.use("/api/v1/interviews", interviewRouter);
+app.use("/api/v1/candidate/interviews", candidateInterviewRouter);
+app.use("/api/v1/interview-invitations", interviewInvitationRouter);
+app.use("/api/v1/notifications", notificationRouter);
 
 app.use(notFoundMiddleware);
 app.use(errorMiddleware);
