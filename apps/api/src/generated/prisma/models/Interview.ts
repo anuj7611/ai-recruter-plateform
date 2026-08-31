@@ -32,6 +32,8 @@ export type InterviewAvgAggregateOutputType = {
   currentQuestionIndex: number | null
   maxFollowUpQuestions: number | null
   followUpCount: number | null
+  integrityScore: number | null
+  integrityWarningCount: number | null
   overallScore: number | null
 }
 
@@ -41,6 +43,8 @@ export type InterviewSumAggregateOutputType = {
   currentQuestionIndex: number | null
   maxFollowUpQuestions: number | null
   followUpCount: number | null
+  integrityScore: number | null
+  integrityWarningCount: number | null
   overallScore: number | null
 }
 
@@ -51,6 +55,7 @@ export type InterviewMinAggregateOutputType = {
   resumeId: string | null
   jobId: string | null
   templateId: string | null
+  applicationId: string | null
   title: string | null
   type: $Enums.InterviewType | null
   difficulty: $Enums.InterviewDifficulty | null
@@ -61,6 +66,9 @@ export type InterviewMinAggregateOutputType = {
   adaptiveFollowUpsEnabled: boolean | null
   maxFollowUpQuestions: number | null
   followUpCount: number | null
+  integrityScore: number | null
+  integrityWarningCount: number | null
+  lastHeartbeatAt: Date | null
   scheduledAt: Date | null
   startedAt: Date | null
   completedAt: Date | null
@@ -79,6 +87,7 @@ export type InterviewMaxAggregateOutputType = {
   resumeId: string | null
   jobId: string | null
   templateId: string | null
+  applicationId: string | null
   title: string | null
   type: $Enums.InterviewType | null
   difficulty: $Enums.InterviewDifficulty | null
@@ -89,6 +98,9 @@ export type InterviewMaxAggregateOutputType = {
   adaptiveFollowUpsEnabled: boolean | null
   maxFollowUpQuestions: number | null
   followUpCount: number | null
+  integrityScore: number | null
+  integrityWarningCount: number | null
+  lastHeartbeatAt: Date | null
   scheduledAt: Date | null
   startedAt: Date | null
   completedAt: Date | null
@@ -107,6 +119,7 @@ export type InterviewCountAggregateOutputType = {
   resumeId: number
   jobId: number
   templateId: number
+  applicationId: number
   title: number
   type: number
   difficulty: number
@@ -117,6 +130,9 @@ export type InterviewCountAggregateOutputType = {
   adaptiveFollowUpsEnabled: number
   maxFollowUpQuestions: number
   followUpCount: number
+  integrityScore: number
+  integrityWarningCount: number
+  lastHeartbeatAt: number
   scheduledAt: number
   startedAt: number
   completedAt: number
@@ -137,6 +153,8 @@ export type InterviewAvgAggregateInputType = {
   currentQuestionIndex?: true
   maxFollowUpQuestions?: true
   followUpCount?: true
+  integrityScore?: true
+  integrityWarningCount?: true
   overallScore?: true
 }
 
@@ -146,6 +164,8 @@ export type InterviewSumAggregateInputType = {
   currentQuestionIndex?: true
   maxFollowUpQuestions?: true
   followUpCount?: true
+  integrityScore?: true
+  integrityWarningCount?: true
   overallScore?: true
 }
 
@@ -156,6 +176,7 @@ export type InterviewMinAggregateInputType = {
   resumeId?: true
   jobId?: true
   templateId?: true
+  applicationId?: true
   title?: true
   type?: true
   difficulty?: true
@@ -166,6 +187,9 @@ export type InterviewMinAggregateInputType = {
   adaptiveFollowUpsEnabled?: true
   maxFollowUpQuestions?: true
   followUpCount?: true
+  integrityScore?: true
+  integrityWarningCount?: true
+  lastHeartbeatAt?: true
   scheduledAt?: true
   startedAt?: true
   completedAt?: true
@@ -184,6 +208,7 @@ export type InterviewMaxAggregateInputType = {
   resumeId?: true
   jobId?: true
   templateId?: true
+  applicationId?: true
   title?: true
   type?: true
   difficulty?: true
@@ -194,6 +219,9 @@ export type InterviewMaxAggregateInputType = {
   adaptiveFollowUpsEnabled?: true
   maxFollowUpQuestions?: true
   followUpCount?: true
+  integrityScore?: true
+  integrityWarningCount?: true
+  lastHeartbeatAt?: true
   scheduledAt?: true
   startedAt?: true
   completedAt?: true
@@ -212,6 +240,7 @@ export type InterviewCountAggregateInputType = {
   resumeId?: true
   jobId?: true
   templateId?: true
+  applicationId?: true
   title?: true
   type?: true
   difficulty?: true
@@ -222,6 +251,9 @@ export type InterviewCountAggregateInputType = {
   adaptiveFollowUpsEnabled?: true
   maxFollowUpQuestions?: true
   followUpCount?: true
+  integrityScore?: true
+  integrityWarningCount?: true
+  lastHeartbeatAt?: true
   scheduledAt?: true
   startedAt?: true
   completedAt?: true
@@ -328,6 +360,7 @@ export type InterviewGroupByOutputType = {
   resumeId: string | null
   jobId: string | null
   templateId: string | null
+  applicationId: string | null
   title: string
   type: $Enums.InterviewType
   difficulty: $Enums.InterviewDifficulty
@@ -338,6 +371,9 @@ export type InterviewGroupByOutputType = {
   adaptiveFollowUpsEnabled: boolean
   maxFollowUpQuestions: number
   followUpCount: number
+  integrityScore: number
+  integrityWarningCount: number
+  lastHeartbeatAt: Date | null
   scheduledAt: Date | null
   startedAt: Date | null
   completedAt: Date | null
@@ -380,6 +416,7 @@ export type InterviewWhereInput = {
   resumeId?: Prisma.UuidNullableFilter<"Interview"> | string | null
   jobId?: Prisma.UuidNullableFilter<"Interview"> | string | null
   templateId?: Prisma.UuidNullableFilter<"Interview"> | string | null
+  applicationId?: Prisma.UuidNullableFilter<"Interview"> | string | null
   title?: Prisma.StringFilter<"Interview"> | string
   type?: Prisma.EnumInterviewTypeFilter<"Interview"> | $Enums.InterviewType
   difficulty?: Prisma.EnumInterviewDifficultyFilter<"Interview"> | $Enums.InterviewDifficulty
@@ -390,6 +427,9 @@ export type InterviewWhereInput = {
   adaptiveFollowUpsEnabled?: Prisma.BoolFilter<"Interview"> | boolean
   maxFollowUpQuestions?: Prisma.IntFilter<"Interview"> | number
   followUpCount?: Prisma.IntFilter<"Interview"> | number
+  integrityScore?: Prisma.FloatFilter<"Interview"> | number
+  integrityWarningCount?: Prisma.IntFilter<"Interview"> | number
+  lastHeartbeatAt?: Prisma.DateTimeNullableFilter<"Interview"> | Date | string | null
   scheduledAt?: Prisma.DateTimeNullableFilter<"Interview"> | Date | string | null
   startedAt?: Prisma.DateTimeNullableFilter<"Interview"> | Date | string | null
   completedAt?: Prisma.DateTimeNullableFilter<"Interview"> | Date | string | null
@@ -400,11 +440,13 @@ export type InterviewWhereInput = {
   processingError?: Prisma.StringNullableFilter<"Interview"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Interview"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Interview"> | Date | string
+  integrityEvents?: Prisma.InterviewIntegrityEventListRelationFilter
   candidateProfile?: Prisma.XOR<Prisma.CandidateProfileScalarRelationFilter, Prisma.CandidateProfileWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   resume?: Prisma.XOR<Prisma.ResumeNullableScalarRelationFilter, Prisma.ResumeWhereInput> | null
   job?: Prisma.XOR<Prisma.JobOpeningNullableScalarRelationFilter, Prisma.JobOpeningWhereInput> | null
   template?: Prisma.XOR<Prisma.InterviewTemplateNullableScalarRelationFilter, Prisma.InterviewTemplateWhereInput> | null
+  application?: Prisma.XOR<Prisma.JobApplicationNullableScalarRelationFilter, Prisma.JobApplicationWhereInput> | null
   questions?: Prisma.InterviewQuestionListRelationFilter
   invitations?: Prisma.InterviewInvitationListRelationFilter
 }
@@ -416,6 +458,7 @@ export type InterviewOrderByWithRelationInput = {
   resumeId?: Prisma.SortOrderInput | Prisma.SortOrder
   jobId?: Prisma.SortOrderInput | Prisma.SortOrder
   templateId?: Prisma.SortOrderInput | Prisma.SortOrder
+  applicationId?: Prisma.SortOrderInput | Prisma.SortOrder
   title?: Prisma.SortOrder
   type?: Prisma.SortOrder
   difficulty?: Prisma.SortOrder
@@ -426,6 +469,9 @@ export type InterviewOrderByWithRelationInput = {
   adaptiveFollowUpsEnabled?: Prisma.SortOrder
   maxFollowUpQuestions?: Prisma.SortOrder
   followUpCount?: Prisma.SortOrder
+  integrityScore?: Prisma.SortOrder
+  integrityWarningCount?: Prisma.SortOrder
+  lastHeartbeatAt?: Prisma.SortOrderInput | Prisma.SortOrder
   scheduledAt?: Prisma.SortOrderInput | Prisma.SortOrder
   startedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   completedAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -436,17 +482,20 @@ export type InterviewOrderByWithRelationInput = {
   processingError?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  integrityEvents?: Prisma.InterviewIntegrityEventOrderByRelationAggregateInput
   candidateProfile?: Prisma.CandidateProfileOrderByWithRelationInput
   createdBy?: Prisma.UserOrderByWithRelationInput
   resume?: Prisma.ResumeOrderByWithRelationInput
   job?: Prisma.JobOpeningOrderByWithRelationInput
   template?: Prisma.InterviewTemplateOrderByWithRelationInput
+  application?: Prisma.JobApplicationOrderByWithRelationInput
   questions?: Prisma.InterviewQuestionOrderByRelationAggregateInput
   invitations?: Prisma.InterviewInvitationOrderByRelationAggregateInput
 }
 
 export type InterviewWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  applicationId?: string
   AND?: Prisma.InterviewWhereInput | Prisma.InterviewWhereInput[]
   OR?: Prisma.InterviewWhereInput[]
   NOT?: Prisma.InterviewWhereInput | Prisma.InterviewWhereInput[]
@@ -465,6 +514,9 @@ export type InterviewWhereUniqueInput = Prisma.AtLeast<{
   adaptiveFollowUpsEnabled?: Prisma.BoolFilter<"Interview"> | boolean
   maxFollowUpQuestions?: Prisma.IntFilter<"Interview"> | number
   followUpCount?: Prisma.IntFilter<"Interview"> | number
+  integrityScore?: Prisma.FloatFilter<"Interview"> | number
+  integrityWarningCount?: Prisma.IntFilter<"Interview"> | number
+  lastHeartbeatAt?: Prisma.DateTimeNullableFilter<"Interview"> | Date | string | null
   scheduledAt?: Prisma.DateTimeNullableFilter<"Interview"> | Date | string | null
   startedAt?: Prisma.DateTimeNullableFilter<"Interview"> | Date | string | null
   completedAt?: Prisma.DateTimeNullableFilter<"Interview"> | Date | string | null
@@ -475,14 +527,16 @@ export type InterviewWhereUniqueInput = Prisma.AtLeast<{
   processingError?: Prisma.StringNullableFilter<"Interview"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Interview"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Interview"> | Date | string
+  integrityEvents?: Prisma.InterviewIntegrityEventListRelationFilter
   candidateProfile?: Prisma.XOR<Prisma.CandidateProfileScalarRelationFilter, Prisma.CandidateProfileWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   resume?: Prisma.XOR<Prisma.ResumeNullableScalarRelationFilter, Prisma.ResumeWhereInput> | null
   job?: Prisma.XOR<Prisma.JobOpeningNullableScalarRelationFilter, Prisma.JobOpeningWhereInput> | null
   template?: Prisma.XOR<Prisma.InterviewTemplateNullableScalarRelationFilter, Prisma.InterviewTemplateWhereInput> | null
+  application?: Prisma.XOR<Prisma.JobApplicationNullableScalarRelationFilter, Prisma.JobApplicationWhereInput> | null
   questions?: Prisma.InterviewQuestionListRelationFilter
   invitations?: Prisma.InterviewInvitationListRelationFilter
-}, "id">
+}, "id" | "applicationId">
 
 export type InterviewOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -491,6 +545,7 @@ export type InterviewOrderByWithAggregationInput = {
   resumeId?: Prisma.SortOrderInput | Prisma.SortOrder
   jobId?: Prisma.SortOrderInput | Prisma.SortOrder
   templateId?: Prisma.SortOrderInput | Prisma.SortOrder
+  applicationId?: Prisma.SortOrderInput | Prisma.SortOrder
   title?: Prisma.SortOrder
   type?: Prisma.SortOrder
   difficulty?: Prisma.SortOrder
@@ -501,6 +556,9 @@ export type InterviewOrderByWithAggregationInput = {
   adaptiveFollowUpsEnabled?: Prisma.SortOrder
   maxFollowUpQuestions?: Prisma.SortOrder
   followUpCount?: Prisma.SortOrder
+  integrityScore?: Prisma.SortOrder
+  integrityWarningCount?: Prisma.SortOrder
+  lastHeartbeatAt?: Prisma.SortOrderInput | Prisma.SortOrder
   scheduledAt?: Prisma.SortOrderInput | Prisma.SortOrder
   startedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   completedAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -528,6 +586,7 @@ export type InterviewScalarWhereWithAggregatesInput = {
   resumeId?: Prisma.UuidNullableWithAggregatesFilter<"Interview"> | string | null
   jobId?: Prisma.UuidNullableWithAggregatesFilter<"Interview"> | string | null
   templateId?: Prisma.UuidNullableWithAggregatesFilter<"Interview"> | string | null
+  applicationId?: Prisma.UuidNullableWithAggregatesFilter<"Interview"> | string | null
   title?: Prisma.StringWithAggregatesFilter<"Interview"> | string
   type?: Prisma.EnumInterviewTypeWithAggregatesFilter<"Interview"> | $Enums.InterviewType
   difficulty?: Prisma.EnumInterviewDifficultyWithAggregatesFilter<"Interview"> | $Enums.InterviewDifficulty
@@ -538,6 +597,9 @@ export type InterviewScalarWhereWithAggregatesInput = {
   adaptiveFollowUpsEnabled?: Prisma.BoolWithAggregatesFilter<"Interview"> | boolean
   maxFollowUpQuestions?: Prisma.IntWithAggregatesFilter<"Interview"> | number
   followUpCount?: Prisma.IntWithAggregatesFilter<"Interview"> | number
+  integrityScore?: Prisma.FloatWithAggregatesFilter<"Interview"> | number
+  integrityWarningCount?: Prisma.IntWithAggregatesFilter<"Interview"> | number
+  lastHeartbeatAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Interview"> | Date | string | null
   scheduledAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Interview"> | Date | string | null
   startedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Interview"> | Date | string | null
   completedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Interview"> | Date | string | null
@@ -562,6 +624,9 @@ export type InterviewCreateInput = {
   adaptiveFollowUpsEnabled?: boolean
   maxFollowUpQuestions?: number
   followUpCount?: number
+  integrityScore?: number
+  integrityWarningCount?: number
+  lastHeartbeatAt?: Date | string | null
   scheduledAt?: Date | string | null
   startedAt?: Date | string | null
   completedAt?: Date | string | null
@@ -572,11 +637,13 @@ export type InterviewCreateInput = {
   processingError?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  integrityEvents?: Prisma.InterviewIntegrityEventCreateNestedManyWithoutInterviewInput
   candidateProfile: Prisma.CandidateProfileCreateNestedOneWithoutInterviewsInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedInterviewsInput
   resume?: Prisma.ResumeCreateNestedOneWithoutInterviewsInput
   job?: Prisma.JobOpeningCreateNestedOneWithoutInterviewsInput
   template?: Prisma.InterviewTemplateCreateNestedOneWithoutInterviewsInput
+  application?: Prisma.JobApplicationCreateNestedOneWithoutInterviewInput
   questions?: Prisma.InterviewQuestionCreateNestedManyWithoutInterviewInput
   invitations?: Prisma.InterviewInvitationCreateNestedManyWithoutInterviewInput
 }
@@ -588,6 +655,7 @@ export type InterviewUncheckedCreateInput = {
   resumeId?: string | null
   jobId?: string | null
   templateId?: string | null
+  applicationId?: string | null
   title: string
   type: $Enums.InterviewType
   difficulty: $Enums.InterviewDifficulty
@@ -598,6 +666,9 @@ export type InterviewUncheckedCreateInput = {
   adaptiveFollowUpsEnabled?: boolean
   maxFollowUpQuestions?: number
   followUpCount?: number
+  integrityScore?: number
+  integrityWarningCount?: number
+  lastHeartbeatAt?: Date | string | null
   scheduledAt?: Date | string | null
   startedAt?: Date | string | null
   completedAt?: Date | string | null
@@ -608,6 +679,7 @@ export type InterviewUncheckedCreateInput = {
   processingError?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  integrityEvents?: Prisma.InterviewIntegrityEventUncheckedCreateNestedManyWithoutInterviewInput
   questions?: Prisma.InterviewQuestionUncheckedCreateNestedManyWithoutInterviewInput
   invitations?: Prisma.InterviewInvitationUncheckedCreateNestedManyWithoutInterviewInput
 }
@@ -624,6 +696,9 @@ export type InterviewUpdateInput = {
   adaptiveFollowUpsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   maxFollowUpQuestions?: Prisma.IntFieldUpdateOperationsInput | number
   followUpCount?: Prisma.IntFieldUpdateOperationsInput | number
+  integrityScore?: Prisma.FloatFieldUpdateOperationsInput | number
+  integrityWarningCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastHeartbeatAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -634,11 +709,13 @@ export type InterviewUpdateInput = {
   processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  integrityEvents?: Prisma.InterviewIntegrityEventUpdateManyWithoutInterviewNestedInput
   candidateProfile?: Prisma.CandidateProfileUpdateOneRequiredWithoutInterviewsNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedInterviewsNestedInput
   resume?: Prisma.ResumeUpdateOneWithoutInterviewsNestedInput
   job?: Prisma.JobOpeningUpdateOneWithoutInterviewsNestedInput
   template?: Prisma.InterviewTemplateUpdateOneWithoutInterviewsNestedInput
+  application?: Prisma.JobApplicationUpdateOneWithoutInterviewNestedInput
   questions?: Prisma.InterviewQuestionUpdateManyWithoutInterviewNestedInput
   invitations?: Prisma.InterviewInvitationUpdateManyWithoutInterviewNestedInput
 }
@@ -650,6 +727,7 @@ export type InterviewUncheckedUpdateInput = {
   resumeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   jobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   templateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  applicationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumInterviewTypeFieldUpdateOperationsInput | $Enums.InterviewType
   difficulty?: Prisma.EnumInterviewDifficultyFieldUpdateOperationsInput | $Enums.InterviewDifficulty
@@ -660,6 +738,9 @@ export type InterviewUncheckedUpdateInput = {
   adaptiveFollowUpsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   maxFollowUpQuestions?: Prisma.IntFieldUpdateOperationsInput | number
   followUpCount?: Prisma.IntFieldUpdateOperationsInput | number
+  integrityScore?: Prisma.FloatFieldUpdateOperationsInput | number
+  integrityWarningCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastHeartbeatAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -670,6 +751,7 @@ export type InterviewUncheckedUpdateInput = {
   processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  integrityEvents?: Prisma.InterviewIntegrityEventUncheckedUpdateManyWithoutInterviewNestedInput
   questions?: Prisma.InterviewQuestionUncheckedUpdateManyWithoutInterviewNestedInput
   invitations?: Prisma.InterviewInvitationUncheckedUpdateManyWithoutInterviewNestedInput
 }
@@ -681,6 +763,7 @@ export type InterviewCreateManyInput = {
   resumeId?: string | null
   jobId?: string | null
   templateId?: string | null
+  applicationId?: string | null
   title: string
   type: $Enums.InterviewType
   difficulty: $Enums.InterviewDifficulty
@@ -691,6 +774,9 @@ export type InterviewCreateManyInput = {
   adaptiveFollowUpsEnabled?: boolean
   maxFollowUpQuestions?: number
   followUpCount?: number
+  integrityScore?: number
+  integrityWarningCount?: number
+  lastHeartbeatAt?: Date | string | null
   scheduledAt?: Date | string | null
   startedAt?: Date | string | null
   completedAt?: Date | string | null
@@ -715,6 +801,9 @@ export type InterviewUpdateManyMutationInput = {
   adaptiveFollowUpsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   maxFollowUpQuestions?: Prisma.IntFieldUpdateOperationsInput | number
   followUpCount?: Prisma.IntFieldUpdateOperationsInput | number
+  integrityScore?: Prisma.FloatFieldUpdateOperationsInput | number
+  integrityWarningCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastHeartbeatAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -734,6 +823,7 @@ export type InterviewUncheckedUpdateManyInput = {
   resumeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   jobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   templateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  applicationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumInterviewTypeFieldUpdateOperationsInput | $Enums.InterviewType
   difficulty?: Prisma.EnumInterviewDifficultyFieldUpdateOperationsInput | $Enums.InterviewDifficulty
@@ -744,6 +834,9 @@ export type InterviewUncheckedUpdateManyInput = {
   adaptiveFollowUpsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   maxFollowUpQuestions?: Prisma.IntFieldUpdateOperationsInput | number
   followUpCount?: Prisma.IntFieldUpdateOperationsInput | number
+  integrityScore?: Prisma.FloatFieldUpdateOperationsInput | number
+  integrityWarningCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastHeartbeatAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -766,6 +859,11 @@ export type InterviewOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type InterviewNullableScalarRelationFilter = {
+  is?: Prisma.InterviewWhereInput | null
+  isNot?: Prisma.InterviewWhereInput | null
+}
+
 export type InterviewCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   candidateProfileId?: Prisma.SortOrder
@@ -773,6 +871,7 @@ export type InterviewCountOrderByAggregateInput = {
   resumeId?: Prisma.SortOrder
   jobId?: Prisma.SortOrder
   templateId?: Prisma.SortOrder
+  applicationId?: Prisma.SortOrder
   title?: Prisma.SortOrder
   type?: Prisma.SortOrder
   difficulty?: Prisma.SortOrder
@@ -783,6 +882,9 @@ export type InterviewCountOrderByAggregateInput = {
   adaptiveFollowUpsEnabled?: Prisma.SortOrder
   maxFollowUpQuestions?: Prisma.SortOrder
   followUpCount?: Prisma.SortOrder
+  integrityScore?: Prisma.SortOrder
+  integrityWarningCount?: Prisma.SortOrder
+  lastHeartbeatAt?: Prisma.SortOrder
   scheduledAt?: Prisma.SortOrder
   startedAt?: Prisma.SortOrder
   completedAt?: Prisma.SortOrder
@@ -801,6 +903,8 @@ export type InterviewAvgOrderByAggregateInput = {
   currentQuestionIndex?: Prisma.SortOrder
   maxFollowUpQuestions?: Prisma.SortOrder
   followUpCount?: Prisma.SortOrder
+  integrityScore?: Prisma.SortOrder
+  integrityWarningCount?: Prisma.SortOrder
   overallScore?: Prisma.SortOrder
 }
 
@@ -811,6 +915,7 @@ export type InterviewMaxOrderByAggregateInput = {
   resumeId?: Prisma.SortOrder
   jobId?: Prisma.SortOrder
   templateId?: Prisma.SortOrder
+  applicationId?: Prisma.SortOrder
   title?: Prisma.SortOrder
   type?: Prisma.SortOrder
   difficulty?: Prisma.SortOrder
@@ -821,6 +926,9 @@ export type InterviewMaxOrderByAggregateInput = {
   adaptiveFollowUpsEnabled?: Prisma.SortOrder
   maxFollowUpQuestions?: Prisma.SortOrder
   followUpCount?: Prisma.SortOrder
+  integrityScore?: Prisma.SortOrder
+  integrityWarningCount?: Prisma.SortOrder
+  lastHeartbeatAt?: Prisma.SortOrder
   scheduledAt?: Prisma.SortOrder
   startedAt?: Prisma.SortOrder
   completedAt?: Prisma.SortOrder
@@ -839,6 +947,7 @@ export type InterviewMinOrderByAggregateInput = {
   resumeId?: Prisma.SortOrder
   jobId?: Prisma.SortOrder
   templateId?: Prisma.SortOrder
+  applicationId?: Prisma.SortOrder
   title?: Prisma.SortOrder
   type?: Prisma.SortOrder
   difficulty?: Prisma.SortOrder
@@ -849,6 +958,9 @@ export type InterviewMinOrderByAggregateInput = {
   adaptiveFollowUpsEnabled?: Prisma.SortOrder
   maxFollowUpQuestions?: Prisma.SortOrder
   followUpCount?: Prisma.SortOrder
+  integrityScore?: Prisma.SortOrder
+  integrityWarningCount?: Prisma.SortOrder
+  lastHeartbeatAt?: Prisma.SortOrder
   scheduledAt?: Prisma.SortOrder
   startedAt?: Prisma.SortOrder
   completedAt?: Prisma.SortOrder
@@ -866,6 +978,8 @@ export type InterviewSumOrderByAggregateInput = {
   currentQuestionIndex?: Prisma.SortOrder
   maxFollowUpQuestions?: Prisma.SortOrder
   followUpCount?: Prisma.SortOrder
+  integrityScore?: Prisma.SortOrder
+  integrityWarningCount?: Prisma.SortOrder
   overallScore?: Prisma.SortOrder
 }
 
@@ -1042,6 +1156,38 @@ export type InterviewUncheckedUpdateManyWithoutJobNestedInput = {
   deleteMany?: Prisma.InterviewScalarWhereInput | Prisma.InterviewScalarWhereInput[]
 }
 
+export type InterviewCreateNestedOneWithoutApplicationInput = {
+  create?: Prisma.XOR<Prisma.InterviewCreateWithoutApplicationInput, Prisma.InterviewUncheckedCreateWithoutApplicationInput>
+  connectOrCreate?: Prisma.InterviewCreateOrConnectWithoutApplicationInput
+  connect?: Prisma.InterviewWhereUniqueInput
+}
+
+export type InterviewUncheckedCreateNestedOneWithoutApplicationInput = {
+  create?: Prisma.XOR<Prisma.InterviewCreateWithoutApplicationInput, Prisma.InterviewUncheckedCreateWithoutApplicationInput>
+  connectOrCreate?: Prisma.InterviewCreateOrConnectWithoutApplicationInput
+  connect?: Prisma.InterviewWhereUniqueInput
+}
+
+export type InterviewUpdateOneWithoutApplicationNestedInput = {
+  create?: Prisma.XOR<Prisma.InterviewCreateWithoutApplicationInput, Prisma.InterviewUncheckedCreateWithoutApplicationInput>
+  connectOrCreate?: Prisma.InterviewCreateOrConnectWithoutApplicationInput
+  upsert?: Prisma.InterviewUpsertWithoutApplicationInput
+  disconnect?: Prisma.InterviewWhereInput | boolean
+  delete?: Prisma.InterviewWhereInput | boolean
+  connect?: Prisma.InterviewWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.InterviewUpdateToOneWithWhereWithoutApplicationInput, Prisma.InterviewUpdateWithoutApplicationInput>, Prisma.InterviewUncheckedUpdateWithoutApplicationInput>
+}
+
+export type InterviewUncheckedUpdateOneWithoutApplicationNestedInput = {
+  create?: Prisma.XOR<Prisma.InterviewCreateWithoutApplicationInput, Prisma.InterviewUncheckedCreateWithoutApplicationInput>
+  connectOrCreate?: Prisma.InterviewCreateOrConnectWithoutApplicationInput
+  upsert?: Prisma.InterviewUpsertWithoutApplicationInput
+  disconnect?: Prisma.InterviewWhereInput | boolean
+  delete?: Prisma.InterviewWhereInput | boolean
+  connect?: Prisma.InterviewWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.InterviewUpdateToOneWithWhereWithoutApplicationInput, Prisma.InterviewUpdateWithoutApplicationInput>, Prisma.InterviewUncheckedUpdateWithoutApplicationInput>
+}
+
 export type InterviewCreateNestedManyWithoutTemplateInput = {
   create?: Prisma.XOR<Prisma.InterviewCreateWithoutTemplateInput, Prisma.InterviewUncheckedCreateWithoutTemplateInput> | Prisma.InterviewCreateWithoutTemplateInput[] | Prisma.InterviewUncheckedCreateWithoutTemplateInput[]
   connectOrCreate?: Prisma.InterviewCreateOrConnectWithoutTemplateInput | Prisma.InterviewCreateOrConnectWithoutTemplateInput[]
@@ -1088,6 +1234,14 @@ export type EnumInterviewStatusFieldUpdateOperationsInput = {
   set?: $Enums.InterviewStatus
 }
 
+export type FloatFieldUpdateOperationsInput = {
+  set?: number
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
 export type InterviewCreateNestedOneWithoutQuestionsInput = {
   create?: Prisma.XOR<Prisma.InterviewCreateWithoutQuestionsInput, Prisma.InterviewUncheckedCreateWithoutQuestionsInput>
   connectOrCreate?: Prisma.InterviewCreateOrConnectWithoutQuestionsInput
@@ -1116,6 +1270,20 @@ export type InterviewUpdateOneRequiredWithoutInvitationsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.InterviewUpdateToOneWithWhereWithoutInvitationsInput, Prisma.InterviewUpdateWithoutInvitationsInput>, Prisma.InterviewUncheckedUpdateWithoutInvitationsInput>
 }
 
+export type InterviewCreateNestedOneWithoutIntegrityEventsInput = {
+  create?: Prisma.XOR<Prisma.InterviewCreateWithoutIntegrityEventsInput, Prisma.InterviewUncheckedCreateWithoutIntegrityEventsInput>
+  connectOrCreate?: Prisma.InterviewCreateOrConnectWithoutIntegrityEventsInput
+  connect?: Prisma.InterviewWhereUniqueInput
+}
+
+export type InterviewUpdateOneRequiredWithoutIntegrityEventsNestedInput = {
+  create?: Prisma.XOR<Prisma.InterviewCreateWithoutIntegrityEventsInput, Prisma.InterviewUncheckedCreateWithoutIntegrityEventsInput>
+  connectOrCreate?: Prisma.InterviewCreateOrConnectWithoutIntegrityEventsInput
+  upsert?: Prisma.InterviewUpsertWithoutIntegrityEventsInput
+  connect?: Prisma.InterviewWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.InterviewUpdateToOneWithWhereWithoutIntegrityEventsInput, Prisma.InterviewUpdateWithoutIntegrityEventsInput>, Prisma.InterviewUncheckedUpdateWithoutIntegrityEventsInput>
+}
+
 export type InterviewCreateWithoutCreatedByInput = {
   id?: string
   title: string
@@ -1128,6 +1296,9 @@ export type InterviewCreateWithoutCreatedByInput = {
   adaptiveFollowUpsEnabled?: boolean
   maxFollowUpQuestions?: number
   followUpCount?: number
+  integrityScore?: number
+  integrityWarningCount?: number
+  lastHeartbeatAt?: Date | string | null
   scheduledAt?: Date | string | null
   startedAt?: Date | string | null
   completedAt?: Date | string | null
@@ -1138,10 +1309,12 @@ export type InterviewCreateWithoutCreatedByInput = {
   processingError?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  integrityEvents?: Prisma.InterviewIntegrityEventCreateNestedManyWithoutInterviewInput
   candidateProfile: Prisma.CandidateProfileCreateNestedOneWithoutInterviewsInput
   resume?: Prisma.ResumeCreateNestedOneWithoutInterviewsInput
   job?: Prisma.JobOpeningCreateNestedOneWithoutInterviewsInput
   template?: Prisma.InterviewTemplateCreateNestedOneWithoutInterviewsInput
+  application?: Prisma.JobApplicationCreateNestedOneWithoutInterviewInput
   questions?: Prisma.InterviewQuestionCreateNestedManyWithoutInterviewInput
   invitations?: Prisma.InterviewInvitationCreateNestedManyWithoutInterviewInput
 }
@@ -1152,6 +1325,7 @@ export type InterviewUncheckedCreateWithoutCreatedByInput = {
   resumeId?: string | null
   jobId?: string | null
   templateId?: string | null
+  applicationId?: string | null
   title: string
   type: $Enums.InterviewType
   difficulty: $Enums.InterviewDifficulty
@@ -1162,6 +1336,9 @@ export type InterviewUncheckedCreateWithoutCreatedByInput = {
   adaptiveFollowUpsEnabled?: boolean
   maxFollowUpQuestions?: number
   followUpCount?: number
+  integrityScore?: number
+  integrityWarningCount?: number
+  lastHeartbeatAt?: Date | string | null
   scheduledAt?: Date | string | null
   startedAt?: Date | string | null
   completedAt?: Date | string | null
@@ -1172,6 +1349,7 @@ export type InterviewUncheckedCreateWithoutCreatedByInput = {
   processingError?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  integrityEvents?: Prisma.InterviewIntegrityEventUncheckedCreateNestedManyWithoutInterviewInput
   questions?: Prisma.InterviewQuestionUncheckedCreateNestedManyWithoutInterviewInput
   invitations?: Prisma.InterviewInvitationUncheckedCreateNestedManyWithoutInterviewInput
 }
@@ -1212,6 +1390,7 @@ export type InterviewScalarWhereInput = {
   resumeId?: Prisma.UuidNullableFilter<"Interview"> | string | null
   jobId?: Prisma.UuidNullableFilter<"Interview"> | string | null
   templateId?: Prisma.UuidNullableFilter<"Interview"> | string | null
+  applicationId?: Prisma.UuidNullableFilter<"Interview"> | string | null
   title?: Prisma.StringFilter<"Interview"> | string
   type?: Prisma.EnumInterviewTypeFilter<"Interview"> | $Enums.InterviewType
   difficulty?: Prisma.EnumInterviewDifficultyFilter<"Interview"> | $Enums.InterviewDifficulty
@@ -1222,6 +1401,9 @@ export type InterviewScalarWhereInput = {
   adaptiveFollowUpsEnabled?: Prisma.BoolFilter<"Interview"> | boolean
   maxFollowUpQuestions?: Prisma.IntFilter<"Interview"> | number
   followUpCount?: Prisma.IntFilter<"Interview"> | number
+  integrityScore?: Prisma.FloatFilter<"Interview"> | number
+  integrityWarningCount?: Prisma.IntFilter<"Interview"> | number
+  lastHeartbeatAt?: Prisma.DateTimeNullableFilter<"Interview"> | Date | string | null
   scheduledAt?: Prisma.DateTimeNullableFilter<"Interview"> | Date | string | null
   startedAt?: Prisma.DateTimeNullableFilter<"Interview"> | Date | string | null
   completedAt?: Prisma.DateTimeNullableFilter<"Interview"> | Date | string | null
@@ -1246,6 +1428,9 @@ export type InterviewCreateWithoutCandidateProfileInput = {
   adaptiveFollowUpsEnabled?: boolean
   maxFollowUpQuestions?: number
   followUpCount?: number
+  integrityScore?: number
+  integrityWarningCount?: number
+  lastHeartbeatAt?: Date | string | null
   scheduledAt?: Date | string | null
   startedAt?: Date | string | null
   completedAt?: Date | string | null
@@ -1256,10 +1441,12 @@ export type InterviewCreateWithoutCandidateProfileInput = {
   processingError?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  integrityEvents?: Prisma.InterviewIntegrityEventCreateNestedManyWithoutInterviewInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedInterviewsInput
   resume?: Prisma.ResumeCreateNestedOneWithoutInterviewsInput
   job?: Prisma.JobOpeningCreateNestedOneWithoutInterviewsInput
   template?: Prisma.InterviewTemplateCreateNestedOneWithoutInterviewsInput
+  application?: Prisma.JobApplicationCreateNestedOneWithoutInterviewInput
   questions?: Prisma.InterviewQuestionCreateNestedManyWithoutInterviewInput
   invitations?: Prisma.InterviewInvitationCreateNestedManyWithoutInterviewInput
 }
@@ -1270,6 +1457,7 @@ export type InterviewUncheckedCreateWithoutCandidateProfileInput = {
   resumeId?: string | null
   jobId?: string | null
   templateId?: string | null
+  applicationId?: string | null
   title: string
   type: $Enums.InterviewType
   difficulty: $Enums.InterviewDifficulty
@@ -1280,6 +1468,9 @@ export type InterviewUncheckedCreateWithoutCandidateProfileInput = {
   adaptiveFollowUpsEnabled?: boolean
   maxFollowUpQuestions?: number
   followUpCount?: number
+  integrityScore?: number
+  integrityWarningCount?: number
+  lastHeartbeatAt?: Date | string | null
   scheduledAt?: Date | string | null
   startedAt?: Date | string | null
   completedAt?: Date | string | null
@@ -1290,6 +1481,7 @@ export type InterviewUncheckedCreateWithoutCandidateProfileInput = {
   processingError?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  integrityEvents?: Prisma.InterviewIntegrityEventUncheckedCreateNestedManyWithoutInterviewInput
   questions?: Prisma.InterviewQuestionUncheckedCreateNestedManyWithoutInterviewInput
   invitations?: Prisma.InterviewInvitationUncheckedCreateNestedManyWithoutInterviewInput
 }
@@ -1332,6 +1524,9 @@ export type InterviewCreateWithoutResumeInput = {
   adaptiveFollowUpsEnabled?: boolean
   maxFollowUpQuestions?: number
   followUpCount?: number
+  integrityScore?: number
+  integrityWarningCount?: number
+  lastHeartbeatAt?: Date | string | null
   scheduledAt?: Date | string | null
   startedAt?: Date | string | null
   completedAt?: Date | string | null
@@ -1342,10 +1537,12 @@ export type InterviewCreateWithoutResumeInput = {
   processingError?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  integrityEvents?: Prisma.InterviewIntegrityEventCreateNestedManyWithoutInterviewInput
   candidateProfile: Prisma.CandidateProfileCreateNestedOneWithoutInterviewsInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedInterviewsInput
   job?: Prisma.JobOpeningCreateNestedOneWithoutInterviewsInput
   template?: Prisma.InterviewTemplateCreateNestedOneWithoutInterviewsInput
+  application?: Prisma.JobApplicationCreateNestedOneWithoutInterviewInput
   questions?: Prisma.InterviewQuestionCreateNestedManyWithoutInterviewInput
   invitations?: Prisma.InterviewInvitationCreateNestedManyWithoutInterviewInput
 }
@@ -1356,6 +1553,7 @@ export type InterviewUncheckedCreateWithoutResumeInput = {
   createdById?: string | null
   jobId?: string | null
   templateId?: string | null
+  applicationId?: string | null
   title: string
   type: $Enums.InterviewType
   difficulty: $Enums.InterviewDifficulty
@@ -1366,6 +1564,9 @@ export type InterviewUncheckedCreateWithoutResumeInput = {
   adaptiveFollowUpsEnabled?: boolean
   maxFollowUpQuestions?: number
   followUpCount?: number
+  integrityScore?: number
+  integrityWarningCount?: number
+  lastHeartbeatAt?: Date | string | null
   scheduledAt?: Date | string | null
   startedAt?: Date | string | null
   completedAt?: Date | string | null
@@ -1376,6 +1577,7 @@ export type InterviewUncheckedCreateWithoutResumeInput = {
   processingError?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  integrityEvents?: Prisma.InterviewIntegrityEventUncheckedCreateNestedManyWithoutInterviewInput
   questions?: Prisma.InterviewQuestionUncheckedCreateNestedManyWithoutInterviewInput
   invitations?: Prisma.InterviewInvitationUncheckedCreateNestedManyWithoutInterviewInput
 }
@@ -1418,6 +1620,9 @@ export type InterviewCreateWithoutJobInput = {
   adaptiveFollowUpsEnabled?: boolean
   maxFollowUpQuestions?: number
   followUpCount?: number
+  integrityScore?: number
+  integrityWarningCount?: number
+  lastHeartbeatAt?: Date | string | null
   scheduledAt?: Date | string | null
   startedAt?: Date | string | null
   completedAt?: Date | string | null
@@ -1428,10 +1633,12 @@ export type InterviewCreateWithoutJobInput = {
   processingError?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  integrityEvents?: Prisma.InterviewIntegrityEventCreateNestedManyWithoutInterviewInput
   candidateProfile: Prisma.CandidateProfileCreateNestedOneWithoutInterviewsInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedInterviewsInput
   resume?: Prisma.ResumeCreateNestedOneWithoutInterviewsInput
   template?: Prisma.InterviewTemplateCreateNestedOneWithoutInterviewsInput
+  application?: Prisma.JobApplicationCreateNestedOneWithoutInterviewInput
   questions?: Prisma.InterviewQuestionCreateNestedManyWithoutInterviewInput
   invitations?: Prisma.InterviewInvitationCreateNestedManyWithoutInterviewInput
 }
@@ -1442,6 +1649,7 @@ export type InterviewUncheckedCreateWithoutJobInput = {
   createdById?: string | null
   resumeId?: string | null
   templateId?: string | null
+  applicationId?: string | null
   title: string
   type: $Enums.InterviewType
   difficulty: $Enums.InterviewDifficulty
@@ -1452,6 +1660,9 @@ export type InterviewUncheckedCreateWithoutJobInput = {
   adaptiveFollowUpsEnabled?: boolean
   maxFollowUpQuestions?: number
   followUpCount?: number
+  integrityScore?: number
+  integrityWarningCount?: number
+  lastHeartbeatAt?: Date | string | null
   scheduledAt?: Date | string | null
   startedAt?: Date | string | null
   completedAt?: Date | string | null
@@ -1462,6 +1673,7 @@ export type InterviewUncheckedCreateWithoutJobInput = {
   processingError?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  integrityEvents?: Prisma.InterviewIntegrityEventUncheckedCreateNestedManyWithoutInterviewInput
   questions?: Prisma.InterviewQuestionUncheckedCreateNestedManyWithoutInterviewInput
   invitations?: Prisma.InterviewInvitationUncheckedCreateNestedManyWithoutInterviewInput
 }
@@ -1492,6 +1704,162 @@ export type InterviewUpdateManyWithWhereWithoutJobInput = {
   data: Prisma.XOR<Prisma.InterviewUpdateManyMutationInput, Prisma.InterviewUncheckedUpdateManyWithoutJobInput>
 }
 
+export type InterviewCreateWithoutApplicationInput = {
+  id?: string
+  title: string
+  type: $Enums.InterviewType
+  difficulty: $Enums.InterviewDifficulty
+  status?: $Enums.InterviewStatus
+  durationMinutes?: number
+  questionCount?: number
+  currentQuestionIndex?: number
+  adaptiveFollowUpsEnabled?: boolean
+  maxFollowUpQuestions?: number
+  followUpCount?: number
+  integrityScore?: number
+  integrityWarningCount?: number
+  lastHeartbeatAt?: Date | string | null
+  scheduledAt?: Date | string | null
+  startedAt?: Date | string | null
+  completedAt?: Date | string | null
+  expiresAt?: Date | string | null
+  overallScore?: number | null
+  finalFeedback?: string | null
+  evaluationData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  processingError?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  integrityEvents?: Prisma.InterviewIntegrityEventCreateNestedManyWithoutInterviewInput
+  candidateProfile: Prisma.CandidateProfileCreateNestedOneWithoutInterviewsInput
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedInterviewsInput
+  resume?: Prisma.ResumeCreateNestedOneWithoutInterviewsInput
+  job?: Prisma.JobOpeningCreateNestedOneWithoutInterviewsInput
+  template?: Prisma.InterviewTemplateCreateNestedOneWithoutInterviewsInput
+  questions?: Prisma.InterviewQuestionCreateNestedManyWithoutInterviewInput
+  invitations?: Prisma.InterviewInvitationCreateNestedManyWithoutInterviewInput
+}
+
+export type InterviewUncheckedCreateWithoutApplicationInput = {
+  id?: string
+  candidateProfileId: string
+  createdById?: string | null
+  resumeId?: string | null
+  jobId?: string | null
+  templateId?: string | null
+  title: string
+  type: $Enums.InterviewType
+  difficulty: $Enums.InterviewDifficulty
+  status?: $Enums.InterviewStatus
+  durationMinutes?: number
+  questionCount?: number
+  currentQuestionIndex?: number
+  adaptiveFollowUpsEnabled?: boolean
+  maxFollowUpQuestions?: number
+  followUpCount?: number
+  integrityScore?: number
+  integrityWarningCount?: number
+  lastHeartbeatAt?: Date | string | null
+  scheduledAt?: Date | string | null
+  startedAt?: Date | string | null
+  completedAt?: Date | string | null
+  expiresAt?: Date | string | null
+  overallScore?: number | null
+  finalFeedback?: string | null
+  evaluationData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  processingError?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  integrityEvents?: Prisma.InterviewIntegrityEventUncheckedCreateNestedManyWithoutInterviewInput
+  questions?: Prisma.InterviewQuestionUncheckedCreateNestedManyWithoutInterviewInput
+  invitations?: Prisma.InterviewInvitationUncheckedCreateNestedManyWithoutInterviewInput
+}
+
+export type InterviewCreateOrConnectWithoutApplicationInput = {
+  where: Prisma.InterviewWhereUniqueInput
+  create: Prisma.XOR<Prisma.InterviewCreateWithoutApplicationInput, Prisma.InterviewUncheckedCreateWithoutApplicationInput>
+}
+
+export type InterviewUpsertWithoutApplicationInput = {
+  update: Prisma.XOR<Prisma.InterviewUpdateWithoutApplicationInput, Prisma.InterviewUncheckedUpdateWithoutApplicationInput>
+  create: Prisma.XOR<Prisma.InterviewCreateWithoutApplicationInput, Prisma.InterviewUncheckedCreateWithoutApplicationInput>
+  where?: Prisma.InterviewWhereInput
+}
+
+export type InterviewUpdateToOneWithWhereWithoutApplicationInput = {
+  where?: Prisma.InterviewWhereInput
+  data: Prisma.XOR<Prisma.InterviewUpdateWithoutApplicationInput, Prisma.InterviewUncheckedUpdateWithoutApplicationInput>
+}
+
+export type InterviewUpdateWithoutApplicationInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumInterviewTypeFieldUpdateOperationsInput | $Enums.InterviewType
+  difficulty?: Prisma.EnumInterviewDifficultyFieldUpdateOperationsInput | $Enums.InterviewDifficulty
+  status?: Prisma.EnumInterviewStatusFieldUpdateOperationsInput | $Enums.InterviewStatus
+  durationMinutes?: Prisma.IntFieldUpdateOperationsInput | number
+  questionCount?: Prisma.IntFieldUpdateOperationsInput | number
+  currentQuestionIndex?: Prisma.IntFieldUpdateOperationsInput | number
+  adaptiveFollowUpsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxFollowUpQuestions?: Prisma.IntFieldUpdateOperationsInput | number
+  followUpCount?: Prisma.IntFieldUpdateOperationsInput | number
+  integrityScore?: Prisma.FloatFieldUpdateOperationsInput | number
+  integrityWarningCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastHeartbeatAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  overallScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  finalFeedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  evaluationData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  integrityEvents?: Prisma.InterviewIntegrityEventUpdateManyWithoutInterviewNestedInput
+  candidateProfile?: Prisma.CandidateProfileUpdateOneRequiredWithoutInterviewsNestedInput
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedInterviewsNestedInput
+  resume?: Prisma.ResumeUpdateOneWithoutInterviewsNestedInput
+  job?: Prisma.JobOpeningUpdateOneWithoutInterviewsNestedInput
+  template?: Prisma.InterviewTemplateUpdateOneWithoutInterviewsNestedInput
+  questions?: Prisma.InterviewQuestionUpdateManyWithoutInterviewNestedInput
+  invitations?: Prisma.InterviewInvitationUpdateManyWithoutInterviewNestedInput
+}
+
+export type InterviewUncheckedUpdateWithoutApplicationInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  candidateProfileId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resumeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  templateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumInterviewTypeFieldUpdateOperationsInput | $Enums.InterviewType
+  difficulty?: Prisma.EnumInterviewDifficultyFieldUpdateOperationsInput | $Enums.InterviewDifficulty
+  status?: Prisma.EnumInterviewStatusFieldUpdateOperationsInput | $Enums.InterviewStatus
+  durationMinutes?: Prisma.IntFieldUpdateOperationsInput | number
+  questionCount?: Prisma.IntFieldUpdateOperationsInput | number
+  currentQuestionIndex?: Prisma.IntFieldUpdateOperationsInput | number
+  adaptiveFollowUpsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxFollowUpQuestions?: Prisma.IntFieldUpdateOperationsInput | number
+  followUpCount?: Prisma.IntFieldUpdateOperationsInput | number
+  integrityScore?: Prisma.FloatFieldUpdateOperationsInput | number
+  integrityWarningCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastHeartbeatAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  overallScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  finalFeedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  evaluationData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  integrityEvents?: Prisma.InterviewIntegrityEventUncheckedUpdateManyWithoutInterviewNestedInput
+  questions?: Prisma.InterviewQuestionUncheckedUpdateManyWithoutInterviewNestedInput
+  invitations?: Prisma.InterviewInvitationUncheckedUpdateManyWithoutInterviewNestedInput
+}
+
 export type InterviewCreateWithoutTemplateInput = {
   id?: string
   title: string
@@ -1504,6 +1872,9 @@ export type InterviewCreateWithoutTemplateInput = {
   adaptiveFollowUpsEnabled?: boolean
   maxFollowUpQuestions?: number
   followUpCount?: number
+  integrityScore?: number
+  integrityWarningCount?: number
+  lastHeartbeatAt?: Date | string | null
   scheduledAt?: Date | string | null
   startedAt?: Date | string | null
   completedAt?: Date | string | null
@@ -1514,10 +1885,12 @@ export type InterviewCreateWithoutTemplateInput = {
   processingError?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  integrityEvents?: Prisma.InterviewIntegrityEventCreateNestedManyWithoutInterviewInput
   candidateProfile: Prisma.CandidateProfileCreateNestedOneWithoutInterviewsInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedInterviewsInput
   resume?: Prisma.ResumeCreateNestedOneWithoutInterviewsInput
   job?: Prisma.JobOpeningCreateNestedOneWithoutInterviewsInput
+  application?: Prisma.JobApplicationCreateNestedOneWithoutInterviewInput
   questions?: Prisma.InterviewQuestionCreateNestedManyWithoutInterviewInput
   invitations?: Prisma.InterviewInvitationCreateNestedManyWithoutInterviewInput
 }
@@ -1528,6 +1901,7 @@ export type InterviewUncheckedCreateWithoutTemplateInput = {
   createdById?: string | null
   resumeId?: string | null
   jobId?: string | null
+  applicationId?: string | null
   title: string
   type: $Enums.InterviewType
   difficulty: $Enums.InterviewDifficulty
@@ -1538,6 +1912,9 @@ export type InterviewUncheckedCreateWithoutTemplateInput = {
   adaptiveFollowUpsEnabled?: boolean
   maxFollowUpQuestions?: number
   followUpCount?: number
+  integrityScore?: number
+  integrityWarningCount?: number
+  lastHeartbeatAt?: Date | string | null
   scheduledAt?: Date | string | null
   startedAt?: Date | string | null
   completedAt?: Date | string | null
@@ -1548,6 +1925,7 @@ export type InterviewUncheckedCreateWithoutTemplateInput = {
   processingError?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  integrityEvents?: Prisma.InterviewIntegrityEventUncheckedCreateNestedManyWithoutInterviewInput
   questions?: Prisma.InterviewQuestionUncheckedCreateNestedManyWithoutInterviewInput
   invitations?: Prisma.InterviewInvitationUncheckedCreateNestedManyWithoutInterviewInput
 }
@@ -1590,6 +1968,9 @@ export type InterviewCreateWithoutQuestionsInput = {
   adaptiveFollowUpsEnabled?: boolean
   maxFollowUpQuestions?: number
   followUpCount?: number
+  integrityScore?: number
+  integrityWarningCount?: number
+  lastHeartbeatAt?: Date | string | null
   scheduledAt?: Date | string | null
   startedAt?: Date | string | null
   completedAt?: Date | string | null
@@ -1600,11 +1981,13 @@ export type InterviewCreateWithoutQuestionsInput = {
   processingError?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  integrityEvents?: Prisma.InterviewIntegrityEventCreateNestedManyWithoutInterviewInput
   candidateProfile: Prisma.CandidateProfileCreateNestedOneWithoutInterviewsInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedInterviewsInput
   resume?: Prisma.ResumeCreateNestedOneWithoutInterviewsInput
   job?: Prisma.JobOpeningCreateNestedOneWithoutInterviewsInput
   template?: Prisma.InterviewTemplateCreateNestedOneWithoutInterviewsInput
+  application?: Prisma.JobApplicationCreateNestedOneWithoutInterviewInput
   invitations?: Prisma.InterviewInvitationCreateNestedManyWithoutInterviewInput
 }
 
@@ -1615,6 +1998,7 @@ export type InterviewUncheckedCreateWithoutQuestionsInput = {
   resumeId?: string | null
   jobId?: string | null
   templateId?: string | null
+  applicationId?: string | null
   title: string
   type: $Enums.InterviewType
   difficulty: $Enums.InterviewDifficulty
@@ -1625,6 +2009,9 @@ export type InterviewUncheckedCreateWithoutQuestionsInput = {
   adaptiveFollowUpsEnabled?: boolean
   maxFollowUpQuestions?: number
   followUpCount?: number
+  integrityScore?: number
+  integrityWarningCount?: number
+  lastHeartbeatAt?: Date | string | null
   scheduledAt?: Date | string | null
   startedAt?: Date | string | null
   completedAt?: Date | string | null
@@ -1635,6 +2022,7 @@ export type InterviewUncheckedCreateWithoutQuestionsInput = {
   processingError?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  integrityEvents?: Prisma.InterviewIntegrityEventUncheckedCreateNestedManyWithoutInterviewInput
   invitations?: Prisma.InterviewInvitationUncheckedCreateNestedManyWithoutInterviewInput
 }
 
@@ -1666,6 +2054,9 @@ export type InterviewUpdateWithoutQuestionsInput = {
   adaptiveFollowUpsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   maxFollowUpQuestions?: Prisma.IntFieldUpdateOperationsInput | number
   followUpCount?: Prisma.IntFieldUpdateOperationsInput | number
+  integrityScore?: Prisma.FloatFieldUpdateOperationsInput | number
+  integrityWarningCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastHeartbeatAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1676,11 +2067,13 @@ export type InterviewUpdateWithoutQuestionsInput = {
   processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  integrityEvents?: Prisma.InterviewIntegrityEventUpdateManyWithoutInterviewNestedInput
   candidateProfile?: Prisma.CandidateProfileUpdateOneRequiredWithoutInterviewsNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedInterviewsNestedInput
   resume?: Prisma.ResumeUpdateOneWithoutInterviewsNestedInput
   job?: Prisma.JobOpeningUpdateOneWithoutInterviewsNestedInput
   template?: Prisma.InterviewTemplateUpdateOneWithoutInterviewsNestedInput
+  application?: Prisma.JobApplicationUpdateOneWithoutInterviewNestedInput
   invitations?: Prisma.InterviewInvitationUpdateManyWithoutInterviewNestedInput
 }
 
@@ -1691,6 +2084,7 @@ export type InterviewUncheckedUpdateWithoutQuestionsInput = {
   resumeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   jobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   templateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  applicationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumInterviewTypeFieldUpdateOperationsInput | $Enums.InterviewType
   difficulty?: Prisma.EnumInterviewDifficultyFieldUpdateOperationsInput | $Enums.InterviewDifficulty
@@ -1701,6 +2095,9 @@ export type InterviewUncheckedUpdateWithoutQuestionsInput = {
   adaptiveFollowUpsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   maxFollowUpQuestions?: Prisma.IntFieldUpdateOperationsInput | number
   followUpCount?: Prisma.IntFieldUpdateOperationsInput | number
+  integrityScore?: Prisma.FloatFieldUpdateOperationsInput | number
+  integrityWarningCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastHeartbeatAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1711,6 +2108,7 @@ export type InterviewUncheckedUpdateWithoutQuestionsInput = {
   processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  integrityEvents?: Prisma.InterviewIntegrityEventUncheckedUpdateManyWithoutInterviewNestedInput
   invitations?: Prisma.InterviewInvitationUncheckedUpdateManyWithoutInterviewNestedInput
 }
 
@@ -1726,6 +2124,9 @@ export type InterviewCreateWithoutInvitationsInput = {
   adaptiveFollowUpsEnabled?: boolean
   maxFollowUpQuestions?: number
   followUpCount?: number
+  integrityScore?: number
+  integrityWarningCount?: number
+  lastHeartbeatAt?: Date | string | null
   scheduledAt?: Date | string | null
   startedAt?: Date | string | null
   completedAt?: Date | string | null
@@ -1736,11 +2137,13 @@ export type InterviewCreateWithoutInvitationsInput = {
   processingError?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  integrityEvents?: Prisma.InterviewIntegrityEventCreateNestedManyWithoutInterviewInput
   candidateProfile: Prisma.CandidateProfileCreateNestedOneWithoutInterviewsInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedInterviewsInput
   resume?: Prisma.ResumeCreateNestedOneWithoutInterviewsInput
   job?: Prisma.JobOpeningCreateNestedOneWithoutInterviewsInput
   template?: Prisma.InterviewTemplateCreateNestedOneWithoutInterviewsInput
+  application?: Prisma.JobApplicationCreateNestedOneWithoutInterviewInput
   questions?: Prisma.InterviewQuestionCreateNestedManyWithoutInterviewInput
 }
 
@@ -1751,6 +2154,7 @@ export type InterviewUncheckedCreateWithoutInvitationsInput = {
   resumeId?: string | null
   jobId?: string | null
   templateId?: string | null
+  applicationId?: string | null
   title: string
   type: $Enums.InterviewType
   difficulty: $Enums.InterviewDifficulty
@@ -1761,6 +2165,9 @@ export type InterviewUncheckedCreateWithoutInvitationsInput = {
   adaptiveFollowUpsEnabled?: boolean
   maxFollowUpQuestions?: number
   followUpCount?: number
+  integrityScore?: number
+  integrityWarningCount?: number
+  lastHeartbeatAt?: Date | string | null
   scheduledAt?: Date | string | null
   startedAt?: Date | string | null
   completedAt?: Date | string | null
@@ -1771,6 +2178,7 @@ export type InterviewUncheckedCreateWithoutInvitationsInput = {
   processingError?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  integrityEvents?: Prisma.InterviewIntegrityEventUncheckedCreateNestedManyWithoutInterviewInput
   questions?: Prisma.InterviewQuestionUncheckedCreateNestedManyWithoutInterviewInput
 }
 
@@ -1802,6 +2210,165 @@ export type InterviewUpdateWithoutInvitationsInput = {
   adaptiveFollowUpsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   maxFollowUpQuestions?: Prisma.IntFieldUpdateOperationsInput | number
   followUpCount?: Prisma.IntFieldUpdateOperationsInput | number
+  integrityScore?: Prisma.FloatFieldUpdateOperationsInput | number
+  integrityWarningCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastHeartbeatAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  overallScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  finalFeedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  evaluationData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  integrityEvents?: Prisma.InterviewIntegrityEventUpdateManyWithoutInterviewNestedInput
+  candidateProfile?: Prisma.CandidateProfileUpdateOneRequiredWithoutInterviewsNestedInput
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedInterviewsNestedInput
+  resume?: Prisma.ResumeUpdateOneWithoutInterviewsNestedInput
+  job?: Prisma.JobOpeningUpdateOneWithoutInterviewsNestedInput
+  template?: Prisma.InterviewTemplateUpdateOneWithoutInterviewsNestedInput
+  application?: Prisma.JobApplicationUpdateOneWithoutInterviewNestedInput
+  questions?: Prisma.InterviewQuestionUpdateManyWithoutInterviewNestedInput
+}
+
+export type InterviewUncheckedUpdateWithoutInvitationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  candidateProfileId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resumeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  templateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  applicationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumInterviewTypeFieldUpdateOperationsInput | $Enums.InterviewType
+  difficulty?: Prisma.EnumInterviewDifficultyFieldUpdateOperationsInput | $Enums.InterviewDifficulty
+  status?: Prisma.EnumInterviewStatusFieldUpdateOperationsInput | $Enums.InterviewStatus
+  durationMinutes?: Prisma.IntFieldUpdateOperationsInput | number
+  questionCount?: Prisma.IntFieldUpdateOperationsInput | number
+  currentQuestionIndex?: Prisma.IntFieldUpdateOperationsInput | number
+  adaptiveFollowUpsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxFollowUpQuestions?: Prisma.IntFieldUpdateOperationsInput | number
+  followUpCount?: Prisma.IntFieldUpdateOperationsInput | number
+  integrityScore?: Prisma.FloatFieldUpdateOperationsInput | number
+  integrityWarningCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastHeartbeatAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  overallScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  finalFeedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  evaluationData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  integrityEvents?: Prisma.InterviewIntegrityEventUncheckedUpdateManyWithoutInterviewNestedInput
+  questions?: Prisma.InterviewQuestionUncheckedUpdateManyWithoutInterviewNestedInput
+}
+
+export type InterviewCreateWithoutIntegrityEventsInput = {
+  id?: string
+  title: string
+  type: $Enums.InterviewType
+  difficulty: $Enums.InterviewDifficulty
+  status?: $Enums.InterviewStatus
+  durationMinutes?: number
+  questionCount?: number
+  currentQuestionIndex?: number
+  adaptiveFollowUpsEnabled?: boolean
+  maxFollowUpQuestions?: number
+  followUpCount?: number
+  integrityScore?: number
+  integrityWarningCount?: number
+  lastHeartbeatAt?: Date | string | null
+  scheduledAt?: Date | string | null
+  startedAt?: Date | string | null
+  completedAt?: Date | string | null
+  expiresAt?: Date | string | null
+  overallScore?: number | null
+  finalFeedback?: string | null
+  evaluationData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  processingError?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  candidateProfile: Prisma.CandidateProfileCreateNestedOneWithoutInterviewsInput
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedInterviewsInput
+  resume?: Prisma.ResumeCreateNestedOneWithoutInterviewsInput
+  job?: Prisma.JobOpeningCreateNestedOneWithoutInterviewsInput
+  template?: Prisma.InterviewTemplateCreateNestedOneWithoutInterviewsInput
+  application?: Prisma.JobApplicationCreateNestedOneWithoutInterviewInput
+  questions?: Prisma.InterviewQuestionCreateNestedManyWithoutInterviewInput
+  invitations?: Prisma.InterviewInvitationCreateNestedManyWithoutInterviewInput
+}
+
+export type InterviewUncheckedCreateWithoutIntegrityEventsInput = {
+  id?: string
+  candidateProfileId: string
+  createdById?: string | null
+  resumeId?: string | null
+  jobId?: string | null
+  templateId?: string | null
+  applicationId?: string | null
+  title: string
+  type: $Enums.InterviewType
+  difficulty: $Enums.InterviewDifficulty
+  status?: $Enums.InterviewStatus
+  durationMinutes?: number
+  questionCount?: number
+  currentQuestionIndex?: number
+  adaptiveFollowUpsEnabled?: boolean
+  maxFollowUpQuestions?: number
+  followUpCount?: number
+  integrityScore?: number
+  integrityWarningCount?: number
+  lastHeartbeatAt?: Date | string | null
+  scheduledAt?: Date | string | null
+  startedAt?: Date | string | null
+  completedAt?: Date | string | null
+  expiresAt?: Date | string | null
+  overallScore?: number | null
+  finalFeedback?: string | null
+  evaluationData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  processingError?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  questions?: Prisma.InterviewQuestionUncheckedCreateNestedManyWithoutInterviewInput
+  invitations?: Prisma.InterviewInvitationUncheckedCreateNestedManyWithoutInterviewInput
+}
+
+export type InterviewCreateOrConnectWithoutIntegrityEventsInput = {
+  where: Prisma.InterviewWhereUniqueInput
+  create: Prisma.XOR<Prisma.InterviewCreateWithoutIntegrityEventsInput, Prisma.InterviewUncheckedCreateWithoutIntegrityEventsInput>
+}
+
+export type InterviewUpsertWithoutIntegrityEventsInput = {
+  update: Prisma.XOR<Prisma.InterviewUpdateWithoutIntegrityEventsInput, Prisma.InterviewUncheckedUpdateWithoutIntegrityEventsInput>
+  create: Prisma.XOR<Prisma.InterviewCreateWithoutIntegrityEventsInput, Prisma.InterviewUncheckedCreateWithoutIntegrityEventsInput>
+  where?: Prisma.InterviewWhereInput
+}
+
+export type InterviewUpdateToOneWithWhereWithoutIntegrityEventsInput = {
+  where?: Prisma.InterviewWhereInput
+  data: Prisma.XOR<Prisma.InterviewUpdateWithoutIntegrityEventsInput, Prisma.InterviewUncheckedUpdateWithoutIntegrityEventsInput>
+}
+
+export type InterviewUpdateWithoutIntegrityEventsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumInterviewTypeFieldUpdateOperationsInput | $Enums.InterviewType
+  difficulty?: Prisma.EnumInterviewDifficultyFieldUpdateOperationsInput | $Enums.InterviewDifficulty
+  status?: Prisma.EnumInterviewStatusFieldUpdateOperationsInput | $Enums.InterviewStatus
+  durationMinutes?: Prisma.IntFieldUpdateOperationsInput | number
+  questionCount?: Prisma.IntFieldUpdateOperationsInput | number
+  currentQuestionIndex?: Prisma.IntFieldUpdateOperationsInput | number
+  adaptiveFollowUpsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxFollowUpQuestions?: Prisma.IntFieldUpdateOperationsInput | number
+  followUpCount?: Prisma.IntFieldUpdateOperationsInput | number
+  integrityScore?: Prisma.FloatFieldUpdateOperationsInput | number
+  integrityWarningCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastHeartbeatAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1817,16 +2384,19 @@ export type InterviewUpdateWithoutInvitationsInput = {
   resume?: Prisma.ResumeUpdateOneWithoutInterviewsNestedInput
   job?: Prisma.JobOpeningUpdateOneWithoutInterviewsNestedInput
   template?: Prisma.InterviewTemplateUpdateOneWithoutInterviewsNestedInput
+  application?: Prisma.JobApplicationUpdateOneWithoutInterviewNestedInput
   questions?: Prisma.InterviewQuestionUpdateManyWithoutInterviewNestedInput
+  invitations?: Prisma.InterviewInvitationUpdateManyWithoutInterviewNestedInput
 }
 
-export type InterviewUncheckedUpdateWithoutInvitationsInput = {
+export type InterviewUncheckedUpdateWithoutIntegrityEventsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   candidateProfileId?: Prisma.StringFieldUpdateOperationsInput | string
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   resumeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   jobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   templateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  applicationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumInterviewTypeFieldUpdateOperationsInput | $Enums.InterviewType
   difficulty?: Prisma.EnumInterviewDifficultyFieldUpdateOperationsInput | $Enums.InterviewDifficulty
@@ -1837,6 +2407,9 @@ export type InterviewUncheckedUpdateWithoutInvitationsInput = {
   adaptiveFollowUpsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   maxFollowUpQuestions?: Prisma.IntFieldUpdateOperationsInput | number
   followUpCount?: Prisma.IntFieldUpdateOperationsInput | number
+  integrityScore?: Prisma.FloatFieldUpdateOperationsInput | number
+  integrityWarningCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastHeartbeatAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1848,6 +2421,7 @@ export type InterviewUncheckedUpdateWithoutInvitationsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   questions?: Prisma.InterviewQuestionUncheckedUpdateManyWithoutInterviewNestedInput
+  invitations?: Prisma.InterviewInvitationUncheckedUpdateManyWithoutInterviewNestedInput
 }
 
 export type InterviewCreateManyCreatedByInput = {
@@ -1856,6 +2430,7 @@ export type InterviewCreateManyCreatedByInput = {
   resumeId?: string | null
   jobId?: string | null
   templateId?: string | null
+  applicationId?: string | null
   title: string
   type: $Enums.InterviewType
   difficulty: $Enums.InterviewDifficulty
@@ -1866,6 +2441,9 @@ export type InterviewCreateManyCreatedByInput = {
   adaptiveFollowUpsEnabled?: boolean
   maxFollowUpQuestions?: number
   followUpCount?: number
+  integrityScore?: number
+  integrityWarningCount?: number
+  lastHeartbeatAt?: Date | string | null
   scheduledAt?: Date | string | null
   startedAt?: Date | string | null
   completedAt?: Date | string | null
@@ -1890,6 +2468,9 @@ export type InterviewUpdateWithoutCreatedByInput = {
   adaptiveFollowUpsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   maxFollowUpQuestions?: Prisma.IntFieldUpdateOperationsInput | number
   followUpCount?: Prisma.IntFieldUpdateOperationsInput | number
+  integrityScore?: Prisma.FloatFieldUpdateOperationsInput | number
+  integrityWarningCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastHeartbeatAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1900,10 +2481,12 @@ export type InterviewUpdateWithoutCreatedByInput = {
   processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  integrityEvents?: Prisma.InterviewIntegrityEventUpdateManyWithoutInterviewNestedInput
   candidateProfile?: Prisma.CandidateProfileUpdateOneRequiredWithoutInterviewsNestedInput
   resume?: Prisma.ResumeUpdateOneWithoutInterviewsNestedInput
   job?: Prisma.JobOpeningUpdateOneWithoutInterviewsNestedInput
   template?: Prisma.InterviewTemplateUpdateOneWithoutInterviewsNestedInput
+  application?: Prisma.JobApplicationUpdateOneWithoutInterviewNestedInput
   questions?: Prisma.InterviewQuestionUpdateManyWithoutInterviewNestedInput
   invitations?: Prisma.InterviewInvitationUpdateManyWithoutInterviewNestedInput
 }
@@ -1914,6 +2497,7 @@ export type InterviewUncheckedUpdateWithoutCreatedByInput = {
   resumeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   jobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   templateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  applicationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumInterviewTypeFieldUpdateOperationsInput | $Enums.InterviewType
   difficulty?: Prisma.EnumInterviewDifficultyFieldUpdateOperationsInput | $Enums.InterviewDifficulty
@@ -1924,6 +2508,9 @@ export type InterviewUncheckedUpdateWithoutCreatedByInput = {
   adaptiveFollowUpsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   maxFollowUpQuestions?: Prisma.IntFieldUpdateOperationsInput | number
   followUpCount?: Prisma.IntFieldUpdateOperationsInput | number
+  integrityScore?: Prisma.FloatFieldUpdateOperationsInput | number
+  integrityWarningCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastHeartbeatAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1934,6 +2521,7 @@ export type InterviewUncheckedUpdateWithoutCreatedByInput = {
   processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  integrityEvents?: Prisma.InterviewIntegrityEventUncheckedUpdateManyWithoutInterviewNestedInput
   questions?: Prisma.InterviewQuestionUncheckedUpdateManyWithoutInterviewNestedInput
   invitations?: Prisma.InterviewInvitationUncheckedUpdateManyWithoutInterviewNestedInput
 }
@@ -1944,6 +2532,7 @@ export type InterviewUncheckedUpdateManyWithoutCreatedByInput = {
   resumeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   jobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   templateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  applicationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumInterviewTypeFieldUpdateOperationsInput | $Enums.InterviewType
   difficulty?: Prisma.EnumInterviewDifficultyFieldUpdateOperationsInput | $Enums.InterviewDifficulty
@@ -1954,6 +2543,9 @@ export type InterviewUncheckedUpdateManyWithoutCreatedByInput = {
   adaptiveFollowUpsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   maxFollowUpQuestions?: Prisma.IntFieldUpdateOperationsInput | number
   followUpCount?: Prisma.IntFieldUpdateOperationsInput | number
+  integrityScore?: Prisma.FloatFieldUpdateOperationsInput | number
+  integrityWarningCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastHeartbeatAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1972,6 +2564,7 @@ export type InterviewCreateManyCandidateProfileInput = {
   resumeId?: string | null
   jobId?: string | null
   templateId?: string | null
+  applicationId?: string | null
   title: string
   type: $Enums.InterviewType
   difficulty: $Enums.InterviewDifficulty
@@ -1982,6 +2575,9 @@ export type InterviewCreateManyCandidateProfileInput = {
   adaptiveFollowUpsEnabled?: boolean
   maxFollowUpQuestions?: number
   followUpCount?: number
+  integrityScore?: number
+  integrityWarningCount?: number
+  lastHeartbeatAt?: Date | string | null
   scheduledAt?: Date | string | null
   startedAt?: Date | string | null
   completedAt?: Date | string | null
@@ -2006,6 +2602,9 @@ export type InterviewUpdateWithoutCandidateProfileInput = {
   adaptiveFollowUpsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   maxFollowUpQuestions?: Prisma.IntFieldUpdateOperationsInput | number
   followUpCount?: Prisma.IntFieldUpdateOperationsInput | number
+  integrityScore?: Prisma.FloatFieldUpdateOperationsInput | number
+  integrityWarningCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastHeartbeatAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2016,10 +2615,12 @@ export type InterviewUpdateWithoutCandidateProfileInput = {
   processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  integrityEvents?: Prisma.InterviewIntegrityEventUpdateManyWithoutInterviewNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedInterviewsNestedInput
   resume?: Prisma.ResumeUpdateOneWithoutInterviewsNestedInput
   job?: Prisma.JobOpeningUpdateOneWithoutInterviewsNestedInput
   template?: Prisma.InterviewTemplateUpdateOneWithoutInterviewsNestedInput
+  application?: Prisma.JobApplicationUpdateOneWithoutInterviewNestedInput
   questions?: Prisma.InterviewQuestionUpdateManyWithoutInterviewNestedInput
   invitations?: Prisma.InterviewInvitationUpdateManyWithoutInterviewNestedInput
 }
@@ -2030,6 +2631,7 @@ export type InterviewUncheckedUpdateWithoutCandidateProfileInput = {
   resumeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   jobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   templateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  applicationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumInterviewTypeFieldUpdateOperationsInput | $Enums.InterviewType
   difficulty?: Prisma.EnumInterviewDifficultyFieldUpdateOperationsInput | $Enums.InterviewDifficulty
@@ -2040,6 +2642,9 @@ export type InterviewUncheckedUpdateWithoutCandidateProfileInput = {
   adaptiveFollowUpsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   maxFollowUpQuestions?: Prisma.IntFieldUpdateOperationsInput | number
   followUpCount?: Prisma.IntFieldUpdateOperationsInput | number
+  integrityScore?: Prisma.FloatFieldUpdateOperationsInput | number
+  integrityWarningCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastHeartbeatAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2050,6 +2655,7 @@ export type InterviewUncheckedUpdateWithoutCandidateProfileInput = {
   processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  integrityEvents?: Prisma.InterviewIntegrityEventUncheckedUpdateManyWithoutInterviewNestedInput
   questions?: Prisma.InterviewQuestionUncheckedUpdateManyWithoutInterviewNestedInput
   invitations?: Prisma.InterviewInvitationUncheckedUpdateManyWithoutInterviewNestedInput
 }
@@ -2060,6 +2666,7 @@ export type InterviewUncheckedUpdateManyWithoutCandidateProfileInput = {
   resumeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   jobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   templateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  applicationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumInterviewTypeFieldUpdateOperationsInput | $Enums.InterviewType
   difficulty?: Prisma.EnumInterviewDifficultyFieldUpdateOperationsInput | $Enums.InterviewDifficulty
@@ -2070,6 +2677,9 @@ export type InterviewUncheckedUpdateManyWithoutCandidateProfileInput = {
   adaptiveFollowUpsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   maxFollowUpQuestions?: Prisma.IntFieldUpdateOperationsInput | number
   followUpCount?: Prisma.IntFieldUpdateOperationsInput | number
+  integrityScore?: Prisma.FloatFieldUpdateOperationsInput | number
+  integrityWarningCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastHeartbeatAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2088,6 +2698,7 @@ export type InterviewCreateManyResumeInput = {
   createdById?: string | null
   jobId?: string | null
   templateId?: string | null
+  applicationId?: string | null
   title: string
   type: $Enums.InterviewType
   difficulty: $Enums.InterviewDifficulty
@@ -2098,6 +2709,9 @@ export type InterviewCreateManyResumeInput = {
   adaptiveFollowUpsEnabled?: boolean
   maxFollowUpQuestions?: number
   followUpCount?: number
+  integrityScore?: number
+  integrityWarningCount?: number
+  lastHeartbeatAt?: Date | string | null
   scheduledAt?: Date | string | null
   startedAt?: Date | string | null
   completedAt?: Date | string | null
@@ -2122,6 +2736,9 @@ export type InterviewUpdateWithoutResumeInput = {
   adaptiveFollowUpsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   maxFollowUpQuestions?: Prisma.IntFieldUpdateOperationsInput | number
   followUpCount?: Prisma.IntFieldUpdateOperationsInput | number
+  integrityScore?: Prisma.FloatFieldUpdateOperationsInput | number
+  integrityWarningCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastHeartbeatAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2132,10 +2749,12 @@ export type InterviewUpdateWithoutResumeInput = {
   processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  integrityEvents?: Prisma.InterviewIntegrityEventUpdateManyWithoutInterviewNestedInput
   candidateProfile?: Prisma.CandidateProfileUpdateOneRequiredWithoutInterviewsNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedInterviewsNestedInput
   job?: Prisma.JobOpeningUpdateOneWithoutInterviewsNestedInput
   template?: Prisma.InterviewTemplateUpdateOneWithoutInterviewsNestedInput
+  application?: Prisma.JobApplicationUpdateOneWithoutInterviewNestedInput
   questions?: Prisma.InterviewQuestionUpdateManyWithoutInterviewNestedInput
   invitations?: Prisma.InterviewInvitationUpdateManyWithoutInterviewNestedInput
 }
@@ -2146,6 +2765,7 @@ export type InterviewUncheckedUpdateWithoutResumeInput = {
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   jobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   templateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  applicationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumInterviewTypeFieldUpdateOperationsInput | $Enums.InterviewType
   difficulty?: Prisma.EnumInterviewDifficultyFieldUpdateOperationsInput | $Enums.InterviewDifficulty
@@ -2156,6 +2776,9 @@ export type InterviewUncheckedUpdateWithoutResumeInput = {
   adaptiveFollowUpsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   maxFollowUpQuestions?: Prisma.IntFieldUpdateOperationsInput | number
   followUpCount?: Prisma.IntFieldUpdateOperationsInput | number
+  integrityScore?: Prisma.FloatFieldUpdateOperationsInput | number
+  integrityWarningCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastHeartbeatAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2166,6 +2789,7 @@ export type InterviewUncheckedUpdateWithoutResumeInput = {
   processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  integrityEvents?: Prisma.InterviewIntegrityEventUncheckedUpdateManyWithoutInterviewNestedInput
   questions?: Prisma.InterviewQuestionUncheckedUpdateManyWithoutInterviewNestedInput
   invitations?: Prisma.InterviewInvitationUncheckedUpdateManyWithoutInterviewNestedInput
 }
@@ -2176,6 +2800,7 @@ export type InterviewUncheckedUpdateManyWithoutResumeInput = {
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   jobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   templateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  applicationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumInterviewTypeFieldUpdateOperationsInput | $Enums.InterviewType
   difficulty?: Prisma.EnumInterviewDifficultyFieldUpdateOperationsInput | $Enums.InterviewDifficulty
@@ -2186,6 +2811,9 @@ export type InterviewUncheckedUpdateManyWithoutResumeInput = {
   adaptiveFollowUpsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   maxFollowUpQuestions?: Prisma.IntFieldUpdateOperationsInput | number
   followUpCount?: Prisma.IntFieldUpdateOperationsInput | number
+  integrityScore?: Prisma.FloatFieldUpdateOperationsInput | number
+  integrityWarningCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastHeartbeatAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2204,6 +2832,7 @@ export type InterviewCreateManyJobInput = {
   createdById?: string | null
   resumeId?: string | null
   templateId?: string | null
+  applicationId?: string | null
   title: string
   type: $Enums.InterviewType
   difficulty: $Enums.InterviewDifficulty
@@ -2214,6 +2843,9 @@ export type InterviewCreateManyJobInput = {
   adaptiveFollowUpsEnabled?: boolean
   maxFollowUpQuestions?: number
   followUpCount?: number
+  integrityScore?: number
+  integrityWarningCount?: number
+  lastHeartbeatAt?: Date | string | null
   scheduledAt?: Date | string | null
   startedAt?: Date | string | null
   completedAt?: Date | string | null
@@ -2238,6 +2870,9 @@ export type InterviewUpdateWithoutJobInput = {
   adaptiveFollowUpsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   maxFollowUpQuestions?: Prisma.IntFieldUpdateOperationsInput | number
   followUpCount?: Prisma.IntFieldUpdateOperationsInput | number
+  integrityScore?: Prisma.FloatFieldUpdateOperationsInput | number
+  integrityWarningCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastHeartbeatAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2248,10 +2883,12 @@ export type InterviewUpdateWithoutJobInput = {
   processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  integrityEvents?: Prisma.InterviewIntegrityEventUpdateManyWithoutInterviewNestedInput
   candidateProfile?: Prisma.CandidateProfileUpdateOneRequiredWithoutInterviewsNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedInterviewsNestedInput
   resume?: Prisma.ResumeUpdateOneWithoutInterviewsNestedInput
   template?: Prisma.InterviewTemplateUpdateOneWithoutInterviewsNestedInput
+  application?: Prisma.JobApplicationUpdateOneWithoutInterviewNestedInput
   questions?: Prisma.InterviewQuestionUpdateManyWithoutInterviewNestedInput
   invitations?: Prisma.InterviewInvitationUpdateManyWithoutInterviewNestedInput
 }
@@ -2262,6 +2899,7 @@ export type InterviewUncheckedUpdateWithoutJobInput = {
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   resumeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   templateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  applicationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumInterviewTypeFieldUpdateOperationsInput | $Enums.InterviewType
   difficulty?: Prisma.EnumInterviewDifficultyFieldUpdateOperationsInput | $Enums.InterviewDifficulty
@@ -2272,6 +2910,9 @@ export type InterviewUncheckedUpdateWithoutJobInput = {
   adaptiveFollowUpsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   maxFollowUpQuestions?: Prisma.IntFieldUpdateOperationsInput | number
   followUpCount?: Prisma.IntFieldUpdateOperationsInput | number
+  integrityScore?: Prisma.FloatFieldUpdateOperationsInput | number
+  integrityWarningCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastHeartbeatAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2282,6 +2923,7 @@ export type InterviewUncheckedUpdateWithoutJobInput = {
   processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  integrityEvents?: Prisma.InterviewIntegrityEventUncheckedUpdateManyWithoutInterviewNestedInput
   questions?: Prisma.InterviewQuestionUncheckedUpdateManyWithoutInterviewNestedInput
   invitations?: Prisma.InterviewInvitationUncheckedUpdateManyWithoutInterviewNestedInput
 }
@@ -2292,6 +2934,7 @@ export type InterviewUncheckedUpdateManyWithoutJobInput = {
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   resumeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   templateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  applicationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumInterviewTypeFieldUpdateOperationsInput | $Enums.InterviewType
   difficulty?: Prisma.EnumInterviewDifficultyFieldUpdateOperationsInput | $Enums.InterviewDifficulty
@@ -2302,6 +2945,9 @@ export type InterviewUncheckedUpdateManyWithoutJobInput = {
   adaptiveFollowUpsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   maxFollowUpQuestions?: Prisma.IntFieldUpdateOperationsInput | number
   followUpCount?: Prisma.IntFieldUpdateOperationsInput | number
+  integrityScore?: Prisma.FloatFieldUpdateOperationsInput | number
+  integrityWarningCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastHeartbeatAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2320,6 +2966,7 @@ export type InterviewCreateManyTemplateInput = {
   createdById?: string | null
   resumeId?: string | null
   jobId?: string | null
+  applicationId?: string | null
   title: string
   type: $Enums.InterviewType
   difficulty: $Enums.InterviewDifficulty
@@ -2330,6 +2977,9 @@ export type InterviewCreateManyTemplateInput = {
   adaptiveFollowUpsEnabled?: boolean
   maxFollowUpQuestions?: number
   followUpCount?: number
+  integrityScore?: number
+  integrityWarningCount?: number
+  lastHeartbeatAt?: Date | string | null
   scheduledAt?: Date | string | null
   startedAt?: Date | string | null
   completedAt?: Date | string | null
@@ -2354,6 +3004,9 @@ export type InterviewUpdateWithoutTemplateInput = {
   adaptiveFollowUpsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   maxFollowUpQuestions?: Prisma.IntFieldUpdateOperationsInput | number
   followUpCount?: Prisma.IntFieldUpdateOperationsInput | number
+  integrityScore?: Prisma.FloatFieldUpdateOperationsInput | number
+  integrityWarningCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastHeartbeatAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2364,10 +3017,12 @@ export type InterviewUpdateWithoutTemplateInput = {
   processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  integrityEvents?: Prisma.InterviewIntegrityEventUpdateManyWithoutInterviewNestedInput
   candidateProfile?: Prisma.CandidateProfileUpdateOneRequiredWithoutInterviewsNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedInterviewsNestedInput
   resume?: Prisma.ResumeUpdateOneWithoutInterviewsNestedInput
   job?: Prisma.JobOpeningUpdateOneWithoutInterviewsNestedInput
+  application?: Prisma.JobApplicationUpdateOneWithoutInterviewNestedInput
   questions?: Prisma.InterviewQuestionUpdateManyWithoutInterviewNestedInput
   invitations?: Prisma.InterviewInvitationUpdateManyWithoutInterviewNestedInput
 }
@@ -2378,6 +3033,7 @@ export type InterviewUncheckedUpdateWithoutTemplateInput = {
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   resumeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   jobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  applicationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumInterviewTypeFieldUpdateOperationsInput | $Enums.InterviewType
   difficulty?: Prisma.EnumInterviewDifficultyFieldUpdateOperationsInput | $Enums.InterviewDifficulty
@@ -2388,6 +3044,9 @@ export type InterviewUncheckedUpdateWithoutTemplateInput = {
   adaptiveFollowUpsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   maxFollowUpQuestions?: Prisma.IntFieldUpdateOperationsInput | number
   followUpCount?: Prisma.IntFieldUpdateOperationsInput | number
+  integrityScore?: Prisma.FloatFieldUpdateOperationsInput | number
+  integrityWarningCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastHeartbeatAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2398,6 +3057,7 @@ export type InterviewUncheckedUpdateWithoutTemplateInput = {
   processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  integrityEvents?: Prisma.InterviewIntegrityEventUncheckedUpdateManyWithoutInterviewNestedInput
   questions?: Prisma.InterviewQuestionUncheckedUpdateManyWithoutInterviewNestedInput
   invitations?: Prisma.InterviewInvitationUncheckedUpdateManyWithoutInterviewNestedInput
 }
@@ -2408,6 +3068,7 @@ export type InterviewUncheckedUpdateManyWithoutTemplateInput = {
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   resumeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   jobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  applicationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumInterviewTypeFieldUpdateOperationsInput | $Enums.InterviewType
   difficulty?: Prisma.EnumInterviewDifficultyFieldUpdateOperationsInput | $Enums.InterviewDifficulty
@@ -2418,6 +3079,9 @@ export type InterviewUncheckedUpdateManyWithoutTemplateInput = {
   adaptiveFollowUpsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   maxFollowUpQuestions?: Prisma.IntFieldUpdateOperationsInput | number
   followUpCount?: Prisma.IntFieldUpdateOperationsInput | number
+  integrityScore?: Prisma.FloatFieldUpdateOperationsInput | number
+  integrityWarningCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastHeartbeatAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2436,11 +3100,13 @@ export type InterviewUncheckedUpdateManyWithoutTemplateInput = {
  */
 
 export type InterviewCountOutputType = {
+  integrityEvents: number
   questions: number
   invitations: number
 }
 
 export type InterviewCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  integrityEvents?: boolean | InterviewCountOutputTypeCountIntegrityEventsArgs
   questions?: boolean | InterviewCountOutputTypeCountQuestionsArgs
   invitations?: boolean | InterviewCountOutputTypeCountInvitationsArgs
 }
@@ -2453,6 +3119,13 @@ export type InterviewCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Ex
    * Select specific fields to fetch from the InterviewCountOutputType
    */
   select?: Prisma.InterviewCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * InterviewCountOutputType without action
+ */
+export type InterviewCountOutputTypeCountIntegrityEventsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.InterviewIntegrityEventWhereInput
 }
 
 /**
@@ -2477,6 +3150,7 @@ export type InterviewSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   resumeId?: boolean
   jobId?: boolean
   templateId?: boolean
+  applicationId?: boolean
   title?: boolean
   type?: boolean
   difficulty?: boolean
@@ -2487,6 +3161,9 @@ export type InterviewSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   adaptiveFollowUpsEnabled?: boolean
   maxFollowUpQuestions?: boolean
   followUpCount?: boolean
+  integrityScore?: boolean
+  integrityWarningCount?: boolean
+  lastHeartbeatAt?: boolean
   scheduledAt?: boolean
   startedAt?: boolean
   completedAt?: boolean
@@ -2497,11 +3174,13 @@ export type InterviewSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   processingError?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  integrityEvents?: boolean | Prisma.Interview$integrityEventsArgs<ExtArgs>
   candidateProfile?: boolean | Prisma.CandidateProfileDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.Interview$createdByArgs<ExtArgs>
   resume?: boolean | Prisma.Interview$resumeArgs<ExtArgs>
   job?: boolean | Prisma.Interview$jobArgs<ExtArgs>
   template?: boolean | Prisma.Interview$templateArgs<ExtArgs>
+  application?: boolean | Prisma.Interview$applicationArgs<ExtArgs>
   questions?: boolean | Prisma.Interview$questionsArgs<ExtArgs>
   invitations?: boolean | Prisma.Interview$invitationsArgs<ExtArgs>
   _count?: boolean | Prisma.InterviewCountOutputTypeDefaultArgs<ExtArgs>
@@ -2514,6 +3193,7 @@ export type InterviewSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   resumeId?: boolean
   jobId?: boolean
   templateId?: boolean
+  applicationId?: boolean
   title?: boolean
   type?: boolean
   difficulty?: boolean
@@ -2524,6 +3204,9 @@ export type InterviewSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   adaptiveFollowUpsEnabled?: boolean
   maxFollowUpQuestions?: boolean
   followUpCount?: boolean
+  integrityScore?: boolean
+  integrityWarningCount?: boolean
+  lastHeartbeatAt?: boolean
   scheduledAt?: boolean
   startedAt?: boolean
   completedAt?: boolean
@@ -2539,6 +3222,7 @@ export type InterviewSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   resume?: boolean | Prisma.Interview$resumeArgs<ExtArgs>
   job?: boolean | Prisma.Interview$jobArgs<ExtArgs>
   template?: boolean | Prisma.Interview$templateArgs<ExtArgs>
+  application?: boolean | Prisma.Interview$applicationArgs<ExtArgs>
 }, ExtArgs["result"]["interview"]>
 
 export type InterviewSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -2548,6 +3232,7 @@ export type InterviewSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   resumeId?: boolean
   jobId?: boolean
   templateId?: boolean
+  applicationId?: boolean
   title?: boolean
   type?: boolean
   difficulty?: boolean
@@ -2558,6 +3243,9 @@ export type InterviewSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   adaptiveFollowUpsEnabled?: boolean
   maxFollowUpQuestions?: boolean
   followUpCount?: boolean
+  integrityScore?: boolean
+  integrityWarningCount?: boolean
+  lastHeartbeatAt?: boolean
   scheduledAt?: boolean
   startedAt?: boolean
   completedAt?: boolean
@@ -2573,6 +3261,7 @@ export type InterviewSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   resume?: boolean | Prisma.Interview$resumeArgs<ExtArgs>
   job?: boolean | Prisma.Interview$jobArgs<ExtArgs>
   template?: boolean | Prisma.Interview$templateArgs<ExtArgs>
+  application?: boolean | Prisma.Interview$applicationArgs<ExtArgs>
 }, ExtArgs["result"]["interview"]>
 
 export type InterviewSelectScalar = {
@@ -2582,6 +3271,7 @@ export type InterviewSelectScalar = {
   resumeId?: boolean
   jobId?: boolean
   templateId?: boolean
+  applicationId?: boolean
   title?: boolean
   type?: boolean
   difficulty?: boolean
@@ -2592,6 +3282,9 @@ export type InterviewSelectScalar = {
   adaptiveFollowUpsEnabled?: boolean
   maxFollowUpQuestions?: boolean
   followUpCount?: boolean
+  integrityScore?: boolean
+  integrityWarningCount?: boolean
+  lastHeartbeatAt?: boolean
   scheduledAt?: boolean
   startedAt?: boolean
   completedAt?: boolean
@@ -2604,13 +3297,15 @@ export type InterviewSelectScalar = {
   updatedAt?: boolean
 }
 
-export type InterviewOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "candidateProfileId" | "createdById" | "resumeId" | "jobId" | "templateId" | "title" | "type" | "difficulty" | "status" | "durationMinutes" | "questionCount" | "currentQuestionIndex" | "adaptiveFollowUpsEnabled" | "maxFollowUpQuestions" | "followUpCount" | "scheduledAt" | "startedAt" | "completedAt" | "expiresAt" | "overallScore" | "finalFeedback" | "evaluationData" | "processingError" | "createdAt" | "updatedAt", ExtArgs["result"]["interview"]>
+export type InterviewOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "candidateProfileId" | "createdById" | "resumeId" | "jobId" | "templateId" | "applicationId" | "title" | "type" | "difficulty" | "status" | "durationMinutes" | "questionCount" | "currentQuestionIndex" | "adaptiveFollowUpsEnabled" | "maxFollowUpQuestions" | "followUpCount" | "integrityScore" | "integrityWarningCount" | "lastHeartbeatAt" | "scheduledAt" | "startedAt" | "completedAt" | "expiresAt" | "overallScore" | "finalFeedback" | "evaluationData" | "processingError" | "createdAt" | "updatedAt", ExtArgs["result"]["interview"]>
 export type InterviewInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  integrityEvents?: boolean | Prisma.Interview$integrityEventsArgs<ExtArgs>
   candidateProfile?: boolean | Prisma.CandidateProfileDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.Interview$createdByArgs<ExtArgs>
   resume?: boolean | Prisma.Interview$resumeArgs<ExtArgs>
   job?: boolean | Prisma.Interview$jobArgs<ExtArgs>
   template?: boolean | Prisma.Interview$templateArgs<ExtArgs>
+  application?: boolean | Prisma.Interview$applicationArgs<ExtArgs>
   questions?: boolean | Prisma.Interview$questionsArgs<ExtArgs>
   invitations?: boolean | Prisma.Interview$invitationsArgs<ExtArgs>
   _count?: boolean | Prisma.InterviewCountOutputTypeDefaultArgs<ExtArgs>
@@ -2621,6 +3316,7 @@ export type InterviewIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   resume?: boolean | Prisma.Interview$resumeArgs<ExtArgs>
   job?: boolean | Prisma.Interview$jobArgs<ExtArgs>
   template?: boolean | Prisma.Interview$templateArgs<ExtArgs>
+  application?: boolean | Prisma.Interview$applicationArgs<ExtArgs>
 }
 export type InterviewIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   candidateProfile?: boolean | Prisma.CandidateProfileDefaultArgs<ExtArgs>
@@ -2628,16 +3324,19 @@ export type InterviewIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   resume?: boolean | Prisma.Interview$resumeArgs<ExtArgs>
   job?: boolean | Prisma.Interview$jobArgs<ExtArgs>
   template?: boolean | Prisma.Interview$templateArgs<ExtArgs>
+  application?: boolean | Prisma.Interview$applicationArgs<ExtArgs>
 }
 
 export type $InterviewPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Interview"
   objects: {
+    integrityEvents: Prisma.$InterviewIntegrityEventPayload<ExtArgs>[]
     candidateProfile: Prisma.$CandidateProfilePayload<ExtArgs>
     createdBy: Prisma.$UserPayload<ExtArgs> | null
     resume: Prisma.$ResumePayload<ExtArgs> | null
     job: Prisma.$JobOpeningPayload<ExtArgs> | null
     template: Prisma.$InterviewTemplatePayload<ExtArgs> | null
+    application: Prisma.$JobApplicationPayload<ExtArgs> | null
     questions: Prisma.$InterviewQuestionPayload<ExtArgs>[]
     invitations: Prisma.$InterviewInvitationPayload<ExtArgs>[]
   }
@@ -2648,6 +3347,7 @@ export type $InterviewPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     resumeId: string | null
     jobId: string | null
     templateId: string | null
+    applicationId: string | null
     title: string
     type: $Enums.InterviewType
     difficulty: $Enums.InterviewDifficulty
@@ -2658,6 +3358,9 @@ export type $InterviewPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     adaptiveFollowUpsEnabled: boolean
     maxFollowUpQuestions: number
     followUpCount: number
+    integrityScore: number
+    integrityWarningCount: number
+    lastHeartbeatAt: Date | null
     scheduledAt: Date | null
     startedAt: Date | null
     completedAt: Date | null
@@ -3062,11 +3765,13 @@ readonly fields: InterviewFieldRefs;
  */
 export interface Prisma__InterviewClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  integrityEvents<T extends Prisma.Interview$integrityEventsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Interview$integrityEventsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InterviewIntegrityEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   candidateProfile<T extends Prisma.CandidateProfileDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CandidateProfileDefaultArgs<ExtArgs>>): Prisma.Prisma__CandidateProfileClient<runtime.Types.Result.GetResult<Prisma.$CandidateProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   createdBy<T extends Prisma.Interview$createdByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Interview$createdByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   resume<T extends Prisma.Interview$resumeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Interview$resumeArgs<ExtArgs>>): Prisma.Prisma__ResumeClient<runtime.Types.Result.GetResult<Prisma.$ResumePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   job<T extends Prisma.Interview$jobArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Interview$jobArgs<ExtArgs>>): Prisma.Prisma__JobOpeningClient<runtime.Types.Result.GetResult<Prisma.$JobOpeningPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   template<T extends Prisma.Interview$templateArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Interview$templateArgs<ExtArgs>>): Prisma.Prisma__InterviewTemplateClient<runtime.Types.Result.GetResult<Prisma.$InterviewTemplatePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  application<T extends Prisma.Interview$applicationArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Interview$applicationArgs<ExtArgs>>): Prisma.Prisma__JobApplicationClient<runtime.Types.Result.GetResult<Prisma.$JobApplicationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   questions<T extends Prisma.Interview$questionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Interview$questionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InterviewQuestionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   invitations<T extends Prisma.Interview$invitationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Interview$invitationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InterviewInvitationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
@@ -3104,6 +3809,7 @@ export interface InterviewFieldRefs {
   readonly resumeId: Prisma.FieldRef<"Interview", 'String'>
   readonly jobId: Prisma.FieldRef<"Interview", 'String'>
   readonly templateId: Prisma.FieldRef<"Interview", 'String'>
+  readonly applicationId: Prisma.FieldRef<"Interview", 'String'>
   readonly title: Prisma.FieldRef<"Interview", 'String'>
   readonly type: Prisma.FieldRef<"Interview", 'InterviewType'>
   readonly difficulty: Prisma.FieldRef<"Interview", 'InterviewDifficulty'>
@@ -3114,6 +3820,9 @@ export interface InterviewFieldRefs {
   readonly adaptiveFollowUpsEnabled: Prisma.FieldRef<"Interview", 'Boolean'>
   readonly maxFollowUpQuestions: Prisma.FieldRef<"Interview", 'Int'>
   readonly followUpCount: Prisma.FieldRef<"Interview", 'Int'>
+  readonly integrityScore: Prisma.FieldRef<"Interview", 'Float'>
+  readonly integrityWarningCount: Prisma.FieldRef<"Interview", 'Int'>
+  readonly lastHeartbeatAt: Prisma.FieldRef<"Interview", 'DateTime'>
   readonly scheduledAt: Prisma.FieldRef<"Interview", 'DateTime'>
   readonly startedAt: Prisma.FieldRef<"Interview", 'DateTime'>
   readonly completedAt: Prisma.FieldRef<"Interview", 'DateTime'>
@@ -3525,6 +4234,30 @@ export type InterviewDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Int
 }
 
 /**
+ * Interview.integrityEvents
+ */
+export type Interview$integrityEventsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the InterviewIntegrityEvent
+   */
+  select?: Prisma.InterviewIntegrityEventSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the InterviewIntegrityEvent
+   */
+  omit?: Prisma.InterviewIntegrityEventOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.InterviewIntegrityEventInclude<ExtArgs> | null
+  where?: Prisma.InterviewIntegrityEventWhereInput
+  orderBy?: Prisma.InterviewIntegrityEventOrderByWithRelationInput | Prisma.InterviewIntegrityEventOrderByWithRelationInput[]
+  cursor?: Prisma.InterviewIntegrityEventWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.InterviewIntegrityEventScalarFieldEnum | Prisma.InterviewIntegrityEventScalarFieldEnum[]
+}
+
+/**
  * Interview.createdBy
  */
 export type Interview$createdByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3598,6 +4331,25 @@ export type Interview$templateArgs<ExtArgs extends runtime.Types.Extensions.Inte
    */
   include?: Prisma.InterviewTemplateInclude<ExtArgs> | null
   where?: Prisma.InterviewTemplateWhereInput
+}
+
+/**
+ * Interview.application
+ */
+export type Interview$applicationArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the JobApplication
+   */
+  select?: Prisma.JobApplicationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the JobApplication
+   */
+  omit?: Prisma.JobApplicationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.JobApplicationInclude<ExtArgs> | null
+  where?: Prisma.JobApplicationWhereInput
 }
 
 /**

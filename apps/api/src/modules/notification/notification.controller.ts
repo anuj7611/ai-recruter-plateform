@@ -32,6 +32,8 @@ export const getNotificationsController = async (
 
       subject: true,
 
+      metadata: true,
+
       sentAt: true,
 
       createdAt: true,

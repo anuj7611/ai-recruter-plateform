@@ -293,3 +293,104 @@ export const interviewResultReadyEmail = ({
     },
   );
 };
+
+export const jobAvailableEmail = ({
+  candidateName,
+  jobTitle,
+  department,
+  location,
+  jobUrl,
+}: {
+  candidateName: string;
+  jobTitle: string;
+  department: string | null;
+  location: string | null;
+  jobUrl: string;
+}) =>
+  baseTemplate(
+    "New Job Opportunity",
+    `
+      <p>Hi ${escapeHtml(candidateName)},</p>
+      <p>A new role matching your career journey is now open:</p>
+      <p style="font-size:18px;"><strong>${escapeHtml(jobTitle)}</strong></p>
+      ${department ? `<p>Department: <strong>${escapeHtml(department)}</strong></p>` : ""}
+      ${location ? `<p>Location: <strong>${escapeHtml(location)}</strong></p>` : ""}
+      <p>Review the role details and apply with one of your processed resumes.</p>
+    `,
+    { label: "View Job", url: jobUrl },
+  );
+
+export const jobApplicationReceivedEmail = ({
+  recruiterName,
+  candidateName,
+  jobTitle,
+  resumeTitle,
+  applicationUrl,
+  resumeUrl,
+}: {
+  recruiterName: string;
+  candidateName: string;
+  jobTitle: string;
+  resumeTitle: string;
+  applicationUrl: string;
+  resumeUrl: string | null;
+}) =>
+  baseTemplate(
+    "New Job Application",
+    `
+      <p>Hi ${escapeHtml(recruiterName)},</p>
+      <p><strong>${escapeHtml(candidateName)}</strong> applied for <strong>${escapeHtml(jobTitle)}</strong>.</p>
+      <p>Submitted resume: <strong>${escapeHtml(resumeTitle)}</strong></p>
+      ${
+        resumeUrl
+          ? `<p><a href="${resumeUrl}" style="color:#6d28d9;font-weight:600;">Open submitted resume</a></p>`
+          : ""
+      }
+      <p>Review the application and create a structured AI interview when ready.</p>
+    `,
+    { label: "Review Application", url: applicationUrl },
+  );
+
+export const jobApplicationStatusEmail = ({
+  candidateName,
+  jobTitle,
+  status,
+  applicationsUrl,
+}: {
+  candidateName: string;
+  jobTitle: string;
+  status: string;
+  applicationsUrl: string;
+}) => {
+  const statusLabel = status.replaceAll("_", " ").toLowerCase();
+
+  return baseTemplate(
+    "Application Update",
+    `
+      <p>Hi ${escapeHtml(candidateName)},</p>
+      <p>Your application for <strong>${escapeHtml(jobTitle)}</strong> is now <strong>${escapeHtml(statusLabel)}</strong>.</p>
+      <p>Open your applications workspace for the latest details.</p>
+    `,
+    { label: "View Applications", url: applicationsUrl },
+  );
+};
+
+export const interviewNotSelectedEmail = ({
+  candidateName,
+  jobTitle,
+  applicationsUrl,
+}: {
+  candidateName: string;
+  jobTitle: string;
+  applicationsUrl: string;
+}) =>
+  baseTemplate(
+    "Application Update",
+    `
+      <p>Hi ${escapeHtml(candidateName)},</p>
+      <p>Thank you for taking the time to interview for <strong>${escapeHtml(jobTitle)}</strong>.</p>
+      <p>After reviewing your interview results, we will not be moving forward with your application for this role.</p>
+      <p>We appreciate your interest and encourage you to explore future opportunities that match your experience.</p>
+    `,
+    { label: "View Applications", url: applicationsUrl },
+  );

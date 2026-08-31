@@ -469,11 +469,25 @@ export const deleteCandidateResume = async (
       storageFileId: true,
 
       isPrimary: true,
+
+      _count: {
+        select: {
+          jobApplications: true,
+        },
+      },
     },
   });
 
   if (!resume) {
     throw new ApiError(404, "Resume not found", "RESUME_NOT_FOUND");
+  }
+
+  if (resume._count.jobApplications > 0) {
+    throw new ApiError(
+      409,
+      "Resume cannot be deleted because it was submitted with a job application",
+      "RESUME_IN_USE_BY_APPLICATION",
+    );
   }
 
   /*

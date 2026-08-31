@@ -2,6 +2,7 @@ import { prisma } from "../../lib/prisma.js";
 import { ApiError } from "../../utils/api-error.js";
 import {
   interviewCompletedEmail,
+  interviewNotSelectedEmail,
   interviewResultReadyEmail,
 } from "../notification/notification-email.template.js";
 import { createNotification } from "../notification/notification.service.js";
@@ -11,6 +12,8 @@ import {
 } from "./interview-evaluation.service.js";
 import type { SubmitInterviewAnswerInput } from "./interview.validation.js";
 import { generateAdaptiveFollowUp } from "./interview-followup.service.js";
+
+const INTERVIEW_QUALIFICATION_THRESHOLD = 65;
 
 const candidateQuestionSelect = {
   id: true,
@@ -110,7 +113,7 @@ export const getCandidateInterviews = async (userId: string) => {
     );
   }
 
-  return prisma.interview.findMany({
+  const interviews = await prisma.interview.findMany({
     where: {
       candidateProfileId: candidate.id,
     },
@@ -122,6 +125,8 @@ export const getCandidateInterviews = async (userId: string) => {
     select: {
       id: true,
       title: true,
+
+      createdById: true,
 
       type: true,
       difficulty: true,
@@ -148,9 +153,151 @@ export const getCandidateInterviews = async (userId: string) => {
         },
       },
 
+      invitations: {
+        where: {
+          candidateUserId: userId,
+        },
+
+        orderBy: {
+          createdAt: "desc",
+        },
+
+        take: 1,
+
+        select: {
+          status: true,
+          expiresAt: true,
+        },
+      },
+
       createdAt: true,
     },
   });
+
+  return interviews.map(({ createdById, invitations, ...interview }) => ({
+    ...interview,
+
+    requiresInvitation: Boolean(createdById),
+
+    invitation: invitations[0] ?? null,
+  }));
+};
+
+export const acceptCandidateInterviewInvitation = async (
+  userId: string,
+  interviewId: string,
+) => {
+  const interview = await prisma.interview.findFirst({
+    where: {
+      id: interviewId,
+
+      candidateProfile: {
+        userId,
+      },
+    },
+
+    select: {
+      id: true,
+      status: true,
+      expiresAt: true,
+
+      invitations: {
+        where: {
+          candidateUserId: userId,
+        },
+
+        orderBy: {
+          createdAt: "desc",
+        },
+
+        take: 1,
+
+        select: {
+          id: true,
+          status: true,
+          expiresAt: true,
+        },
+      },
+    },
+  });
+
+  if (!interview) {
+    throw new ApiError(404, "Interview not found", "INTERVIEW_NOT_FOUND");
+  }
+
+  const invitation = interview.invitations[0];
+
+  if (!invitation) {
+    throw new ApiError(
+      404,
+      "No invitation has been sent for this interview",
+      "INTERVIEW_INVITATION_NOT_FOUND",
+    );
+  }
+
+  const now = new Date();
+
+  if (
+    invitation.expiresAt <= now ||
+    (interview.expiresAt && interview.expiresAt <= now)
+  ) {
+    if (invitation.status !== "EXPIRED") {
+      await prisma.interviewInvitation.update({
+        where: {
+          id: invitation.id,
+        },
+
+        data: {
+          status: "EXPIRED",
+        },
+      });
+    }
+
+    throw new ApiError(
+      410,
+      "Interview invitation has expired",
+      "INTERVIEW_INVITATION_EXPIRED",
+    );
+  }
+
+  if (invitation.status === "REVOKED") {
+    throw new ApiError(
+      410,
+      "Interview invitation has been revoked",
+      "INTERVIEW_INVITATION_REVOKED",
+    );
+  }
+
+  if (["COMPLETED", "CANCELLED", "EXPIRED"].includes(interview.status)) {
+    throw new ApiError(
+      409,
+      `Interview invitation cannot be accepted because the interview status is ${interview.status}`,
+      "INTERVIEW_INVITATION_CANNOT_BE_ACCEPTED",
+    );
+  }
+
+  if (invitation.status !== "ACCEPTED") {
+    await prisma.interviewInvitation.update({
+      where: {
+        id: invitation.id,
+      },
+
+      data: {
+        status: "ACCEPTED",
+        acceptedAt: now,
+      },
+    });
+  }
+
+  return {
+    interviewId: interview.id,
+    accepted: true,
+
+    invitation: {
+      status: "ACCEPTED" as const,
+      expiresAt: invitation.expiresAt,
+    },
+  };
 };
 
 export const startCandidateInterview = async (
@@ -948,6 +1095,15 @@ export const completeCandidateInterview = async (
 
       completedAt: true,
 
+      applicationId: true,
+
+      job: {
+        select: {
+          id: true,
+          title: true,
+        },
+      },
+
       candidateProfile: {
         select: {
           user: {
@@ -1001,6 +1157,82 @@ export const completeCandidateInterview = async (
       "Unable to queue candidate completion notification:",
       error,
     );
+  }
+
+  if (
+    completedInterview.overallScore !== null &&
+    completedInterview.overallScore <= INTERVIEW_QUALIFICATION_THRESHOLD
+  ) {
+    try {
+      const candidate = completedInterview.candidateProfile.user;
+      const jobTitle = completedInterview.job?.title ?? completedInterview.title;
+
+      if (completedInterview.applicationId) {
+        await prisma.jobApplication.updateMany({
+          where: {
+            id: completedInterview.applicationId,
+
+            status: {
+              not: "WITHDRAWN",
+            },
+          },
+
+          data: {
+            status: "REJECTED",
+          },
+        });
+      }
+
+      const existingOutcomeNotification = await prisma.notification.findFirst({
+        where: {
+          userId: candidate.id,
+          type: "JOB_APPLICATION_STATUS",
+
+          metadata: {
+            path: ["interviewId"],
+            equals: completedInterview.id,
+          },
+        },
+
+        select: {
+          id: true,
+        },
+      });
+
+      if (!existingOutcomeNotification) {
+        await createNotification({
+          userId: candidate.id,
+
+          type: "JOB_APPLICATION_STATUS",
+
+          recipientEmail: candidate.email,
+
+          subject: `Application update: Not selected for ${jobTitle}`,
+
+          message: interviewNotSelectedEmail({
+            candidateName: candidate.name,
+            jobTitle,
+            applicationsUrl: `${webUrl}/candidate/jobs`,
+          }),
+
+          metadata: {
+            interviewId: completedInterview.id,
+            ...(completedInterview.job?.id
+              ? { jobId: completedInterview.job.id }
+              : {}),
+            ...(completedInterview.applicationId
+              ? { applicationId: completedInterview.applicationId }
+              : {}),
+            status: "REJECTED",
+            outcome: "BELOW_INTERVIEW_THRESHOLD",
+            threshold: INTERVIEW_QUALIFICATION_THRESHOLD,
+            overallScore: completedInterview.overallScore,
+          },
+        });
+      }
+    } catch (error) {
+      console.error("Unable to send candidate outcome notification:", error);
+    }
   }
 
   try {

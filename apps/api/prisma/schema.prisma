@@ -82,6 +82,14 @@ enum JobStatus {
   ARCHIVED
 }
 
+enum JobApplicationStatus {
+  APPLIED
+  UNDER_REVIEW
+  INTERVIEW_CREATED
+  REJECTED
+  WITHDRAWN
+}
+
 enum InterviewType {
   TECHNICAL
   BEHAVIORAL
@@ -132,6 +140,9 @@ enum InterviewInvitationStatus {
 }
 
 enum NotificationType {
+  JOB_AVAILABLE
+  JOB_APPLICATION_RECEIVED
+  JOB_APPLICATION_STATUS
   INTERVIEW_INVITATION
   INTERVIEW_REMINDER
   INTERVIEW_COMPLETED
@@ -143,6 +154,25 @@ enum NotificationStatus {
   PROCESSING
   SENT
   FAILED
+}
+
+enum InterviewIntegrityEventType {
+  TAB_HIDDEN
+  WINDOW_BLUR
+  FULLSCREEN_EXIT
+  COPY
+  PASTE
+  CUT
+  PAGE_REFRESH
+  DISCONNECT
+  HEARTBEAT_MISSED
+}
+
+enum InterviewIntegritySeverity {
+  INFO
+  LOW
+  MEDIUM
+  HIGH
 }
 
 // ================================
@@ -224,6 +254,7 @@ model CandidateProfile {
 
   resumes    Resume[]
   interviews Interview[]
+  jobApplications JobApplication[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -412,6 +443,7 @@ model Resume {
   projects    ResumeProject[]
   chunks      ResumeChunk[]
   interviews  Interview[]
+  jobApplications JobApplication[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -601,6 +633,7 @@ model JobOpening {
   createdBy User @relation("JobOpeningCreatedBy", fields: [createdById], references: [id], onDelete: Cascade)
 
   interviews Interview[]
+  applications JobApplication[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -609,6 +642,34 @@ model JobOpening {
   @@index([status])
   @@index([createdAt])
   @@map("job_openings")
+}
+
+model JobApplication {
+  id String @id @default(uuid()) @db.Uuid
+
+  jobId String @db.Uuid
+  candidateProfileId String @db.Uuid
+  resumeId String @db.Uuid
+
+  status JobApplicationStatus @default(APPLIED)
+
+  coverLetter String? @db.Text
+
+  job JobOpening @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  candidateProfile CandidateProfile @relation(fields: [candidateProfileId], references: [id], onDelete: Cascade)
+  resume Resume @relation(fields: [resumeId], references: [id], onDelete: Restrict)
+  interview Interview?
+
+  appliedAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([jobId, candidateProfileId])
+  @@index([jobId])
+  @@index([candidateProfileId])
+  @@index([resumeId])
+  @@index([status])
+  @@index([appliedAt])
+  @@map("job_applications")
 }
 
 model InterviewTemplate {
@@ -658,6 +719,7 @@ model Interview {
   resumeId   String? @db.Uuid
   jobId      String? @db.Uuid
   templateId String? @db.Uuid
+  applicationId String? @unique @db.Uuid
 
   title String
 
@@ -676,6 +738,14 @@ model Interview {
   maxFollowUpQuestions Int @default(0)
 
   followUpCount Int @default(0)
+
+  integrityScore Float @default(100)
+
+  integrityWarningCount Int @default(0)
+
+  lastHeartbeatAt DateTime?
+
+  integrityEvents InterviewIntegrityEvent[]
 
   scheduledAt DateTime?
   startedAt   DateTime?
@@ -700,6 +770,8 @@ model Interview {
 
   template InterviewTemplate? @relation(fields: [templateId], references: [id], onDelete: SetNull)
 
+  application JobApplication? @relation(fields: [applicationId], references: [id], onDelete: SetNull)
+
   questions   InterviewQuestion[]
   invitations InterviewInvitation[]
 
@@ -711,6 +783,7 @@ model Interview {
   @@index([resumeId])
   @@index([jobId])
   @@index([templateId])
+  @@index([applicationId])
   @@index([status])
   @@index([scheduledAt])
   @@map("interviews")
@@ -867,4 +940,28 @@ model Notification {
   @@index([status])
   @@index([createdAt])
   @@map("notifications")
+}
+
+model InterviewIntegrityEvent {
+  id String @id @default(uuid()) @db.Uuid
+
+  interviewId String @db.Uuid
+
+  type InterviewIntegrityEventType
+
+  severity InterviewIntegritySeverity
+
+  metadata Json?
+
+  occurredAt DateTime
+
+  interview Interview @relation(fields: [interviewId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@index([interviewId])
+  @@index([type])
+  @@index([severity])
+  @@index([occurredAt])
+  @@map("interview_integrity_events")
 }

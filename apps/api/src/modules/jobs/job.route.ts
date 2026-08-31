@@ -20,6 +20,17 @@ import {
   updateJobSchema,
   updateJobStatusSchema,
 } from "./job.validation.js";
+import {
+  createApplicationInterviewController,
+  getRecruiterApplicationController,
+  getRecruiterApplicationsController,
+  updateJobApplicationStatusController,
+} from "./job-application.controller.js";
+import {
+  createApplicationInterviewSchema,
+  jobApplicationParamsSchema,
+  updateJobApplicationStatusSchema,
+} from "./job-application.validation.js";
 
 export const jobRouter = Router();
 
@@ -39,6 +50,31 @@ jobRouter.get(
   "/",
 
   asyncHandler(getJobsController),
+);
+
+jobRouter.get(
+  "/applications",
+  asyncHandler(getRecruiterApplicationsController),
+);
+
+jobRouter.get(
+  "/applications/:applicationId",
+  validateParams(jobApplicationParamsSchema),
+  asyncHandler(getRecruiterApplicationController),
+);
+
+jobRouter.patch(
+  "/applications/:applicationId/status",
+  validateParams(jobApplicationParamsSchema),
+  validateBody(updateJobApplicationStatusSchema),
+  asyncHandler(updateJobApplicationStatusController),
+);
+
+jobRouter.post(
+  "/applications/:applicationId/interview",
+  validateParams(jobApplicationParamsSchema),
+  validateBody(createApplicationInterviewSchema),
+  asyncHandler(createApplicationInterviewController),
 );
 
 jobRouter.get(

@@ -45,7 +45,11 @@ export const apiRequest = async <T>(
   accessToken?: string | null,
 ): Promise<ApiResponse<T>> => {
   const headers = new Headers(init.headers);
-  if (init.body && !headers.has("content-type")) {
+  if (
+    init.body &&
+    !(typeof FormData !== "undefined" && init.body instanceof FormData) &&
+    !headers.has("content-type")
+  ) {
     headers.set("content-type", "application/json");
   }
   if (accessToken) headers.set("authorization", `Bearer ${accessToken}`);

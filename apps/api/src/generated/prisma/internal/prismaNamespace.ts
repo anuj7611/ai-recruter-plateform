@@ -412,12 +412,14 @@ export const ModelName = {
   ResumeProject: 'ResumeProject',
   ResumeChunk: 'ResumeChunk',
   JobOpening: 'JobOpening',
+  JobApplication: 'JobApplication',
   InterviewTemplate: 'InterviewTemplate',
   Interview: 'Interview',
   InterviewQuestion: 'InterviewQuestion',
   InterviewAnswer: 'InterviewAnswer',
   InterviewInvitation: 'InterviewInvitation',
-  Notification: 'Notification'
+  Notification: 'Notification',
+  InterviewIntegrityEvent: 'InterviewIntegrityEvent'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -433,7 +435,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "candidateProfile" | "recruiterProfile" | "account" | "session" | "emailVerificationToken" | "passwordResetToken" | "accountInvitation" | "resume" | "resumeSkill" | "resumeExperience" | "resumeEducation" | "resumeProject" | "resumeChunk" | "jobOpening" | "interviewTemplate" | "interview" | "interviewQuestion" | "interviewAnswer" | "interviewInvitation" | "notification"
+    modelProps: "user" | "candidateProfile" | "recruiterProfile" | "account" | "session" | "emailVerificationToken" | "passwordResetToken" | "accountInvitation" | "resume" | "resumeSkill" | "resumeExperience" | "resumeEducation" | "resumeProject" | "resumeChunk" | "jobOpening" | "jobApplication" | "interviewTemplate" | "interview" | "interviewQuestion" | "interviewAnswer" | "interviewInvitation" | "notification" | "interviewIntegrityEvent"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1547,6 +1549,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    JobApplication: {
+      payload: Prisma.$JobApplicationPayload<ExtArgs>
+      fields: Prisma.JobApplicationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.JobApplicationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JobApplicationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.JobApplicationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JobApplicationPayload>
+        }
+        findFirst: {
+          args: Prisma.JobApplicationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JobApplicationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.JobApplicationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JobApplicationPayload>
+        }
+        findMany: {
+          args: Prisma.JobApplicationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JobApplicationPayload>[]
+        }
+        create: {
+          args: Prisma.JobApplicationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JobApplicationPayload>
+        }
+        createMany: {
+          args: Prisma.JobApplicationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.JobApplicationCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JobApplicationPayload>[]
+        }
+        delete: {
+          args: Prisma.JobApplicationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JobApplicationPayload>
+        }
+        update: {
+          args: Prisma.JobApplicationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JobApplicationPayload>
+        }
+        deleteMany: {
+          args: Prisma.JobApplicationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.JobApplicationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.JobApplicationUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JobApplicationPayload>[]
+        }
+        upsert: {
+          args: Prisma.JobApplicationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JobApplicationPayload>
+        }
+        aggregate: {
+          args: Prisma.JobApplicationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateJobApplication>
+        }
+        groupBy: {
+          args: Prisma.JobApplicationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.JobApplicationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.JobApplicationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.JobApplicationCountAggregateOutputType> | number
+        }
+      }
+    }
     InterviewTemplate: {
       payload: Prisma.$InterviewTemplatePayload<ExtArgs>
       fields: Prisma.InterviewTemplateFieldRefs
@@ -1991,6 +2067,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    InterviewIntegrityEvent: {
+      payload: Prisma.$InterviewIntegrityEventPayload<ExtArgs>
+      fields: Prisma.InterviewIntegrityEventFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.InterviewIntegrityEventFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InterviewIntegrityEventPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.InterviewIntegrityEventFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InterviewIntegrityEventPayload>
+        }
+        findFirst: {
+          args: Prisma.InterviewIntegrityEventFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InterviewIntegrityEventPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.InterviewIntegrityEventFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InterviewIntegrityEventPayload>
+        }
+        findMany: {
+          args: Prisma.InterviewIntegrityEventFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InterviewIntegrityEventPayload>[]
+        }
+        create: {
+          args: Prisma.InterviewIntegrityEventCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InterviewIntegrityEventPayload>
+        }
+        createMany: {
+          args: Prisma.InterviewIntegrityEventCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.InterviewIntegrityEventCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InterviewIntegrityEventPayload>[]
+        }
+        delete: {
+          args: Prisma.InterviewIntegrityEventDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InterviewIntegrityEventPayload>
+        }
+        update: {
+          args: Prisma.InterviewIntegrityEventUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InterviewIntegrityEventPayload>
+        }
+        deleteMany: {
+          args: Prisma.InterviewIntegrityEventDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.InterviewIntegrityEventUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.InterviewIntegrityEventUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InterviewIntegrityEventPayload>[]
+        }
+        upsert: {
+          args: Prisma.InterviewIntegrityEventUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InterviewIntegrityEventPayload>
+        }
+        aggregate: {
+          args: Prisma.InterviewIntegrityEventAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateInterviewIntegrityEvent>
+        }
+        groupBy: {
+          args: Prisma.InterviewIntegrityEventGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.InterviewIntegrityEventGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.InterviewIntegrityEventCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.InterviewIntegrityEventCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -2299,6 +2449,20 @@ export const JobOpeningScalarFieldEnum = {
 export type JobOpeningScalarFieldEnum = (typeof JobOpeningScalarFieldEnum)[keyof typeof JobOpeningScalarFieldEnum]
 
 
+export const JobApplicationScalarFieldEnum = {
+  id: 'id',
+  jobId: 'jobId',
+  candidateProfileId: 'candidateProfileId',
+  resumeId: 'resumeId',
+  status: 'status',
+  coverLetter: 'coverLetter',
+  appliedAt: 'appliedAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type JobApplicationScalarFieldEnum = (typeof JobApplicationScalarFieldEnum)[keyof typeof JobApplicationScalarFieldEnum]
+
+
 export const InterviewTemplateScalarFieldEnum = {
   id: 'id',
   createdById: 'createdById',
@@ -2329,6 +2493,7 @@ export const InterviewScalarFieldEnum = {
   resumeId: 'resumeId',
   jobId: 'jobId',
   templateId: 'templateId',
+  applicationId: 'applicationId',
   title: 'title',
   type: 'type',
   difficulty: 'difficulty',
@@ -2339,6 +2504,9 @@ export const InterviewScalarFieldEnum = {
   adaptiveFollowUpsEnabled: 'adaptiveFollowUpsEnabled',
   maxFollowUpQuestions: 'maxFollowUpQuestions',
   followUpCount: 'followUpCount',
+  integrityScore: 'integrityScore',
+  integrityWarningCount: 'integrityWarningCount',
+  lastHeartbeatAt: 'lastHeartbeatAt',
   scheduledAt: 'scheduledAt',
   startedAt: 'startedAt',
   completedAt: 'completedAt',
@@ -2433,6 +2601,19 @@ export const NotificationScalarFieldEnum = {
 } as const
 
 export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
+
+
+export const InterviewIntegrityEventScalarFieldEnum = {
+  id: 'id',
+  interviewId: 'interviewId',
+  type: 'type',
+  severity: 'severity',
+  metadata: 'metadata',
+  occurredAt: 'occurredAt',
+  createdAt: 'createdAt'
+} as const
+
+export type InterviewIntegrityEventScalarFieldEnum = (typeof InterviewIntegrityEventScalarFieldEnum)[keyof typeof InterviewIntegrityEventScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -2672,6 +2853,20 @@ export type ListEnumJobStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$Pr
 
 
 /**
+ * Reference to a field of type 'JobApplicationStatus'
+ */
+export type EnumJobApplicationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'JobApplicationStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'JobApplicationStatus[]'
+ */
+export type ListEnumJobApplicationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'JobApplicationStatus[]'>
+    
+
+
+/**
  * Reference to a field of type 'InterviewType'
  */
 export type EnumInterviewTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'InterviewType'>
@@ -2780,6 +2975,34 @@ export type EnumNotificationStatusFieldRefInput<$PrismaModel> = FieldRefInputTyp
  * Reference to a field of type 'NotificationStatus[]'
  */
 export type ListEnumNotificationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'NotificationStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'InterviewIntegrityEventType'
+ */
+export type EnumInterviewIntegrityEventTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'InterviewIntegrityEventType'>
+    
+
+
+/**
+ * Reference to a field of type 'InterviewIntegrityEventType[]'
+ */
+export type ListEnumInterviewIntegrityEventTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'InterviewIntegrityEventType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'InterviewIntegritySeverity'
+ */
+export type EnumInterviewIntegritySeverityFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'InterviewIntegritySeverity'>
+    
+
+
+/**
+ * Reference to a field of type 'InterviewIntegritySeverity[]'
+ */
+export type ListEnumInterviewIntegritySeverityFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'InterviewIntegritySeverity[]'>
     
 
 /**
@@ -2948,12 +3171,14 @@ export type GlobalOmitConfig = {
   resumeProject?: Prisma.ResumeProjectOmit
   resumeChunk?: Prisma.ResumeChunkOmit
   jobOpening?: Prisma.JobOpeningOmit
+  jobApplication?: Prisma.JobApplicationOmit
   interviewTemplate?: Prisma.InterviewTemplateOmit
   interview?: Prisma.InterviewOmit
   interviewQuestion?: Prisma.InterviewQuestionOmit
   interviewAnswer?: Prisma.InterviewAnswerOmit
   interviewInvitation?: Prisma.InterviewInvitationOmit
   notification?: Prisma.NotificationOmit
+  interviewIntegrityEvent?: Prisma.InterviewIntegrityEventOmit
 }
 
 /* Types for Logging */

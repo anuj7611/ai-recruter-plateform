@@ -3,6 +3,7 @@ import type { Request, Response } from "express";
 import { ApiError } from "../../utils/api-error.js";
 
 import {
+  acceptCandidateInterviewInvitation,
   completeCandidateInterview,
   getCandidateCurrentQuestion,
   getCandidateInterviewResult,
@@ -57,6 +58,26 @@ export const startCandidateInterviewController = async (
     success: true,
 
     message: "Interview started successfully",
+
+    data: result,
+  });
+};
+
+export const acceptCandidateInterviewInvitationController = async (
+  req: Request,
+  res: Response,
+) => {
+  const { interviewId } = req.params as InterviewParams;
+
+  const result = await acceptCandidateInterviewInvitation(
+    getUserId(req),
+    interviewId,
+  );
+
+  return res.status(200).json({
+    success: true,
+
+    message: "Interview invitation accepted successfully",
 
     data: result,
   });

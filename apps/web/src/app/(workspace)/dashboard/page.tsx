@@ -1,40 +1,32 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
-import { StatusMessage } from "@/components/auth/form-controls";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useAuth } from "@/lib/auth/auth-context";
 import { errorMessage } from "@/lib/auth/api";
+import type { CandidateInterview, CandidateProfileResponse, NotificationItem, Resume } from "@/lib/workspace-types";
+import { MetricCard, Notice, PageHeader, StatusPill, formatDate } from "@/components/workspace-ui";
 
 export default function DashboardPage() {
-  const { user, resendVerification } = useAuth();
-  const [notice, setNotice] = useState("");
+  const { user, status, requestWithAuth, resendVerification } = useAuth();
+  const [profile, setProfile] = useState<CandidateProfileResponse | null>(null);
+  const [resumes, setResumes] = useState<Resume[]>([]);
+  const [interviews, setInterviews] = useState<CandidateInterview[]>([]);
+  const [notifications, setNotifications] = useState<NotificationItem[]>([]);
   const [error, setError] = useState("");
-  const [sending, setSending] = useState(false);
-
-  const resend = async () => {
-    setNotice(""); setError(""); setSending(true);
-    try { setNotice(await resendVerification()); } catch (caught) { setError(errorMessage(caught)); } finally { setSending(false); }
-  };
-
-  return (
-    <div>
-      {!user?.emailVerifiedAt && (
-        <div className="mb-7 flex flex-col gap-4 rounded-2xl border border-amber-200 bg-amber-50 p-5 sm:flex-row sm:items-center sm:justify-between">
-          <div><p className="font-semibold text-amber-950">Verify your email address</p><p className="mt-1 text-sm text-amber-800">Verification protects your account and unlocks every workspace feature.</p></div>
-          <button className="secondary-button shrink-0" onClick={resend} disabled={sending}>{sending ? "Sending…" : "Resend email"}</button>
-        </div>
-      )}
-      {notice && <div className="mb-6"><StatusMessage tone="success">{notice}</StatusMessage></div>}
-      {error && <div className="mb-6"><StatusMessage>{error}</StatusMessage></div>}
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-        <div><p className="text-sm font-semibold text-violet-600">Your workspace</p><h1 className="mt-1 text-3xl font-semibold tracking-tight text-slate-950">Good to see you, {user?.name.split(" ")[0]}.</h1><p className="mt-2 text-slate-500">Your secure interview hub is ready.</p></div>
-        <Link href="/settings/security" className="secondary-button">Manage security</Link>
-      </div>
-      <div className="mt-8 grid gap-5 md:grid-cols-3">
-        <article className="workspace-card md:col-span-2"><span className="card-icon bg-violet-100 text-violet-700"><svg viewBox="0 0 24 24" className="size-6" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M4 5h16v12H4z"/><path d="M8 21h8M12 17v4M8 9h8M8 13h5"/></svg></span><h2 className="mt-6 text-xl font-semibold text-slate-950">Interview workspace</h2><p className="mt-2 max-w-lg text-sm leading-6 text-slate-500">Your interview preparation and assessment modules will appear here as the platform grows.</p><button className="mt-6 rounded-xl bg-slate-950 px-4 py-2.5 text-sm font-semibold text-white">Explore workspace</button></article>
-        <article className="workspace-card"><p className="text-xs font-bold uppercase tracking-wider text-slate-400">Account</p><div className="mt-5 space-y-4"><div><p className="text-xs text-slate-400">Email</p><p className="mt-1 truncate text-sm font-medium text-slate-800">{user?.email}</p></div><div><p className="text-xs text-slate-400">Role</p><p className="mt-1 text-sm font-medium capitalize text-slate-800">{user?.role.replaceAll("_", " ").toLowerCase()}</p></div><div><p className="text-xs text-slate-400">Verification</p><span className={`mt-1 inline-flex rounded-full px-2.5 py-1 text-xs font-semibold ${user?.emailVerifiedAt ? "bg-emerald-50 text-emerald-700" : "bg-amber-50 text-amber-700"}`}>{user?.emailVerifiedAt ? "Verified" : "Pending"}</span></div></div></article>
-      </div>
-    </div>
-  );
+  const [notice, setNotice] = useState("");
+  const load = useCallback(async () => { try { const [profileData,resumeData,interviewData,notificationData] = await Promise.all([requestWithAuth<{ profile: CandidateProfileResponse }>("/candidate/profile"), requestWithAuth<{ resumes: Resume[] }>("/candidate/resume"), requestWithAuth<{ interviews: CandidateInterview[] }>("/candidate/interviews"), requestWithAuth<{ notifications: NotificationItem[] }>("/notifications")]); setProfile(profileData.profile); setResumes(resumeData.resumes); setInterviews(interviewData.interviews); setNotifications(notificationData.notifications); } catch (caught) { setError(errorMessage(caught)); } }, [requestWithAuth]);
+  useEffect(() => { if (status !== "authenticated") return; const timer = window.setTimeout(() => void load(), 0); return () => window.clearTimeout(timer); }, [load,status]);
+  const upcoming = useMemo(() => interviews.filter((item) => ["READY","SCHEDULED","IN_PROGRESS"].includes(item.status)), [interviews]);
+  const profileStrength = profile ? Math.min(100, 35 + Object.values(profile.candidateProfile).filter(Boolean).length * 6) : 0;
+  const resend = async () => { try { setNotice(await resendVerification()); } catch (caught) { setError(errorMessage(caught)); } };
+  return <div>
+    {!user?.emailVerifiedAt && <div className="mb-7 flex flex-col gap-4 rounded-2xl border border-amber-200 bg-amber-50 p-5 sm:flex-row sm:items-center sm:justify-between"><div><p className="font-semibold text-amber-950">Verify your email address</p><p className="mt-1 text-sm text-amber-800">Verification protects your account and unlocks every workspace feature.</p></div><button className="secondary-button" onClick={() => void resend()}>Resend email</button></div>}
+    {error && <div className="mb-6"><Notice>{error}</Notice></div>}{notice && <div className="mb-6"><Notice tone="success">{notice}</Notice></div>}
+    <PageHeader eyebrow="Candidate workspace" title={`Good to see you, ${user?.name.split(" ")[0] ?? "there"}.`} description="Your next interview, career context, and recent activity—all in one place." action={<Link href="/candidate/interviews" className="solid-button">Open interviews</Link>} />
+    <div className="mt-8 grid gap-4 sm:grid-cols-3"><MetricCard label="Profile strength" value={`${profileStrength}%`} detail="Keep your story interview-ready"/><MetricCard label="Ready resumes" value={resumes.filter((item) => item.status === "READY").length} detail={`${resumes.length} uploaded in total`} accent="emerald"/><MetricCard label="Active interviews" value={upcoming.length} detail={`${interviews.filter((item) => item.status === "COMPLETED").length} completed`} accent="sky"/></div>
+    <div className="mt-6 grid gap-6 lg:grid-cols-[1.35fr_.8fr]"><section className="workspace-card card-rise"><div className="flex items-center justify-between"><div><h2 className="text-lg font-semibold text-slate-950">Next interviews</h2><p className="mt-1 text-sm text-slate-500">Continue active and upcoming assessments.</p></div><Link href="/candidate/interviews" className="text-sm font-bold text-violet-600">View all</Link></div><div className="mt-5 space-y-3">{upcoming.length ? upcoming.slice(0,3).map((item) => <Link key={item.id} href={`/candidate/interviews/${item.id}`} className="flex items-center gap-4 rounded-2xl border border-slate-100 p-4 hover:border-violet-200 hover:bg-violet-50/40"><span className="grid size-10 place-items-center rounded-xl bg-slate-950 text-white">▶</span><div className="min-w-0 flex-1"><p className="truncate text-sm font-semibold text-slate-900">{item.title}</p><p className="mt-1 text-xs text-slate-500">{item.job?.title ?? "Interview"} · {formatDate(item.scheduledAt)}</p></div><StatusPill value={item.status}/></Link>) : <div className="rounded-2xl bg-slate-50 p-8 text-center text-sm text-slate-500">No active interviews.</div>}</div></section>
+      <section className="workspace-card card-rise"><div className="flex items-center justify-between"><h2 className="text-lg font-semibold text-slate-950">Recent activity</h2><Link href="/notifications" className="text-sm font-bold text-violet-600">All</Link></div><div className="mt-5 space-y-5">{notifications.slice(0,4).map((item) => <div key={item.id} className="flex gap-3"><span className="mt-1 size-2 shrink-0 rounded-full bg-violet-500 ring-4 ring-violet-50"/><div><p className="text-sm font-medium leading-5 text-slate-800">{item.subject}</p><p className="mt-1 text-xs text-slate-400">{formatDate(item.createdAt)}</p></div></div>)}{notifications.length === 0 && <p className="py-8 text-center text-sm text-slate-500">No activity yet.</p>}</div></section></div>
+    <div className="mt-6 grid gap-4 sm:grid-cols-3">{[["Complete your profile","Add experience and career goals.","/candidate/profile"],["Manage resumes","Upload and query your career context.","/candidate/resumes"],["Account security","Review devices and active sessions.","/settings/security"]].map(([title,description,href]) => <Link key={href} href={href} className="workspace-card card-rise"><h3 className="font-semibold text-slate-950">{title}</h3><p className="mt-2 text-sm leading-6 text-slate-500">{description}</p><span className="mt-4 inline-flex text-sm font-bold text-violet-600">Open →</span></Link>)}</div>
+  </div>;
 }

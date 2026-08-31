@@ -21,6 +21,7 @@ import {
   sendInterviewInvitationController,
 } from "./interview-invitation.controller.js";
 import { sendInterviewInvitationSchema } from "./interview-invitation.validation.js";
+import { getInterviewIntegrityReportController } from "./interview-integrity.controller.js";
 
 export const interviewRouter = Router();
 
@@ -58,7 +59,6 @@ interviewRouter.post(
   asyncHandler(generateInterviewQuestionsController),
 );
 
-
 interviewRouter.post(
   "/:interviewId/invitations",
 
@@ -87,4 +87,10 @@ interviewRouter.get(
   asyncHandler(getInterviewController),
 );
 
+interviewRouter.get(
+  "/:interviewId/integrity",
 
+  validateParams(interviewParamsSchema),
+
+  asyncHandler(getInterviewIntegrityReportController),
+);

@@ -4,13 +4,17 @@ import { ApiError } from "../../utils/api-error.js";
 
 import type { CreateInterviewInput } from "./interview.validation.js";
 
+type CreateInterviewServiceInput = CreateInterviewInput & {
+  applicationId?: string;
+};
+
 // =====================================
 // CREATE INTERVIEW
 // =====================================
 
 export const createInterview = async (
   recruiterId: string,
-  input: CreateInterviewInput,
+  input: CreateInterviewServiceInput,
 ) => {
   // -----------------------------------
   // Candidate
@@ -171,6 +175,12 @@ export const createInterview = async (
 
       templateId: template.id,
 
+      ...(input.applicationId
+        ? {
+            applicationId: input.applicationId,
+          }
+        : {}),
+
       title: input.title ?? `${job.title} Interview - ${candidate.user.name}`,
 
       type: template.type,
@@ -330,10 +340,27 @@ export const getRecruiterInterviewById = async (
         select: {
           id: true,
 
+          headline: true,
+          bio: true,
+
+          currentRole: true,
+          targetRole: true,
+
+          experienceYears: true,
+          experienceLevel: true,
+
+          location: true,
+
+          linkedinUrl: true,
+          githubUrl: true,
+          portfolioUrl: true,
+
           user: {
             select: {
+              id: true,
               name: true,
               email: true,
+              avatarUrl: true,
             },
           },
         },
@@ -343,7 +370,24 @@ export const getRecruiterInterviewById = async (
         select: {
           id: true,
           title: true,
+          originalFileName: true,
           status: true,
+          storageUrl: true,
+
+          skills: {
+            orderBy: {
+              confidence: "desc",
+            },
+
+            take: 12,
+
+            select: {
+              id: true,
+              name: true,
+              category: true,
+              yearsExperience: true,
+            },
+          },
         },
       },
 

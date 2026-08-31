@@ -98,6 +98,17 @@ export const JobStatus = {
 export type JobStatus = (typeof JobStatus)[keyof typeof JobStatus]
 
 
+export const JobApplicationStatus = {
+  APPLIED: 'APPLIED',
+  UNDER_REVIEW: 'UNDER_REVIEW',
+  INTERVIEW_CREATED: 'INTERVIEW_CREATED',
+  REJECTED: 'REJECTED',
+  WITHDRAWN: 'WITHDRAWN'
+} as const
+
+export type JobApplicationStatus = (typeof JobApplicationStatus)[keyof typeof JobApplicationStatus]
+
+
 export const InterviewType = {
   TECHNICAL: 'TECHNICAL',
   BEHAVIORAL: 'BEHAVIORAL',
@@ -166,6 +177,9 @@ export type InterviewInvitationStatus = (typeof InterviewInvitationStatus)[keyof
 
 
 export const NotificationType = {
+  JOB_AVAILABLE: 'JOB_AVAILABLE',
+  JOB_APPLICATION_RECEIVED: 'JOB_APPLICATION_RECEIVED',
+  JOB_APPLICATION_STATUS: 'JOB_APPLICATION_STATUS',
   INTERVIEW_INVITATION: 'INTERVIEW_INVITATION',
   INTERVIEW_REMINDER: 'INTERVIEW_REMINDER',
   INTERVIEW_COMPLETED: 'INTERVIEW_COMPLETED',
@@ -183,3 +197,28 @@ export const NotificationStatus = {
 } as const
 
 export type NotificationStatus = (typeof NotificationStatus)[keyof typeof NotificationStatus]
+
+
+export const InterviewIntegrityEventType = {
+  TAB_HIDDEN: 'TAB_HIDDEN',
+  WINDOW_BLUR: 'WINDOW_BLUR',
+  FULLSCREEN_EXIT: 'FULLSCREEN_EXIT',
+  COPY: 'COPY',
+  PASTE: 'PASTE',
+  CUT: 'CUT',
+  PAGE_REFRESH: 'PAGE_REFRESH',
+  DISCONNECT: 'DISCONNECT',
+  HEARTBEAT_MISSED: 'HEARTBEAT_MISSED'
+} as const
+
+export type InterviewIntegrityEventType = (typeof InterviewIntegrityEventType)[keyof typeof InterviewIntegrityEventType]
+
+
+export const InterviewIntegritySeverity = {
+  INFO: 'INFO',
+  LOW: 'LOW',
+  MEDIUM: 'MEDIUM',
+  HIGH: 'HIGH'
+} as const
+
+export type InterviewIntegritySeverity = (typeof InterviewIntegritySeverity)[keyof typeof InterviewIntegritySeverity]

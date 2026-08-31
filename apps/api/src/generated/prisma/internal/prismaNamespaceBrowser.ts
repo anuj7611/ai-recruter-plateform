@@ -66,12 +66,14 @@ export const ModelName = {
   ResumeProject: 'ResumeProject',
   ResumeChunk: 'ResumeChunk',
   JobOpening: 'JobOpening',
+  JobApplication: 'JobApplication',
   InterviewTemplate: 'InterviewTemplate',
   Interview: 'Interview',
   InterviewQuestion: 'InterviewQuestion',
   InterviewAnswer: 'InterviewAnswer',
   InterviewInvitation: 'InterviewInvitation',
-  Notification: 'Notification'
+  Notification: 'Notification',
+  InterviewIntegrityEvent: 'InterviewIntegrityEvent'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -359,6 +361,20 @@ export const JobOpeningScalarFieldEnum = {
 export type JobOpeningScalarFieldEnum = (typeof JobOpeningScalarFieldEnum)[keyof typeof JobOpeningScalarFieldEnum]
 
 
+export const JobApplicationScalarFieldEnum = {
+  id: 'id',
+  jobId: 'jobId',
+  candidateProfileId: 'candidateProfileId',
+  resumeId: 'resumeId',
+  status: 'status',
+  coverLetter: 'coverLetter',
+  appliedAt: 'appliedAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type JobApplicationScalarFieldEnum = (typeof JobApplicationScalarFieldEnum)[keyof typeof JobApplicationScalarFieldEnum]
+
+
 export const InterviewTemplateScalarFieldEnum = {
   id: 'id',
   createdById: 'createdById',
@@ -389,6 +405,7 @@ export const InterviewScalarFieldEnum = {
   resumeId: 'resumeId',
   jobId: 'jobId',
   templateId: 'templateId',
+  applicationId: 'applicationId',
   title: 'title',
   type: 'type',
   difficulty: 'difficulty',
@@ -399,6 +416,9 @@ export const InterviewScalarFieldEnum = {
   adaptiveFollowUpsEnabled: 'adaptiveFollowUpsEnabled',
   maxFollowUpQuestions: 'maxFollowUpQuestions',
   followUpCount: 'followUpCount',
+  integrityScore: 'integrityScore',
+  integrityWarningCount: 'integrityWarningCount',
+  lastHeartbeatAt: 'lastHeartbeatAt',
   scheduledAt: 'scheduledAt',
   startedAt: 'startedAt',
   completedAt: 'completedAt',
@@ -493,6 +513,19 @@ export const NotificationScalarFieldEnum = {
 } as const
 
 export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
+
+
+export const InterviewIntegrityEventScalarFieldEnum = {
+  id: 'id',
+  interviewId: 'interviewId',
+  type: 'type',
+  severity: 'severity',
+  metadata: 'metadata',
+  occurredAt: 'occurredAt',
+  createdAt: 'createdAt'
+} as const
+
+export type InterviewIntegrityEventScalarFieldEnum = (typeof InterviewIntegrityEventScalarFieldEnum)[keyof typeof InterviewIntegrityEventScalarFieldEnum]
 
 
 export const SortOrder = {

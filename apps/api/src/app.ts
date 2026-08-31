@@ -15,6 +15,7 @@ import { interviewRouter } from "./modules/interview/interview.route.js";
 import { candidateInterviewRouter } from "./modules/interview/candidate-interview.routes.js";
 import { interviewInvitationRouter } from "./modules/interview/interview-invitation.routes.js";
 import { notificationRouter } from "./modules/notification/notification.routes.js";
+import { adminRouter } from "./modules/admin/admin.routes.js";
 
 export const app = express();
 
@@ -71,6 +72,7 @@ app.use("/api/v1/interviews", interviewRouter);
 app.use("/api/v1/candidate/interviews", candidateInterviewRouter);
 app.use("/api/v1/interview-invitations", interviewInvitationRouter);
 app.use("/api/v1/notifications", notificationRouter);
+app.use("/api/v1/admin", adminRouter);
 
 app.use(notFoundMiddleware);
 app.use(errorMiddleware);

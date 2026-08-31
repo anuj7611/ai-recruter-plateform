@@ -93,6 +93,11 @@ export type ResumeChunk = Prisma.ResumeChunkModel
  */
 export type JobOpening = Prisma.JobOpeningModel
 /**
+ * Model JobApplication
+ * 
+ */
+export type JobApplication = Prisma.JobApplicationModel
+/**
  * Model InterviewTemplate
  * 
  */
@@ -122,3 +127,8 @@ export type InterviewInvitation = Prisma.InterviewInvitationModel
  * 
  */
 export type Notification = Prisma.NotificationModel
+/**
+ * Model InterviewIntegrityEvent
+ * 
+ */
+export type InterviewIntegrityEvent = Prisma.InterviewIntegrityEventModel

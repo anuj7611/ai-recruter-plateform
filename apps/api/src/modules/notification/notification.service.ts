@@ -6,6 +6,9 @@ interface CreateNotificationInput {
   userId: string;
 
   type:
+    | "JOB_AVAILABLE"
+    | "JOB_APPLICATION_RECEIVED"
+    | "JOB_APPLICATION_STATUS"
     | "INTERVIEW_INVITATION"
     | "INTERVIEW_REMINDER"
     | "INTERVIEW_COMPLETED"

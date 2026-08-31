@@ -714,14 +714,6 @@ export type InterviewQuestionUpdateexpectedTopicsInput = {
   push?: string | string[]
 }
 
-export type FloatFieldUpdateOperationsInput = {
-  set?: number
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
 export type InterviewQuestionUpdateOneWithoutFollowUpsNestedInput = {
   create?: Prisma.XOR<Prisma.InterviewQuestionCreateWithoutFollowUpsInput, Prisma.InterviewQuestionUncheckedCreateWithoutFollowUpsInput>
   connectOrCreate?: Prisma.InterviewQuestionCreateOrConnectWithoutFollowUpsInput
